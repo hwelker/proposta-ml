@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WeStack — Escritório Virtual de IA para Mercado Livre</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w_acid:'#FF4D00',w_acid_light:'#FF6A1A',w_bone:'#F4F4F0',w_white:'#FFFFFF'},fontFamily:{display:['"Space Grotesk"','system-ui'],body:['"Inter"','sans-serif'],mono:['"JetBrains Mono"','monospace']},transitionTimingFunction:{'swiss':'cubic-bezier(0.16, 1, 0.3, 1)'}}}}
+</script>
+<style>
+.track-tighter{letter-spacing:-0.04em}.track-widest{letter-spacing:0.1em}
+.bg-noise{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0.035;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.clip-button{clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
+.bg-tech-grid{background-size:40px 40px;background-image:linear-gradient(to right,rgba(92,92,92,0.08) 1px,transparent 1px),linear-gradient(to bottom,rgba(92,92,92,0.08) 1px,transparent 1px);mask-image:radial-gradient(circle at center,black 40%,transparent 80%);-webkit-mask-image:radial-gradient(circle at center,black 40%,transparent 80%)}
+.slide{min-height:100vh;display:flex;align-items:center;position:relative;overflow:visible;padding:6rem 0}
+@media(max-width:768px){.slide{min-height:auto;padding:4rem 0}}
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}.reveal.active{opacity:1;transform:translateY(0)}
+.caret-blink{animation:blink-caret 1s step-end infinite}
+@keyframes blink-caret{0%,100%{opacity:1}50%{opacity:0}}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#F4F4F0}::-webkit-scrollbar-thumb{background:#FF4D00}
+::selection{background:#FF4D00;color:#FFFFFF}
+.slide-nav{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:12px}
+.slide-nav a{width:10px;height:10px;border-radius:50%;background:rgba(92,92,92,0.3);transition:all 0.3s}
+.slide-nav a.active{background:#FF4D00;box-shadow:0 0 8px rgba(255,77,0,0.5)}
+.photo-container{position:relative;width:380px;max-width:100%}
+.photo-container img{width:100%;aspect-ratio:3/4;object-fit:cover;filter:grayscale(100%);clip-path:polygon(0 0,100% 0,100% calc(100% - 24px),calc(100% - 24px) 100%,0 100%);transition:filter 0.5s}
+.photo-container:hover img{filter:grayscale(0%)}
+.photo-frame{position:absolute;inset:8px -8px -8px 8px;border:2px solid #FF4D00;clip-path:polygon(0 0,100% 0,100% calc(100% - 24px),calc(100% - 24px) 100%,0 100%);pointer-events:none}
+.photo-accent{position:absolute;left:0;bottom:0;width:4px;height:60%;background:#FF4D00}
+.logo-row{display:flex;align-items:center;gap:24px;margin-top:24px}
+.logo-row img{height:32px;filter:grayscale(100%);opacity:0.5;transition:all 0.3s}
+.logo-row img:hover{filter:grayscale(0%);opacity:1}
+.card-dark{background:#1a1a1a;border:1px solid #2a2a2a;padding:20px;margin-top:12px;transition:all 0.3s}
+.card-dark:hover{border-color:#FF4D00}
+.photo-container-light .photo-frame{border-color:rgba(92,92,92,0.2)}
+.stack-bar{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border:1px solid rgba(92,92,92,0.15);margin-bottom:4px;transition:all 0.5s cubic-bezier(0.16,1,0.3,1);opacity:0;transform:translateX(-30px)}
+.stack-bar.active{opacity:1;transform:translateX(0)}
+.duvida-text{font-size:clamp(4rem,15vw,12rem);line-height:0.9}
+.mm-node{background:#1a1a1a;border:1px solid #2a2a2a;padding:16px 24px;border-radius:12px;text-align:center;transition:all 0.3s}
+.mm-node:hover{border-color:#FF4D00;box-shadow:0 0 20px rgba(255,77,0,0.1)}
+.mm-diamond{width:60px;height:60px;background:#FF4D00;transform:rotate(45deg);display:flex;align-items:center;justify-content:center;margin:0 auto}
+.mm-diamond span{transform:rotate(-45deg);font-size:10px;font-weight:bold;color:white}
+</style>
+</head>
+<body class="bg-w_bone text-w_black font-body antialiased overflow-x-hidden">
+<div class="bg-noise"></div>
+
+<!-- Nav dots -->
+<div class="slide-nav hidden md:flex">
+  <a href="#capa" title="Capa"></a>
+  <a href="#autoridade" title="Autoridade"></a>
+  <a href="#problema" title="Problema"></a>
+  <a href="#solucao" title="Solução"></a>
+  <a href="#metodo" title="Método"></a>
+  <a href="#agentes" title="Agentes"></a>
+  <a href="#escritorio" title="Escritório"></a>
+  <a href="#duvida" title="Dúvida"></a>
+  <a href="#escopo" title="Escopo"></a>
+  <a href="#ancoragem" title="Ancoragem"></a>
+  <a href="#preco" title="Preço"></a>
+</div>
+
+<!-- ══ 01. CAPA ══ -->
+<section class="slide bg-w_black" id="capa">
+  <div class="absolute inset-0 bg-tech-grid opacity-40 pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10 text-center">
+    <div class="reveal active">
+      <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-8">Proposta Comercial</p>
+      <p class="font-mono text-xl font-bold text-w_bone mb-10">
+        <span class="text-w_bone">&gt;_</span> We<span class="text-w_acid">{Stack}</span>
+      </p>
+      <h1 class="font-display font-semibold text-[clamp(3rem,7vw,6.5rem)] leading-[0.9] track-tighter text-w_bone mb-8">
+        Escritório Virtual de IA<br><span class="text-w_acid">para Mercado Livre</span>
+      </h1>
+      <div class="grid grid-cols-6 gap-3 max-w-4xl mx-auto mt-12 mb-12">
+        <div class="text-center py-5 px-2 border border-w_acid/20 bg-w_acid/[0.04] clip-button"><p class="font-mono text-2xl font-bold text-w_acid leading-none mb-2">{?}</p><p class="font-mono text-[10px] font-semibold text-w_bone/70 tracking-wide">ANALISTA</p></div>
+        <div class="text-center py-5 px-2 border border-w_acid/20 bg-w_acid/[0.04] clip-button"><p class="font-mono text-2xl font-bold text-w_acid leading-none mb-2">&lt;/&gt;</p><p class="font-mono text-[10px] font-semibold text-w_bone/70 tracking-wide">ANÚNCIOS</p></div>
+        <div class="text-center py-5 px-2 border border-w_acid/20 bg-w_acid/[0.04] clip-button"><p class="font-mono text-2xl font-bold text-w_acid leading-none mb-2">[img]</p><p class="font-mono text-[10px] font-semibold text-w_bone/70 tracking-wide">CRIATIVO</p></div>
+        <div class="text-center py-5 px-2 border border-w_acid bg-w_acid clip-button"><p class="font-mono text-2xl font-bold text-white leading-none mb-2">&gt;_✓</p><p class="font-mono text-[10px] font-bold text-white/90 tracking-wide">GESTOR</p></div>
+        <div class="text-center py-5 px-2 border border-w_acid/20 bg-w_acid/[0.04] clip-button"><p class="font-mono text-2xl font-bold text-w_acid leading-none mb-2">//$</p><p class="font-mono text-[10px] font-semibold text-w_bone/70 tracking-wide">ADS</p></div>
+        <div class="text-center py-5 px-2 border border-w_acid/20 bg-w_acid/[0.04] clip-button"><p class="font-mono text-2xl font-bold text-w_acid leading-none mb-2">++↗</p><p class="font-mono text-[10px] font-semibold text-w_bone/70 tracking-wide">SAC</p></div>
+      </div>
+      <p class="font-mono text-sm text-w_bone/40 tracking-widest uppercase">66 automações possíveis dentro do mercado livre · 100% autônomo · 24/7</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 02. AUTORIDADE ══ -->
+<section class="slide bg-w_bone relative" id="autoridade">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-16 reveal">sec.02 // quem está por trás</p>
+
+    <!-- Henrique — foto à DIREITA -->
+    <div class="grid md:grid-cols-[1fr_380px] gap-12 lg:gap-16 items-start mb-32 reveal">
+      <div>
+        <h2 class="font-display text-[clamp(2rem,4vw,3rem)] font-semibold track-tighter text-w_black">Henrique Welker</h2>
+        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mt-2 mb-6">Founder & CEO · WeStack</p>
+
+        <h3 class="font-display text-lg font-medium text-w_black/80 mb-2">Cases entregues</h3>
+        <p class="text-w_graphite leading-relaxed mb-6">Ronaldinho Gaúcho (R10) · Sebrae · Beto Carreiro</p>
+
+        <div class="logo-row mb-6">
+          <img src="google-for-startups.png" alt="Google for Startups">
+          <img src="Ronaldinho.png" alt="R10">
+          <img src="Sebrae.svg.png" alt="Sebrae">
+        </div>
+
+        <div class="border border-w_graphite/15 bg-white p-5 mb-3 transition-all duration-300 hover:border-w_acid">
+          <div class="flex items-center gap-3">
+            <img src="google-for-startups.png" alt="Google" class="h-6">
+            <p class="text-sm text-w_graphite"><strong class="text-w_black">Google for Startups</strong> — Acelerados pelo programa de startups do Google.</p>
+          </div>
+        </div>
+        <div class="border border-w_graphite/15 bg-white p-5 mb-3 transition-all duration-300 hover:border-w_acid">
+          <div class="flex items-center gap-3">
+            <img src="NASA_logo.svg.png" alt="NASA" class="h-6">
+            <p class="text-sm text-w_graphite"><strong class="text-w_black">NASA Space Apps</strong> — Equipe com mentores certificados NASA Space Apps Challenge.</p>
+          </div>
+        </div>
+
+        <p class="mt-6 text-w_black/80 font-medium"><strong class="text-w_acid">4 anos construindo agentes de IA que operam de verdade.</strong><br>Engenharia, não promessa.</p>
+      </div>
+      <div class="photo-container mx-auto md:mx-0">
+        <img src="_MG_2909.jpg" alt="Henrique Welker">
+        <div class="photo-frame"></div>
+        <div class="photo-accent"></div>
+      </div>
+    </div>
+
+    <!-- Raicon — foto à ESQUERDA -->
+    <div class="grid md:grid-cols-[380px_1fr] gap-12 lg:gap-16 items-start reveal" style="transition-delay:0.2s">
+      <div class="photo-container mx-auto md:mx-0">
+        <img src="raicon-mercado-libre-foto.png" alt="Raicon Look">
+        <div class="photo-frame"></div>
+        <div class="photo-accent"></div>
+      </div>
+      <div>
+        <h2 class="font-display text-[clamp(2rem,4vw,3rem)] font-semibold track-tighter text-w_black">Raicon Look</h2>
+        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mt-2 mb-6">Seller · +383 Mil em Vendas no Mercado Livre</p>
+
+        <h3 class="font-display text-lg font-medium text-w_black/80 mb-2">Case: +R$ 383 mil em vendas no ML</h3>
+        <p class="text-w_graphite leading-relaxed mb-6">Vendeu mais de R$ 383 mil no Mercado Livre. Viveu as dores na pele: perguntas, reclamações, ADS sem otimização, concorrentes derrubando preço. Sabe exatamente o que automatizar.</p>
+
+        <div class="logo-row mb-6">
+          <img src="logo-mercadolivre.png" alt="Mercado Livre" style="height:32px;filter:none;opacity:1">
+          <div class="px-4 py-2 bg-w_acid/10 border border-w_acid/30 rounded" style="filter:none;opacity:1"><p class="font-mono text-[10px] font-bold text-w_acid tracking-widest">+R$ 383k VENDAS</p></div>
+        </div>
+
+        <div class="border border-w_graphite/15 bg-white p-5 mb-3 transition-all duration-300 hover:border-w_acid">
+          <p class="text-sm text-w_graphite"><strong class="text-w_black">Ex-Seller com case real</strong> — Experiência prática com Product Ads, SEO ML, perguntas, reclamações e reputação.</p>
+        </div>
+        <div class="border border-w_graphite/15 bg-white p-5 mb-3 transition-all duration-300 hover:border-w_acid">
+          <p class="text-sm text-w_graphite"><strong class="text-w_black">Consultoria ML</strong> — Construiu os agentes baseado em experiência real, não teoria.</p>
+        </div>
+
+        <p class="mt-6 text-w_black/80 font-medium"><strong class="text-w_acid">Quem vende no ML sabe onde dói.</strong><br>Os agentes foram construídos por quem vive isso todo dia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 03. PROBLEMA ══ -->
+<section class="slide bg-white" id="problema">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-6 reveal">sec.03 // a dor de quem vende no ml</p>
+    <h2 class="font-display font-semibold text-[clamp(2.5rem,5vw,4rem)] track-tighter leading-tight mb-12 reveal">
+      Seu dia como vendedor<br><span class="text-w_acid">no Mercado Livre.</span>
+    </h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="border border-w_graphite/20 bg-w_bone p-8 transition-all duration-500 ease-swiss hover:-translate-y-1 hover:border-w_acid hover:shadow-xl reveal">
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-3">01.</p>
+        <h3 class="font-display text-xl font-medium track-tight mb-3">"Passo o dia inteiro respondendo pergunta repetida"</h3>
+        <p class="text-w_graphite leading-relaxed">50, 100, 200 perguntas por dia. Se demora pra responder, perde a venda pro concorrente que respondeu primeiro. Reputação cai.</p>
+      </div>
+      <div class="border border-w_graphite/20 bg-w_bone p-8 transition-all duration-500 ease-swiss hover:-translate-y-1 hover:border-w_acid hover:shadow-xl reveal" style="transition-delay:0.1s">
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-3">02.</p>
+        <h3 class="font-display text-xl font-medium track-tight mb-3">"Não sei se meu preço tá caro ou barato"</h3>
+        <p class="text-w_graphite leading-relaxed">Abre 10 abas pra ver o concorrente. Quando termina de conferir, o preço já mudou. Precifica no chute. Perde Buy Box.</p>
+      </div>
+      <div class="border border-w_graphite/20 bg-w_bone p-8 transition-all duration-500 ease-swiss hover:-translate-y-1 hover:border-w_acid hover:shadow-xl reveal" style="transition-delay:0.2s">
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-3">03.</p>
+        <h3 class="font-display text-xl font-medium track-tight mb-3">"Meus anúncios parecem todos iguais"</h3>
+        <p class="text-w_graphite leading-relaxed">Título genérico, descrição copiada, fotos amadoras, atributos incompletos. O algoritmo enterra seu anúncio. Paga ADS sem otimizar a base.</p>
+      </div>
+      <div class="border border-w_graphite/20 bg-w_bone p-8 transition-all duration-500 ease-swiss hover:-translate-y-1 hover:border-w_acid hover:shadow-xl reveal" style="transition-delay:0.3s">
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-3">04.</p>
+        <h3 class="font-display text-xl font-medium track-tight mb-3">"Queimo budget em ADS sem saber se funciona"</h3>
+        <p class="text-w_graphite leading-relaxed">Campanha rodando com ACoS de 30%. Ninguém ajusta lance. Ninguém realoca budget. Dinheiro escorrendo sem retorno.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 04. SOLUÇÃO ══ -->
+<section class="slide bg-w_bone" id="solucao">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-6 reveal">sec.04 // a solução</p>
+    <h2 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] track-tighter leading-tight mb-16 reveal">
+      6 agentes de IA especializados.<br><span class="text-w_acid">Trabalhando 24/7 na sua conta.</span>
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-8 reveal">
+      <div class="text-center">
+        <p class="font-display font-bold text-5xl text-w_acid track-tighter mb-2">24/7</p>
+        <p class="font-mono text-xs text-w_graphite tracking-widest uppercase">Monitoramento contínuo</p>
+        <p class="text-sm text-w_graphite mt-2">Concorrentes, preços, perguntas e campanhas — sem parar nunca.</p>
+      </div>
+      <div class="text-center">
+        <p class="font-display font-bold text-5xl text-w_acid track-tighter mb-2">700+</p>
+        <p class="font-mono text-xs text-w_graphite tracking-widest uppercase">Operações por dia</p>
+        <p class="text-sm text-w_graphite mt-2">Análises, otimizações, respostas, ajustes de lance — automaticamente.</p>
+      </div>
+      <div class="text-center">
+        <p class="font-display font-bold text-5xl text-w_acid track-tighter mb-2">66</p>
+        <p class="font-mono text-xs text-w_graphite tracking-widest uppercase">Automações possíveis</p>
+        <p class="text-sm text-w_graphite mt-2">Tudo que a API do ML permite. Anúncios, SAC, ADS, pedidos, métricas.</p>
+      </div>
+      <div class="text-center">
+        <p class="font-display font-bold text-5xl text-w_acid track-tighter mb-2">&lt;10</p>
+        <p class="font-mono text-xs text-w_graphite tracking-widest uppercase">Min. tempo de resposta</p>
+        <p class="text-sm text-w_graphite mt-2">SAC responde perguntas em minutos. Reputação protegida.</p>
+      </div>
+      <div class="text-center">
+        <p class="font-display font-bold text-5xl text-w_acid track-tighter mb-2">5x</p>
+        <p class="font-mono text-xs text-w_graphite tracking-widest uppercase">ROAS otimizado</p>
+        <p class="text-sm text-w_graphite mt-2">ADS ajusta lances e budget em tempo real. De 3.5x para 5x.</p>
+      </div>
+      <div class="text-center">
+        <p class="font-display font-bold text-5xl text-w_acid track-tighter mb-2">20h</p>
+        <p class="font-mono text-xs text-w_graphite tracking-widest uppercase">Reunião diária</p>
+        <p class="text-sm text-w_graphite mt-2">Todos os dias às 20h os agentes se reúnem e geram relatório.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 05. MÉTODO ══ -->
+<section class="slide bg-w_black text-w_bone" id="metodo">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_acid mb-6 reveal">sec.05 // como funciona</p>
+    <h2 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] track-tighter leading-tight mb-16 reveal">
+      Opus decide.<br><span class="text-w_acid">Sonnet executa.</span>
+    </h2>
+    <div class="space-y-0 reveal">
+      <div class="p-6 lg:p-8 border border-white/10 border-b-0 bg-white/[0.02]">
+        <p class="font-mono text-[10px] text-w_acid tracking-widest uppercase mb-4">Fluxo Principal — Criação e Publicação</p>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="bg-w_acid/10 text-w_acid px-4 py-2 font-mono text-sm font-semibold border border-w_acid/25 rounded">ANALISTA</span>
+          <span class="text-w_acid text-lg">→</span>
+          <span class="bg-w_acid/10 text-w_acid px-4 py-2 font-mono text-sm font-semibold border border-w_acid/25 rounded">ANÚNCIOS</span>
+          <span class="text-w_acid text-lg">→</span>
+          <span class="bg-w_acid/10 text-w_acid px-4 py-2 font-mono text-sm font-semibold border border-w_acid/25 rounded">CRIATIVO</span>
+          <span class="text-w_acid text-lg">→</span>
+          <span class="bg-w_acid text-white px-4 py-2 font-mono text-sm font-bold rounded">GESTOR (Opus)</span>
+          <span class="text-w_acid text-lg">→</span>
+          <span class="bg-w_acid/10 text-w_acid px-4 py-2 font-mono text-sm font-semibold border border-w_acid/25 rounded">ADS</span>
+        </div>
+      </div>
+      <div class="p-6 lg:p-8 border border-white/10 border-b-0 bg-white/[0.02]">
+        <p class="font-mono text-[10px] text-green-400 tracking-widest uppercase mb-4">Ciclo Contínuo — Otimização 24/7</p>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="bg-green-500/10 text-green-400 px-4 py-2 font-mono text-sm font-semibold border border-green-500/25 rounded">ADS MONITORA</span>
+          <span class="text-green-400 text-lg">→</span>
+          <span class="bg-green-500/10 text-green-400 px-4 py-2 font-mono text-sm font-semibold border border-green-500/25 rounded">ANALISTA CRUZA</span>
+          <span class="text-green-400 text-lg">→</span>
+          <span class="bg-green-500/10 text-green-400 px-4 py-2 font-mono text-sm font-semibold border border-green-500/25 rounded">ANÚNCIOS AJUSTA</span>
+          <span class="text-green-400 text-lg">→</span>
+          <span class="bg-green-500/10 text-green-400 px-4 py-2 font-mono text-sm font-semibold border border-green-500/25 rounded">GESTOR VALIDA</span>
+        </div>
+      </div>
+      <div class="p-6 lg:p-8 border border-emerald-500/20 bg-emerald-500/[0.03]">
+        <p class="font-mono text-[10px] text-emerald-400 tracking-widest uppercase mb-4">Paralelo 24/7 — SAC Automático</p>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="bg-emerald-500/10 text-emerald-400 px-4 py-2 font-mono text-sm font-semibold border border-emerald-500/25 rounded">SAC MONITORA</span>
+          <span class="text-emerald-400 text-lg">→</span>
+          <span class="bg-emerald-500/10 text-emerald-400 px-4 py-2 font-mono text-sm font-semibold border border-emerald-500/25 rounded">RESPONDE &lt;10min</span>
+          <span class="text-emerald-400 text-lg">→</span>
+          <span class="bg-emerald-500/10 text-emerald-400 px-4 py-2 font-mono text-sm font-semibold border border-emerald-500/25 rounded">RESOLVE CLAIMS</span>
+          <span class="text-emerald-400 text-lg">→</span>
+          <span class="bg-emerald-500/10 text-emerald-400 px-4 py-2 font-mono text-sm font-semibold border border-emerald-500/25 rounded">PEDE AVALIAÇÃO</span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-12 border-l-2 border-w_acid pl-6 reveal">
+      <p class="font-mono text-xs text-w_acid font-semibold">// Nenhum Sonnet toma decisão. Todos reportam. Só o Gestor (Opus) decide.</p>
+      <p class="text-w_bone/50 text-sm mt-2">Risco de erro: quase zero. Custo 36% menor que 100% Opus.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 06. AGENTES ══ -->
+<section class="slide bg-white" id="agentes">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-6 reveal">sec.06 // 6 agentes especializados</p>
+    <h2 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] track-tighter leading-tight mb-16 reveal">
+      O que cada agente<br><span class="text-w_acid">faz por você.</span>
+    </h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="border border-w_graphite/15 bg-w_bone p-8 transition-all duration-500 ease-swiss hover:-translate-y-1 hover:border-w_acid reveal">
+        <div class="w-12 h-12 bg-[#00A650] rounded-full flex items-center justify-center mb-5"><span class="text-white text-xl">🔍</span></div>
+        <h3 class="font-display text-xl font-medium mb-1">Analista</h3>
+        <p class="font-mono text-[10px] text-w_acid tracking-widest uppercase mb-4">Sonnet 4 · ~260 ops/dia</p>
+        <ul class="space-y-2 text-w_graphite text-sm"><li class="flex gap-2"><span class="text-w_acid">▸</span>Busca e compara concorrentes 24/7</li><li class="flex gap-2"><span class="text-w_acid">▸</span>Audita SKUs + health check</li><li class="flex gap-2"><span class="text-w_acid">▸</span>Tendências de busca + Buy Box</li></ul>
+      </div>
+      <div class="border border-w_graphite/15 bg-w_bone p-8 transition-all duration-500 ease-swiss hover:-translate-y-1 hover:border-w_acid reveal" style="transition-delay:0.1s">
+        <div class="w-12 h-12 bg-[#3483FA] rounded-full flex items-center justify-center mb-5"><span class="text-white text-xl">📢</span></div>
+        <h3 class="font-display text-xl font-medium mb-1">Anúncios</h3>
+        <p class="font-mono text-[10px] text-w_acid tracking-widest uppercase mb-4">Sonnet 4 · ~60 ops/dia</p>
+        <ul class="space-y-2 text-w_graphite text-sm"><li class="flex gap-2"><span class="text-w_acid">▸</span>Títulos SEO + fichas completas</li><li class="flex gap-2"><span class="text-w_acid">▸</span>Cria anúncios novos do zero</li><li class="flex gap-2"><span class="text-w_acid">▸</span>Ajusta preço + variações</li></ul>
+      </div>
+      <div class="border border-w_graphite/15 bg-w_bone p-8 transition-all duration-500 ease-swiss hover:-translate-y-1 hover:border-w_acid reveal" style="transition-delay:0.2s">
+        <div class="w-12 h-12 bg-[#E040FB] rounded-full flex items-center justify-center mb-5"><span class="text-white text-xl">🎨</span></div>
+        <h3 class="font-display text-xl font-medium mb-1">Criativo</h3>
+        <p class="font-mono text-[10px] text-w_acid tracking-widest uppercase mb-4">Nano Banana Pro · ~45 imgs/dia</p>
+        <ul class="space-y-2 text-w_graphite text-sm"><li class="flex gap-2"><span class="text-w_acid">▸</span>Fotos profissionais com fundo branco</li><li class="flex gap-2"><span class="text-w_acid">▸</span>Infográficos + banners + mockups</li><li class="flex gap-2"><span class="text-w_acid">▸</span>Remoção de fundo automática</li></ul>
+      </div>
+      <div class="border border-w_acid/30 bg-w_bone p-8 transition-all duration-500 ease-swiss hover:-translate-y-1 hover:border-w_acid reveal" style="transition-delay:0.3s">
+        <div class="w-12 h-12 bg-[#FFE600] rounded-full flex items-center justify-center mb-5"><span class="text-w_black text-xl">👑</span></div>
+        <h3 class="font-display text-xl font-medium mb-1">Gestor</h3>
+        <p class="font-mono text-[10px] text-w_acid tracking-widest uppercase mb-4">Claude Opus 4 · Decisor Final</p>
+        <ul class="space-y-2 text-w_graphite text-sm"><li class="flex gap-2"><span class="text-w_acid">▸</span>Único que toma decisões</li><li class="flex gap-2"><span class="text-w_acid">▸</span>Semáforo: <span class="text-green-500 font-semibold">publica</span> / <span class="text-yellow-500 font-semibold">humano</span> / <span class="text-red-500 font-semibold">reprova</span></li><li class="flex gap-2"><span class="text-w_acid">▸</span>Reunião diária 20h + relatório</li></ul>
+      </div>
+      <div class="border border-w_graphite/15 bg-w_bone p-8 transition-all duration-500 ease-swiss hover:-translate-y-1 hover:border-w_acid reveal" style="transition-delay:0.4s">
+        <div class="w-12 h-12 bg-[#F97316] rounded-full flex items-center justify-center mb-5"><span class="text-white text-xl">📈</span></div>
+        <h3 class="font-display text-xl font-medium mb-1">ADS</h3>
+        <p class="font-mono text-[10px] text-w_acid tracking-widest uppercase mb-4">Sonnet 4 · ~80 ops/dia</p>
+        <ul class="space-y-2 text-w_graphite text-sm"><li class="flex gap-2"><span class="text-w_acid">▸</span>Cria e monitora Product Ads</li><li class="flex gap-2"><span class="text-w_acid">▸</span>Ajusta lances + realoca budget</li><li class="flex gap-2"><span class="text-w_acid">▸</span>ROAS 3.5x → 5x automático</li></ul>
+      </div>
+      <div class="border border-w_graphite/15 bg-w_bone p-8 transition-all duration-500 ease-swiss hover:-translate-y-1 hover:border-w_acid reveal" style="transition-delay:0.5s">
+        <div class="w-12 h-12 bg-[#0EA5E9] rounded-full flex items-center justify-center mb-5"><span class="text-white text-xl">💬</span></div>
+        <h3 class="font-display text-xl font-medium mb-1">SAC</h3>
+        <p class="font-mono text-[10px] text-w_acid tracking-widest uppercase mb-4">Sonnet 4 · ~195 ops/dia</p>
+        <ul class="space-y-2 text-w_graphite text-sm"><li class="flex gap-2"><span class="text-w_acid">▸</span>Responde perguntas em &lt;10min</li><li class="flex gap-2"><span class="text-w_acid">▸</span>Resolve reclamações + mediações</li><li class="flex gap-2"><span class="text-w_acid">▸</span>Solicita avaliação pós-entrega</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 07. ESCRITÓRIO ══ -->
+<section class="slide bg-w_black text-w_bone" id="escritorio">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_acid mb-6 reveal">sec.07 // escritório virtual 3d</p>
+    <h2 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] track-tighter leading-tight mb-16 reveal">
+      6 agentes conectados.<br><span class="text-w_acid">Uma máquina de vendas.</span>
+    </h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+      <div class="bg-white/[0.04] border border-white/10 p-6 rounded-xl hover:border-w_acid transition-all duration-300">
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-2">PAINEL</p>
+        <p class="text-sm text-w_bone/70">Métricas em tempo real: vendas, visitas, conversão, reputação, probabilidade de escala.</p>
+      </div>
+      <div class="bg-white/[0.04] border border-white/10 p-6 rounded-xl hover:border-w_acid transition-all duration-300">
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-2">ANÚNCIOS</p>
+        <p class="text-sm text-w_bone/70">Lista de SKUs com score SEO, qualidade (ouro/prata/bronze) e status de otimização.</p>
+      </div>
+      <div class="bg-white/[0.04] border border-white/10 p-6 rounded-xl hover:border-w_acid transition-all duration-300">
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-2">CAMPANHAS</p>
+        <p class="text-sm text-w_bone/70">ACoS, CPC, ROAS por campanha. Semáforo automático: escalar, ajustar ou pausar.</p>
+      </div>
+      <div class="bg-white/[0.04] border border-white/10 p-6 rounded-xl hover:border-w_acid transition-all duration-300">
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-2">PERGUNTAS</p>
+        <p class="text-sm text-w_bone/70">Todas as perguntas respondidas pelo SAC com tempo médio e status.</p>
+      </div>
+      <div class="bg-white/[0.04] border border-white/10 p-6 rounded-xl hover:border-w_acid transition-all duration-300">
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-2">REUNIÕES</p>
+        <p class="text-sm text-w_bone/70">Reunião diária às 20h. Chat ao vivo. Relatório por e-mail. Alinhamento sob demanda.</p>
+      </div>
+      <div class="bg-white/[0.04] border border-white/10 p-6 rounded-xl hover:border-w_acid transition-all duration-300">
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-2">RELATÓRIOS</p>
+        <p class="text-sm text-w_bone/70">Timeline de decisões do dia. Métricas consolidadas. Insights dos agentes.</p>
+      </div>
+    </div>
+    <div class="mt-8 text-center reveal">
+      <span class="inline-flex items-center gap-2 px-4 py-2 bg-w_acid/10 border border-w_acid/20 rounded-full font-mono text-xs text-w_acid">
+        <span class="w-2 h-2 rounded-full bg-w_acid animate-pulse"></span>
+        LIVE · 6 AGENTS ONLINE · AUTENTICAÇÃO SEGURA
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 08. DÚVIDA ══ -->
+<section class="slide bg-w_bone flex items-center justify-center" id="duvida">
+  <div class="text-center">
+    <p class="font-display font-bold duvida-text track-tighter text-w_black">Dúvida<span class="text-w_acid caret-blink">?</span></p>
+  </div>
+</section>
+
+<!-- ══ 09. ESCOPO ══ -->
+<section class="slide bg-white" id="escopo">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-6 reveal">sec.09 // escopo de entrega</p>
+    <h2 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] track-tighter leading-tight mb-16 reveal">
+      Do briefing ao go-live<br><span class="text-w_acid">em 4 semanas.</span>
+    </h2>
+    <div class="grid md:grid-cols-4 gap-0 relative reveal">
+      <div class="hidden md:block absolute top-7 left-[12.5%] w-[75%] h-0.5 bg-gradient-to-r from-w_acid to-w_acid_light"></div>
+      <div class="text-center px-4 relative z-10">
+        <div class="w-3.5 h-3.5 bg-w_acid rounded-full mx-auto mb-6 ring-4 ring-white shadow-[0_0_0_6px_rgba(255,77,0,0.2)]"></div>
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-2">SEMANA 01</p>
+        <h3 class="font-display text-lg font-medium mb-3">Infra + Analista</h3>
+        <p class="text-sm text-w_graphite text-left">Setup ML Developers + OAuth<br>Agente Analista<br>Agente Anúncios<br>Fluxo end-to-end</p>
+      </div>
+      <div class="text-center px-4 relative z-10">
+        <div class="w-3.5 h-3.5 bg-w_acid rounded-full mx-auto mb-6 ring-4 ring-white shadow-[0_0_0_6px_rgba(255,77,0,0.2)]"></div>
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-2">SEMANA 02</p>
+        <h3 class="font-display text-lg font-medium mb-3">Criativo + Gestor</h3>
+        <p class="text-sm text-w_graphite text-left">Agente Criativo (imagens IA)<br>Agente Gestor (Opus 4)<br>4 agentes integrados<br>Testes com produtos reais</p>
+      </div>
+      <div class="text-center px-4 relative z-10">
+        <div class="w-3.5 h-3.5 bg-w_acid rounded-full mx-auto mb-6 ring-4 ring-white shadow-[0_0_0_6px_rgba(255,77,0,0.2)]"></div>
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-2">SEMANA 03</p>
+        <h3 class="font-display text-lg font-medium mb-3">ADS + SAC</h3>
+        <p class="text-sm text-w_graphite text-left">Agente ADS (campanhas)<br>Agente SAC (perguntas + claims)<br>Reunião diária 20h<br>Alertas e notificações</p>
+      </div>
+      <div class="text-center px-4 relative z-10">
+        <div class="w-3.5 h-3.5 bg-w_acid rounded-full mx-auto mb-6 ring-4 ring-white shadow-[0_0_0_6px_rgba(255,77,0,0.2)]"></div>
+        <p class="font-mono text-xs text-w_acid tracking-widest mb-2">SEMANA 04</p>
+        <h3 class="font-display text-lg font-medium mb-3">Go-live</h3>
+        <p class="text-sm text-w_graphite text-left">6 agentes end-to-end<br>Deploy produção 24/7<br>Escritório Virtual 3D<br>Treinamento do operador</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 10. ANCORAGEM ══ -->
+<section class="slide bg-w_bone" id="ancoragem">
+  <div class="max-w-4xl mx-auto px-6 lg:px-12 w-full">
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-6 reveal">sec.10 // se você fosse construir internamente</p>
+    <h2 class="font-display font-semibold text-[clamp(2rem,4vw,3rem)] track-tighter leading-tight mb-12 reveal">
+      O custo real de montar<br><span class="text-w_acid">essa operação do zero.</span>
+    </h2>
+    <div class="space-y-1 reveal" id="stack-bars">
+      <div class="stack-bar bg-white"><span class="font-mono text-sm">Agente Analista (Sonnet 4)</span><span class="font-display font-bold text-w_acid">R$ 25.000</span></div>
+      <div class="stack-bar bg-white"><span class="font-mono text-sm">Agente Anúncios (Sonnet 4)</span><span class="font-display font-bold text-w_acid">R$ 20.000</span></div>
+      <div class="stack-bar bg-white"><span class="font-mono text-sm">Agente Criativo (Nano Banana)</span><span class="font-display font-bold text-w_acid">R$ 15.000</span></div>
+      <div class="stack-bar bg-white"><span class="font-mono text-sm">Agente Gestor (Opus 4)</span><span class="font-display font-bold text-w_acid">R$ 30.000</span></div>
+      <div class="stack-bar bg-white"><span class="font-mono text-sm">Agente ADS (Sonnet 4)</span><span class="font-display font-bold text-w_acid">R$ 20.000</span></div>
+      <div class="stack-bar bg-white"><span class="font-mono text-sm">Agente SAC (Sonnet 4)</span><span class="font-display font-bold text-w_acid">R$ 20.000</span></div>
+      <div class="stack-bar bg-white"><span class="font-mono text-sm">Escritório Virtual 3D + Consultoria</span><span class="font-display font-bold text-w_acid">R$ 10.000</span></div>
+    </div>
+    <div class="mt-6 text-right reveal">
+      <p class="font-display font-bold text-4xl text-w_graphite track-tighter line-through decoration-w_acid decoration-[3px]">R$ 140.000</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 11. PREÇO ══ -->
+<section class="slide bg-w_black text-w_bone" id="preco">
+  <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center w-full">
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_acid mb-6 reveal">sec.11 // seu investimento</p>
+    <p class="font-display text-[clamp(2.5rem,5vw,4rem)] font-medium text-w_bone/30 line-through decoration-w_acid decoration-[3px] mb-4 reveal">R$140.000</p>
+    <p class="font-mono text-sm text-w_bone/60 tracking-widest uppercase mb-8 reveal">6 agentes · 66 automações dentro do ml · escritório virtual 3d · 4 semanas</p>
+    <div class="h-0.5 w-20 bg-w_acid mx-auto mb-8 reveal"></div>
+    <p class="font-display text-[clamp(5rem,10vw,8rem)] font-bold text-w_acid track-tighter leading-none mb-4 reveal">R$30.000</p>
+    <p class="font-mono text-lg text-w_bone/60 mb-2 reveal">à vista | ou <strong class="text-w_bone text-xl">12x de R$2.997,99</strong></p>
+    <p class="font-mono text-sm text-w_bone/40 mb-4 reveal">Custo operacional após go-live: <strong class="text-w_bone/70">~R$3.200 a R$5.600/mês</strong></p>
+    <p class="font-mono text-xs text-w_bone/30 mb-16 reveal">Opus 4 (Gestor) + Sonnet 4 (Executores) · <strong class="text-w_bone/50">66 automações possíveis dentro do Mercado Livre</strong> · 700+ ops/dia</p>
+
+    <div class="grid md:grid-cols-2 gap-6 text-left reveal">
+      <div class="border-2 border-w_acid p-8 relative">
+        <span class="absolute -top-3 left-6 bg-w_black text-w_acid font-mono text-[11px] tracking-widest px-2 font-semibold">BONUS</span>
+        <h3 class="font-display text-xl font-medium text-w_bone mb-3">Consultoria em Agentes IA</h3>
+        <p class="text-w_bone/60 leading-relaxed">Ensinamos você a treinar os agentes e ajustar regras, comportamentos e estratégias sem depender de nós.</p>
+      </div>
+      <div class="border-2 border-w_acid p-8 relative">
+        <span class="absolute -top-3 left-6 bg-w_black text-w_acid font-mono text-[11px] tracking-widest px-2 font-semibold">BONUS</span>
+        <h3 class="font-display text-xl font-medium text-w_bone mb-3">+30 dias de acompanhamento</h3>
+        <p class="text-w_bone/60 leading-relaxed">Calibragem de semáforos, ajustes de regras, monitoramento de estabilidade e suporte técnico pós go-live.</p>
+      </div>
+    </div>
+
+    <div class="mt-16 reveal">
+      <div class="inline-block px-8 py-4 border-2 border-w_acid clip-button">
+        <p class="font-mono text-w_acid font-semibold tracking-wide">// ENGENHARIA, NÃO PROMESSA. VENDAS, NÃO SLIDES BONITOS.</p>
+      </div>
+    </div>
+
+    <div class="mt-16">
+      <span class="font-mono text-xl font-bold text-w_graphite">
+        <span class="text-w_bone">&gt;_</span> We<span class="text-w_acid">{Stack}</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<script>
+const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active')})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal,.stack-bar').forEach(el=>observer.observe(el));
+const navDots=document.querySelectorAll('.slide-nav a');
+const sections=document.querySelectorAll('[id]');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-300)current=s.id});
+  navDots.forEach(d=>{d.classList.toggle('active',d.getAttribute('href')==='#'+current)});
+});
+document.querySelectorAll('a[href^="#"]').forEach(l=>{l.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(l.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})})});
+</script>
+</body>
+</html>

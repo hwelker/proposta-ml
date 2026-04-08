@@ -1,0 +1,25 @@
+{
+  "name": "proposta-westack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hwelker/proposta-westack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/hwelker/proposta-westack/issues"
+  },
+  "homepage": "https://github.com/hwelker/proposta-westack#readme",
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^24.40.0"
+  }
+}

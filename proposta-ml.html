@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WeStack — Squad de Agentes IA para Mercado Livre</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --w-black: #0A0A0A;
+    --w-graphite: #5C5C5C;
+    --w-acid: #FF4D00;
+    --w-acid-light: #FF6A1A;
+    --w-bone: #F4F4F0;
+    --w-white: #FFFFFF;
+    --w-ml-yellow: #FFE600;
+    --w-ml-blue: #3483FA;
+    --ease-swiss: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  ::selection { background: var(--w-acid); color: var(--w-white); }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--w-bone);
+    color: var(--w-black);
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .slide {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(2rem, 5vw, 5rem);
+  }
+  .slide-inner {
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .font-display { font-family: 'Space Grotesk', system-ui, sans-serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--w-graphite);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+  }
+  h2 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  h3 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  p {
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+    line-height: 1.625;
+    color: var(--w-graphite);
+  }
+
+  .slide-dark { background: var(--w-black); color: var(--w-bone); }
+  .slide-dark p { color: rgba(244,244,240,0.7); }
+
+  .bg-tech-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(92,92,92,0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(92,92,92,0.08) 1px, transparent 1px);
+    mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .bg-tech-grid-light::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(255,77,0,0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,77,0,0.06) 1px, transparent 1px);
+    mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .clip-button { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); }
+
+  .card {
+    border: 1px solid rgba(92,92,92,0.2);
+    background: var(--w-white);
+    padding: clamp(2rem, 3vw, 2.5rem);
+    transition: all 500ms var(--ease-swiss);
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+    border-color: var(--w-acid);
+  }
+  .card-dark {
+    border: 1px solid rgba(244,244,240,0.1);
+    background: rgba(244,244,240,0.03);
+    padding: clamp(2rem, 3vw, 2.5rem);
+    transition: all 500ms var(--ease-swiss);
+  }
+  .card-dark:hover {
+    transform: translateY(-4px);
+    border-color: var(--w-acid);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s var(--ease-swiss);
+  }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+  .draw-line { width: 0; height: 2px; background: var(--w-acid); transition: width 1s var(--ease-swiss); }
+  .draw-line.active { width: 100%; }
+
+  @keyframes blink-caret { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  .caret-blink { animation: blink-caret 1s step-end infinite; }
+
+  .photo-container { position: relative; width: 400px; flex-shrink: 0; }
+  .photo-container img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(100%);
+    clip-path: polygon(0 0, 100% 0, 100% 82%, 70% 100%, 0 100%);
+    transition: all 600ms var(--ease-swiss);
+  }
+  .photo-container:hover img { filter: grayscale(0%); }
+  .photo-frame {
+    position: absolute;
+    top: -8px; left: -8px; right: -8px; bottom: -8px;
+    border: 2px solid var(--w-acid);
+    clip-path: polygon(0 0, 100% 0, 100% 82%, 70% 100%, 0 100%);
+    pointer-events: none;
+  }
+  .photo-accent { position: absolute; bottom: 0; left: 0; width: 70%; height: 3px; background: var(--w-acid); }
+
+  .logo-row { display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap; }
+  .logo-row img {
+    height: 44px;
+    opacity: 0.85;
+    transition: opacity 300ms var(--ease-swiss);
+    filter: grayscale(100%);
+  }
+  .logo-row img:hover { opacity: 1; filter: grayscale(0%); }
+
+  .counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--w-acid);
+    margin-bottom: 0.75rem;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 3vw, 2rem); }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2rem); }
+
+  .value-table { width: 100%; border-collapse: collapse; }
+  .value-table tr { border-bottom: 1px solid rgba(244,244,240,0.1); }
+  .value-table td { padding: 1.25rem 0; font-size: 1.15rem; }
+  .value-table td:first-child { color: rgba(244,244,240,0.7); }
+  .value-table td:last-child { text-align: right; font-family: 'JetBrains Mono', monospace; color: var(--w-bone); font-weight: 500; font-size: 1.1rem; }
+
+  .price-big {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(5rem, 10vw, 8rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--w-acid);
+  }
+  .price-strikethrough {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+    color: rgba(244,244,240,0.5);
+    text-decoration: line-through;
+    text-decoration-color: var(--w-acid);
+    text-decoration-thickness: 3px;
+  }
+
+  .dúvida-text {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(6rem, 15vw, 14rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.85;
+    color: var(--w-bone);
+    text-align: center;
+  }
+  .dúvida-caret { color: var(--w-acid); animation: blink-caret 1s step-end infinite; }
+
+  .bonus-card {
+    border: 2px solid var(--w-acid);
+    padding: 2.5rem;
+    position: relative;
+  }
+  .bonus-card::before {
+    content: 'BONUS';
+    position: absolute;
+    top: -10px; left: 1.5rem;
+    background: var(--w-bone);
+    color: var(--w-acid);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    padding: 0 0.5rem;
+    font-weight: 600;
+  }
+
+  .agent-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--w-acid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    box-shadow: 0 0 0 3px var(--w-bone), 0 0 0 5px rgba(255,77,0,0.2);
+  }
+  .agent-icon svg { width: 28px; height: 28px; }
+  .agent-icon::after {
+    content: '';
+    position: absolute;
+    top: 4px; right: 2px;
+    width: 10px; height: 10px;
+    background: #22c55e;
+    border-radius: 50%;
+    border: 2px solid var(--w-white);
+  }
+
+  .agents-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+    position: relative;
+  }
+  .agent-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 400ms var(--ease-swiss);
+  }
+  .agent-node:hover { transform: translateY(-4px); }
+  .agent-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--w-graphite);
+  }
+  .agent-connector-h {
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(to right, rgba(255,77,0,0.4), rgba(255,77,0,0.1));
+    align-self: center;
+    position: relative;
+  }
+  .agent-connector-h::before {
+    content: '';
+    position: absolute;
+    right: 0; top: -3px;
+    width: 0; height: 0;
+    border-left: 6px solid rgba(255,77,0,0.4);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+  .timeline::after {
+    content: '';
+    position: absolute;
+    top: 28px; left: 5%; width: 90%; height: 2px;
+    background: linear-gradient(to right, var(--w-acid), var(--w-acid-light));
+  }
+  .timeline-item { text-align: center; padding: 0 1rem; position: relative; z-index: 2; }
+  .timeline-dot {
+    width: 14px; height: 14px;
+    background: var(--w-acid);
+    border-radius: 50%;
+    margin: 22px auto 1.5rem;
+    position: relative; z-index: 3;
+    box-shadow: 0 0 0 4px var(--w-bone), 0 0 0 6px var(--w-acid);
+  }
+
+  .slide-nav {
+    position: fixed;
+    right: 2rem; top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .slide-nav a {
+    display: block;
+    width: 8px; height: 8px;
+    background: rgba(92,92,92,0.3);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3px), calc(100% - 3px) 100%, 0 100%);
+    transition: all 300ms var(--ease-swiss);
+    text-decoration: none;
+  }
+  .slide-nav a:hover, .slide-nav a.active { background: var(--w-acid); transform: scale(1.5); }
+
+  .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--w-acid);
+    border: 1px solid rgba(255,77,0,0.3);
+    padding: 3px 10px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--w-bone); }
+  ::-webkit-scrollbar-thumb { background: var(--w-acid); }
+
+  @média (max-width: 768px) {
+    .slide { padding: clamp(1.5rem, 4vw, 3rem); }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .timeline::after { display: none; }
+    .photo-container { width: 100%; max-width: 280px; }
+    .photo-container img { height: 360px; }
+    .slide-nav { display: none; }
+    .agents-visual { gap: 0.5rem; flex-direction: column; }
+    .agent-connector-h { width: 2px; height: 20px; background: linear-gradient(to bottom, rgba(255,77,0,0.4), rgba(255,77,0,0.1)); }
+    .agent-connector-h::before { display: none; }
+    .price-big { font-size: clamp(3.5rem, 8vw, 5rem); }
+    .bonus-card { padding: 1.5rem; }
+    .logo-row { gap: 1.5rem; }
+    .logo-row img { height: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="slide-nav">
+  <a href="#capa"></a><a href="#autoridade"></a><a href="#problema"></a>
+  <a href="#solução"></a><a href="#metodo1"></a><a href="#metodo2"></a><a href="#metodo3"></a><a href="#agentes"></a><a href="#escritório"></a>
+  <a href="#dúvida"></a><a href="#escopo"></a><a href="#ancoragem"></a><a href="#preco"></a>
+</nav>
+
+<!-- ===== SLIDE 01: CAPA ===== -->
+<section class="slide slide-dark bg-tech-grid" id="capa">
+  <div class="slide-inner" style="text-align: center;">
+    <div class="reveal">
+      <p class="font-mono" style="font-size: 12px; color: var(--w-acid); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2rem;">proposta comercial</p>
+      <div style="margin-bottom: 2.5rem;">
+        <span class="font-mono" style="font-size: 1.5rem; font-weight: 700; color: var(--w-bone);">
+          <span style="color: var(--w-bone);">&gt;_</span>
+          We<span style="color: var(--w-acid);">{</span>Stack<span style="color: var(--w-acid);">}</span>
+        </span>
+      </div>
+      <h1 style="color: var(--w-bone); margin-bottom: 2rem;">
+        Escritório Virtual de IA<br>
+        <span style="color: var(--w-acid);">para Mercado Livre</span>
+      </h1>
+
+      <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; max-width: 900px; margin: 2.5rem auto 1.5rem;">
+        <div style="text-align: center; padding: 1.25rem 0.5rem; border: 1px solid rgba(255,77,0,0.2); background: rgba(255,77,0,0.04); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+          <p class="font-mono" style="font-size: 2rem; color: var(--w-acid); font-weight: 700; line-height: 1; margin-bottom: 0.6rem;">{&thinsp;?&thinsp;}</p>
+          <p class="font-mono" style="font-size: 10px; font-weight: 600; color: rgba(244,244,240,0.8); letter-spacing: 0.05em;">ANALISTA</p>
+        </div>
+        <div style="text-align: center; padding: 1.25rem 0.5rem; border: 1px solid rgba(255,77,0,0.2); background: rgba(255,77,0,0.04); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+          <p class="font-mono" style="font-size: 2rem; color: var(--w-acid); font-weight: 700; line-height: 1; margin-bottom: 0.6rem;">&lt;/&gt;</p>
+          <p class="font-mono" style="font-size: 10px; font-weight: 600; color: rgba(244,244,240,0.8); letter-spacing: 0.05em;">ANÚNCIOS</p>
+        </div>
+        <div style="text-align: center; padding: 1.25rem 0.5rem; border: 1px solid rgba(255,77,0,0.2); background: rgba(255,77,0,0.04); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+          <p class="font-mono" style="font-size: 2rem; color: var(--w-acid); font-weight: 700; line-height: 1; margin-bottom: 0.6rem;">[&thinsp;img&thinsp;]</p>
+          <p class="font-mono" style="font-size: 10px; font-weight: 600; color: rgba(244,244,240,0.8); letter-spacing: 0.05em;">CRIATIVO</p>
+        </div>
+        <div style="text-align: center; padding: 1.25rem 0.5rem; border: 1px solid var(--w-acid); background: var(--w-acid); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+          <p class="font-mono" style="font-size: 2rem; color: var(--w-white); font-weight: 700; line-height: 1; margin-bottom: 0.6rem;">&gt;_&thinsp;&#x2713;</p>
+          <p class="font-mono" style="font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.9); letter-spacing: 0.05em;">GESTOR</p>
+        </div>
+        <div style="text-align: center; padding: 1.25rem 0.5rem; border: 1px solid rgba(255,77,0,0.2); background: rgba(255,77,0,0.04); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+          <p class="font-mono" style="font-size: 2rem; color: var(--w-acid); font-weight: 700; line-height: 1; margin-bottom: 0.6rem;">//&thinsp;$</p>
+          <p class="font-mono" style="font-size: 10px; font-weight: 600; color: rgba(244,244,240,0.8); letter-spacing: 0.05em;">ADS ML</p>
+        </div>
+        <div style="text-align: center; padding: 1.25rem 0.5rem; border: 1px solid rgba(255,77,0,0.2); background: rgba(255,77,0,0.04); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+          <p class="font-mono" style="font-size: 2rem; color: var(--w-acid); font-weight: 700; line-height: 1; margin-bottom: 0.6rem;">++&thinsp;&#x2197;</p>
+          <p class="font-mono" style="font-size: 10px; font-weight: 600; color: rgba(244,244,240,0.8); letter-spacing: 0.05em;">SAC</p>
+        </div>
+      </div>
+
+      <p class="font-mono" style="font-size: 0.8rem; color: rgba(244,244,240,0.6); letter-spacing: 0.1em; text-transform: uppercase;">
+        do briefing ao go-live &middot; 100% autônomo &middot; 24/7
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SLIDE 02: AUTORIDADE ===== -->
+<section class="slide" id="autoridade" style="background: var(--w-bone);">
+  <div class="slide-inner">
+    <p class="section-label reveal">sec.01 // autoridade</p>
+    <div class="reveal" style="display: flex; gap: clamp(3rem, 6vw, 6rem); align-items: flex-start; flex-wrap: wrap;">
+
+      <div class="photo-container">
+        <img src="_MG_2909.jpg" alt="Henrique Welker">
+        <div class="photo-frame"></div>
+        <div class="photo-accent"></div>
+      </div>
+
+      <div style="flex: 1; min-width: 340px;">
+        <h2 style="margin-bottom: 0.5rem; font-size: clamp(2.5rem, 5vw, 3.5rem);">Henrique Welker</h2>
+        <p class="font-mono" style="font-size: 1rem; color: var(--w-acid); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 2.5rem; font-weight: 600;">
+          Founder & CEO &middot; 2x Exit
+        </p>
+
+        <div class="draw-line" style="margin-bottom: 2.5rem; max-width: 80px;"></div>
+
+        <p style="font-size: 1.3rem; color: var(--w-black); font-weight: 600; margin-bottom: 0.75rem;">Cases entregues</p>
+        <p style="font-size: 1.15rem; margin-bottom: 3rem; white-space: nowrap;">
+          Ronaldinho Gaúcho (R10) &middot; Sebrae &middot; +Dezenas de empresas no Brasil, Portugal e Suíça
+        </p>
+
+        <div class="logo-row" style="margin-bottom: 3rem;">
+          <img src="google-for-startups.png" alt="Google for Startups" style="height: 40px;">
+          <img src="NASA_logo.svg.png" alt="NASA" style="height: 55px;">
+          <img src="Ronaldinho.png" alt="R10" style="height: 48px;">
+          <img src="Sebrae.svg.png" alt="Sebrae" style="height: 38px;">
+        </div>
+
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
+          <div style="flex: 1; min-width: 220px;">
+            <p class="font-mono" style="font-size: 0.8rem; color: var(--w-acid); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; font-weight: 600;">Google for Startups</p>
+            <p style="font-size: 1rem;">Acelerados pelo programa de startups do Google.</p>
+          </div>
+          <div style="flex: 1; min-width: 220px;">
+            <p class="font-mono" style="font-size: 0.8rem; color: var(--w-acid); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; font-weight: 600;">NASA Space Apps</p>
+            <p style="font-size: 1rem;">Equipe com membros certificados NASA Space Apps Challenge.</p>
+          </div>
+        </div>
+
+        <div style="padding: 1.5rem 2rem; border-left: 3px solid var(--w-acid); background: rgba(255,77,0,0.03);">
+          <p style="font-size: 1.1rem; color: var(--w-black); font-weight: 500; line-height: 1.5;">
+            4 anos construindo agentes de IA que operam de verdade.<br>
+            <span style="color: var(--w-acid); font-weight: 700;">Engenharia, não promessa.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SLIDE 03: PROBLEMA ===== -->
+<section class="slide" id="problema" style="background: var(--w-bone);">
+  <div class="slide-inner">
+    <p class="section-label reveal">sec.02 // a dor de quem vende no ml</p>
+    <h2 class="reveal" style="margin-bottom: clamp(2.5rem, 5vw, 4rem);">
+      Seu dia como vendedor<br>
+      <span style="color: var(--w-acid);">no Mercado Livre.</span>
+    </h2>
+    <div class="grid-2 reveal">
+      <div class="card">
+        <p class="counter">01.</p>
+        <h3 style="margin-bottom: 1rem;">"Passo o dia inteiro respondendo pergunta repetida"</h3>
+        <p style="font-size: 1.05rem;">Mesma dúvida sobre frete, prazo, cor, tamanho. 50, 100, 200 perguntas por dia. Se demora pra responder, perde a venda pro concorrente que respondeu primeiro. Sua equipe vira atendente, não vendedor.</p>
+      </div>
+      <div class="card">
+        <p class="counter">02.</p>
+        <h3 style="margin-bottom: 1rem;">"Nao sei se meu preço ta caro ou barato"</h3>
+        <p style="font-size: 1.05rem;">Você abre 10 abas pra ver quanto o concorrente ta cobrando. Quando termina de conferir, o preço ja mudou. Precifica no chute e descobre depois que perdeu margem ou perdeu vendas.</p>
+      </div>
+      <div class="card">
+        <p class="counter">03.</p>
+        <h3 style="margin-bottom: 1rem;">"Meus anúncios parecem todos iguais"</h3>
+        <p style="font-size: 1.05rem;">Título genérico, descrição copiada, atributos incompletos. O algoritmo enterra seu anúncio. Você paga Product Ads sem otimizar a base e joga dinheiro fora com tráfego que não converte.</p>
+      </div>
+      <div class="card">
+        <p class="counter">04.</p>
+        <h3 style="margin-bottom: 1rem;">"Reclamação derruba minha reputação em segundos"</h3>
+        <p style="font-size: 1.05rem;">Um atraso no envio, uma resposta demorada no pós-venda, uma evidência que não foi enviada a tempo. Sua reputação cai, seu anúncio perde exposição e você entra num ciclo que leva meses pra reverter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SLIDE 04: SOLUCAO ===== -->
+<section class="slide bg-tech-grid-light" id="solução" style="background: var(--w-bone);">
+  <div class="slide-inner">
+    <p class="section-label reveal" style="color: var(--w-graphite);">sec.03 // a solução</p>
+    <h2 class="reveal" style="color: var(--w-black); margin-bottom: clamp(2.5rem, 4vw, 3.5rem);">
+      6 agentes de IA trabalhando<br>
+      <span style="color: var(--w-acid);">na sua loja. 24/7.</span>
+    </h2>
+
+    <div class="grid-2 reveal">
+      <div class="card" style="text-align: center; padding: 3rem 2rem;">
+        <p class="font-display" style="font-size: clamp(3.5rem, 6vw, 5rem); font-weight: 700; color: var(--w-acid); letter-spacing: -0.04em; line-height: 1;">24/7</p>
+        <div style="width: 60px; height: 2px; background: var(--w-acid); margin: 1rem auto;"></div>
+        <h3 style="color: var(--w-black); margin-bottom: 0.5rem; font-size: 1.25rem;">Respondendo perguntas</h3>
+        <p style="font-size: 1rem;">De madrugada, feriado, domingo. Seu cliente pergunta, o agente responde em segundos com contexto real do seu produto.</p>
+      </div>
+
+      <div class="card" style="text-align: center; padding: 3rem 2rem;">
+        <p class="font-display" style="font-size: clamp(3rem, 5vw, 4rem); font-weight: 700; color: var(--w-acid); letter-spacing: -0.04em; line-height: 1;">&lt;3s</p>
+        <div style="width: 60px; height: 2px; background: var(--w-acid); margin: 1rem auto;"></div>
+        <h3 style="color: var(--w-black); margin-bottom: 0.5rem; font-size: 1.25rem;">Ajuste de preco</h3>
+        <p style="font-size: 1rem;">Concorrente baixou o preco? Seu agente detecta e reposiciona automáticamente respeitando sua margem mínima.</p>
+      </div>
+
+      <div class="card" style="text-align: center; padding: 3rem 2rem;">
+        <svg style="width: 56px; height: 56px; margin-bottom: 0.5rem;" viewBox="0 0 56 56" fill="none">
+          <rect x="8" y="14" width="40" height="28" rx="3" stroke="#FF4D00" stroke-width="2" fill="none"/>
+          <path d="M16 26l6 6 12-12" stroke="#FF4D00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="44" cy="14" r="6" fill="#FF4D00" opacity="0.3"/>
+          <path d="M42 12l2 2 4-4" stroke="#FF4D00" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div style="width: 60px; height: 2px; background: var(--w-acid); margin: 1rem auto;"></div>
+        <h3 style="color: var(--w-black); margin-bottom: 0.5rem; font-size: 1.25rem;">Anúncios otimizados</h3>
+        <p style="font-size: 1rem;">Títulos, descricoes e atributos escritos pra converter. O agente usa dados reais de busca pra posicionar melhor.</p>
+      </div>
+
+      <div class="card" style="text-align: center; padding: 3rem 2rem;">
+        <svg style="width: 56px; height: 56px; margin-bottom: 0.5rem;" viewBox="0 0 56 56" fill="none">
+          <path d="M28 6l6 12h14l-11 8 4 13-13-9-13 9 4-13-11-8h14z" stroke="#FF4D00" stroke-width="2" fill="none"/>
+        </svg>
+        <div style="width: 60px; height: 2px; background: var(--w-acid); margin: 1rem auto;"></div>
+        <h3 style="color: var(--w-black); margin-bottom: 0.5rem; font-size: 1.25rem;">Reputação protegida</h3>
+        <p style="font-size: 1rem;">Pós-venda automatizado, reclamações tratadas em minutos, evidências enviadas antes do prazo. Sua reputação não cai.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: 3rem; padding: 1.5rem 2rem; border: 1px solid rgba(92,92,92,0.15); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);">
+      <p class="font-mono" style="font-size: 0.95rem; color: var(--w-acid); font-weight: 600;">
+        // Tudo via API oficial do Mercado Livre + WhatsApp. Sem gambiarra. Sem risco de bloqueio.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SLIDE 05a: ANALISTA + ANÚNCIOS ===== -->
+<section class="slide bg-tech-grid-light" id="metodo1" style="padding-top: 2rem; padding-bottom: 2rem; background: var(--w-bone);">
+  <div class="slide-inner" style="max-width: 1300px;">
+    <div class="reveal" style="text-align: center; margin-bottom: clamp(2rem, 4vw, 3rem);">
+      <p class="font-mono" style="font-size: 11px; color: var(--w-graphite); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem;">sec.04 // o que seus agentes fazem &mdash; 1 de 3</p>
+      <h2 style="color: var(--w-black); font-size: clamp(2rem, 4vw, 3rem);">Analista + Anúncios</h2>
+    </div>
+    <div class="grid-2 reveal">
+
+      <!-- CARD: Analista -->
+      <div class="card" style="padding: clamp(2rem, 3vw, 2.5rem);">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem;">
+          <div style="width: 48px; height: 48px; background: var(--w-acid); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="1.8"/><path d="M16 16l5 5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <h3 style="color: var(--w-black); font-size: 1.4rem; margin-bottom: 0.15rem;">Analista</h3>
+            <p class="font-mono" style="font-size: 10px; color: var(--w-acid); letter-spacing: 0.08em;">INTELIGÊNCIA DE MERCADO</p>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Busca concorrentes do mesmo produto via API</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Compara preço, título, vendas, tipo de anúncio e frete dos top concorrentes</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Identifica gaps e oportunidades</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Título fraco, preço alto, poucas fotos — gera briefing e envia pro Agente Anúncios</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Auditoria dos seus anúncios ativos</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Analisa visitas, conversão e ranking. Classifica: Saudável, Otimizável ou Crítico</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Radar de preços 24/7 com alerta de margem</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Monitora concorrentes continuamente e avisa quando margem fica negativa</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD: Anúncios -->
+      <div class="card" style="padding: clamp(2rem, 3vw, 2.5rem);">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem;">
+          <div style="width: 48px; height: 48px; background: var(--w-acid); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="white" stroke-width="1.8" fill="none"/><path d="M8 12h8M12 8v8" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <h3 style="color: var(--w-black); font-size: 1.4rem; margin-bottom: 0.15rem;">Anúncios</h3>
+            <p class="font-mono" style="font-size: 10px; color: var(--w-acid); letter-spacing: 0.08em;">CRIAÇÃO E OTIMIZAÇÃO</p>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Cria anúncios completos a partir do briefing</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Título otimizado com keywords de maior busca + ficha técnica completa</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Otimiza anúncios existentes sem perder histórico</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Reescreve títulos fracos, completa atributos faltantes, ajusta preço competitivo</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Pede imagens ao Criativo e monta o pacote</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Texto + imagens + preço prontos para aprovação do Gestor ML</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Adiciona FAQ automática na descrição</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Perguntas frequentes viram informação no anúncio, reduzindo dúvidas futuras</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SLIDE 05b: CRIATIVO + GESTOR ML ===== -->
+<section class="slide bg-tech-grid-light" id="metodo2" style="padding-top: 2rem; padding-bottom: 2rem; background: var(--w-bone);">
+  <div class="slide-inner" style="max-width: 1300px;">
+    <div class="reveal" style="text-align: center; margin-bottom: clamp(2rem, 4vw, 3rem);">
+      <p class="font-mono" style="font-size: 11px; color: var(--w-graphite); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem;">sec.04 // o que seus agentes fazem &mdash; 2 de 3</p>
+      <h2 style="color: var(--w-black); font-size: clamp(2rem, 4vw, 3rem);">Criativo + Gestor ML</h2>
+    </div>
+
+    <!-- Imagem antes/depois gerada por IA -->
+    <div class="reveal" style="margin-bottom: clamp(1.5rem, 3vw, 2rem); text-align: center;">
+      <img src="img-meias-mockup.png" alt="Antes e depois: foto amadora transformada em profissional por IA" style="width: 100%; max-width: 900px; border-radius: 8px; border: 1px solid rgba(92,92,92,0.2);">
+    </div>
+
+    <div class="grid-2 reveal">
+
+      <!-- CARD: Criativo -->
+      <div class="card" style="padding: clamp(2rem, 3vw, 2.5rem);">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem;">
+          <div style="width: 48px; height: 48px; background: var(--w-acid); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="white" stroke-width="1.8" fill="none"/><circle cx="8.5" cy="8.5" r="2" stroke="white" stroke-width="1.3"/><path d="M3 16l5-5 3 3 4-4 6 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <h3 style="color: var(--w-black); font-size: 1.4rem; margin-bottom: 0.15rem;">Criativo</h3>
+            <p class="font-mono" style="font-size: 10px; color: var(--w-acid); letter-spacing: 0.08em;">GERAÇÃO DE IMAGENS POR IA</p>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Gera imagens profissionais por IA</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Fundo branco, infográficos, banners e mockups gerados automaticamente</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Remoção de fundo automática</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Produto com fundo branco limpo, padrão ML, sem precisar de fotógrafo</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Kit de 3-5 imagens por produto</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Redimensiona para 1200x1200px (padrão ML) e devolve pro Agente Anúncios</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Imagens lifestyle e de uso</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Gera variações do produto em contexto real de uso para aumentar conversão</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD: Gestor ML -->
+      <div class="card" style="padding: clamp(2rem, 3vw, 2.5rem);">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem;">
+          <div style="width: 48px; height: 48px; background: var(--w-acid); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="3" width="18" height="18" rx="3" stroke="white" stroke-width="1.8" fill="none"/></svg>
+          </div>
+          <div>
+            <h3 style="color: var(--w-black); font-size: 1.4rem; margin-bottom: 0.15rem;">Gestor ML</h3>
+            <p class="font-mono" style="font-size: 10px; color: var(--w-acid); letter-spacing: 0.08em;">APROVAÇÃO E CONTROLE</p>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Valida anúncio completo antes de publicar</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Confere margem mínima, SEO score, qualidade de imagens e preço competitivo</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Sistema de semáforo com regras configuráveis</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;"><span style="color: #22c55e;">Verde (margem &gt;25%)</span> publica &middot; <span style="color: #fbbf24;">Amarelo (15-25%)</span> humano decide &middot; <span style="color: #ef4444;">Vermelho (&lt;15%)</span> reprova</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Monitora health score da conta</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Acompanha saúde geral da conta e alerta antes de problemas de reputação</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Relatório diário automático</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Anúncios criados, otimizados, aprovados, margem média e ações pendentes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SLIDE 05c: ADS ML + SAC ===== -->
+<section class="slide bg-tech-grid-light" id="metodo3" style="padding-top: 2rem; padding-bottom: 2rem; background: var(--w-bone);">
+  <div class="slide-inner" style="max-width: 1300px;">
+    <div class="reveal" style="text-align: center; margin-bottom: clamp(2rem, 4vw, 3rem);">
+      <p class="font-mono" style="font-size: 11px; color: var(--w-graphite); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem;">sec.04 // o que seus agentes fazem &mdash; 3 de 3</p>
+      <h2 style="color: var(--w-black); font-size: clamp(2rem, 4vw, 3rem);">ADS ML + SAC</h2>
+    </div>
+
+    <!-- Imagem SAC respondendo perguntas automaticamente -->
+    <div class="reveal" style="margin-bottom: clamp(1.5rem, 3vw, 2rem); text-align: center;">
+      <img src="img-sac-mockup.png" alt="SAC respondendo perguntas do Mercado Livre automaticamente por IA" style="width: 100%; max-width: 900px; border-radius: 8px; border: 1px solid rgba(92,92,92,0.2);">
+    </div>
+    <div class="grid-2 reveal">
+
+      <!-- CARD: ADS ML -->
+      <div class="card" style="padding: clamp(2rem, 3vw, 2.5rem);">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem;">
+          <div style="width: 48px; height: 48px; background: var(--w-acid); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 20V10l4-6h8l4 6v10" stroke="white" stroke-width="1.8" fill="none" stroke-linejoin="round"/><path d="M4 14h16" stroke="white" stroke-width="1.5"/><circle cx="12" cy="17" r="2" stroke="white" stroke-width="1.3"/></svg>
+          </div>
+          <div>
+            <h3 style="color: var(--w-black); font-size: 1.4rem; margin-bottom: 0.15rem;">ADS ML</h3>
+            <p class="font-mono" style="font-size: 10px; color: var(--w-acid); letter-spacing: 0.08em;">CAMPANHAS E TRÁFEGO PAGO</p>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Cria campanhas Product Ads automáticamente</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Define budget e lance baseado na margem do produto aprovado</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Pausa campanhas que não performam</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">ACoS acima do limite? Pausa e realoca budget para os que convertem</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Monitora ROAS, CPC, CTR e ACoS</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Ajusta lances automaticamente para maximizar retorno sobre investimento</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Escala budget dos que vendem mais</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Identifica campanhas com melhor performance e aumenta investimento gradual</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD: SAC -->
+      <div class="card" style="padding: clamp(2rem, 3vw, 2.5rem);">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem;">
+          <div style="width: 48px; height: 48px; background: var(--w-acid); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H6l-2 2V4z" stroke="white" stroke-width="1.8" fill="none"/><path d="M9 9h6M9 12h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <h3 style="color: var(--w-black); font-size: 1.4rem; margin-bottom: 0.15rem;">SAC</h3>
+            <p class="font-mono" style="font-size: 10px; color: var(--w-acid); letter-spacing: 0.08em;">PERGUNTAS E RECLAMAÇÕES</p>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Responde perguntas entre 5 e 10 minutos</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Monitora a cada 1-2 minutos. Classifica: dúvida técnica, preço, frete, estoque</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Detecta e resolve reclamações</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Propõe resolução automática e envia alerta urgente no WhatsApp para mediações</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Tracking de envio com notificação ao comprador</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Acompanha rastreio e avisa o cliente sobre status da entrega</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <span style="color: var(--w-acid); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0;">&#x25B8;</span>
+            <div>
+              <p style="color: var(--w-black); font-size: 1rem; font-weight: 500; line-height: 1.4;">Solicita avaliação positiva pós-entrega</p>
+              <p style="font-size: 0.85rem; color: var(--w-graphite); line-height: 1.4;">Após confirmação de entrega, envia mensagem gentil pedindo review</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SLIDE 06: FLUXO DOS AGENTES ===== -->
+<section class="slide bg-tech-grid-light" id="agentes" style="background: var(--w-bone);">
+  <div class="slide-inner" style="max-width: 1300px;">
+    <p class="section-label reveal" style="color: var(--w-graphite);">sec.05 // como eles trabalham juntos</p>
+    <h2 class="reveal" style="color: var(--w-black); margin-bottom: 0.75rem;">
+      Analista descobre. Anúncios cria.<br>
+      <span style="color: var(--w-acid);">Criativo ilustra. Gestor aprova. ADS impulsiona. SAC atende.</span>
+    </h2>
+    <p class="reveal" style="margin-bottom: clamp(2rem, 4vw, 3rem); max-width: 750px; font-size: 1.1rem;">
+      Cada agente tem um papel claro. Quando um termina, passa o bastão pro próximo. O ciclo é contínuo e opera 24/7.
+    </p>
+
+    <div class="reveal" style="display: flex; flex-direction: column; gap: 0;">
+
+      <!-- Fluxo principal -->
+      <div style="padding: 2rem 2.5rem; border: 1px solid rgba(92,92,92,0.12); border-bottom: none; background: rgba(255,77,0,0.02);">
+        <p class="font-mono" style="font-size: 10px; color: var(--w-acid); letter-spacing: 0.1em; margin-bottom: 1.25rem;">FLUXO PRINCIPAL — CRIAÇÃO E PUBLICAÇÃO</p>
+        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+          <span style="background: rgba(255,77,0,0.08); color: var(--w-acid); padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(255,77,0,0.25);">ANALISTA</span>
+          <span style="color: var(--w-acid); font-size: 1.2rem;">&#x2192;</span>
+          <span style="background: rgba(255,77,0,0.08); color: var(--w-acid); padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(255,77,0,0.25);">ANÚNCIOS</span>
+          <span style="color: var(--w-acid); font-size: 1.2rem;">&#x2192;</span>
+          <span style="background: rgba(255,77,0,0.08); color: var(--w-acid); padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(255,77,0,0.25);">CRIATIVO</span>
+          <span style="color: var(--w-acid); font-size: 1.2rem;">&#x2192;</span>
+          <span style="background: var(--w-acid); color: white; padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600;">GESTOR ML</span>
+          <span style="color: var(--w-acid); font-size: 1.2rem;">&#x2192;</span>
+          <span style="background: rgba(255,77,0,0.08); color: var(--w-acid); padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(255,77,0,0.25);">ADS ML</span>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--w-graphite);">Analista descobre oportunidade &#x2192; Anúncios monta o conteúdo &#x2192; Criativo gera as imagens &#x2192; Gestor valida margem e qualidade &#x2192; ADS impulsiona com tráfego pago</p>
+      </div>
+
+      <!-- Ciclo contínuo -->
+      <div style="padding: 2rem 2.5rem; border: 1px solid rgba(92,92,92,0.12); border-bottom: none; background: rgba(255,77,0,0.02);">
+        <p class="font-mono" style="font-size: 10px; color: #22c55e; letter-spacing: 0.1em; margin-bottom: 1.25rem;">CICLO CONTÍNUO — OTIMIZAÇÃO</p>
+        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+          <span style="background: rgba(34,197,94,0.06); color: #22c55e; padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(34,197,94,0.25);">ADS MONITORA</span>
+          <span style="color: #22c55e; font-size: 1.2rem;">&#x2192;</span>
+          <span style="background: rgba(34,197,94,0.06); color: #22c55e; padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(34,197,94,0.25);">ANALISTA CRUZA</span>
+          <span style="color: #22c55e; font-size: 1.2rem;">&#x2192;</span>
+          <span style="background: rgba(34,197,94,0.06); color: #22c55e; padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(34,197,94,0.25);">ANÚNCIOS AJUSTA</span>
+          <span style="color: #22c55e; font-size: 1.2rem;">&#x2192;</span>
+          <span style="background: rgba(34,197,94,0.06); color: #22c55e; padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(34,197,94,0.25);">GESTOR VALIDA</span>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--w-graphite);">ADS monitora métricas &#x2192; Analista cruza com vendas &#x2192; Anúncios reotimiza &#x2192; Gestor revalida. Loop infinito de melhoria.</p>
+      </div>
+
+      <!-- SAC paralelo -->
+      <div style="padding: 2rem 2.5rem; border: 1px solid rgba(37,211,102,0.2); background: rgba(37,211,102,0.04);">
+        <p class="font-mono" style="font-size: 10px; color: #25D366; letter-spacing: 0.1em; margin-bottom: 1.25rem;">PARALELO 24/7 — SAC + WHATSAPP</p>
+        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+          <span style="background: rgba(37,211,102,0.06); color: #25D366; padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(37,211,102,0.25);">SAC MONITORA</span>
+          <span style="color: #25D366; font-size: 1.2rem;">&#x2192;</span>
+          <span style="background: rgba(37,211,102,0.06); color: #25D366; padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(37,211,102,0.25);">RESPONDE</span>
+          <span style="color: #25D366; font-size: 1.2rem;">&#x2192;</span>
+          <span style="background: rgba(37,211,102,0.06); color: #25D366; padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(37,211,102,0.25);">RESOLVE CLAIMS</span>
+          <span style="color: #25D366; font-size: 1.2rem;">&#x2192;</span>
+          <span style="background: rgba(37,211,102,0.06); color: #25D366; padding: 0.6rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(37,211,102,0.25);">PEDE AVALIAÇÃO</span>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--w-graphite);">SAC roda em paralelo o tempo todo. Responde perguntas, resolve reclamações, rastreia envios e pede avaliação após entrega. Tudo via WhatsApp para você.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SLIDE 07: AGENTES SE COMUNICAM ===== -->
+<section class="slide bg-tech-grid-light" id="escritório" style="background: var(--w-bone);">
+  <div class="slide-inner" style="max-width: 1300px;">
+    <p class="section-label reveal" style="color: var(--w-graphite);">sec.06 // exemplo real de comunicação</p>
+    <h2 class="reveal" style="color: var(--w-black); margin-bottom: 0.75rem;">
+      Eles trabalham sozinhos, se reúnem<br>
+      <span style="color: var(--w-acid);">e tomam decisões em conjunto.</span>
+    </h2>
+
+    <div class="reveal" style="display: flex; gap: clamp(2rem, 4vw, 3rem); align-items: flex-start; flex-wrap: wrap; margin-top: clamp(1.5rem, 3vw, 2.5rem);">
+
+      <!-- Imagem do escritório à esquerda -->
+      <div style="flex: 1; min-width: 440px;">
+        <img src="img-escritorio-v2.png" alt="Escritório virtual com 6 agentes de IA conversando" style="width: 100%; border-radius: 12px; border: 1px solid rgba(92,92,92,0.12);">
+        <p class="font-mono" style="font-size: 10px; color: var(--w-graphite); text-align: center; margin-top: 0.75rem; letter-spacing: 0.08em;">ESCRITÓRIO VIRTUAL &middot; 6 AGENTES OPERANDO 24/7</p>
+      </div>
+
+      <!-- Chat dos agentes à direita -->
+      <div style="flex: 1; min-width: 400px; display: flex; flex-direction: column; gap: 0;">
+
+        <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1.1rem 1.5rem; border: 1px solid rgba(92,92,92,0.1); border-bottom: none; background: var(--w-white);">
+          <div style="width: 36px; height: 36px; background: var(--w-acid); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H6l-2 2V4z" stroke="white" stroke-width="2" fill="none"/></svg>
+          </div>
+          <div>
+            <p style="font-size: 0.85rem; margin-bottom: 0.2rem;"><strong style="color: var(--w-acid);">SAC</strong> <span style="color: var(--w-graphite); font-size: 0.75rem;">detecta padrão</span></p>
+            <p style="font-size: 0.9rem; color: var(--w-graphite);">"31 clientes perguntaram <strong style="color: var(--w-black);">'qual a voltagem?'</strong>"</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1.1rem 1.5rem; border: 1px solid rgba(92,92,92,0.1); border-bottom: none; background: var(--w-white);">
+          <div style="width: 36px; height: 36px; background: var(--w-acid); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="white" stroke-width="2" fill="none"/><path d="M8 12h8M12 8v8" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <p style="font-size: 0.85rem; margin-bottom: 0.2rem;"><strong style="color: var(--w-acid);">Anúncios</strong> <span style="color: var(--w-graphite); font-size: 0.75rem;">atualiza descrição</span></p>
+            <p style="font-size: 0.9rem; color: var(--w-graphite);">"Adicionei <strong style="color: var(--w-black);">tabela de voltagem 110V/220V</strong> no anúncio."</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1.1rem 1.5rem; border: 1px solid rgba(92,92,92,0.1); border-bottom: none; background: var(--w-white);">
+          <div style="width: 36px; height: 36px; background: var(--w-acid); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="white" stroke-width="2" fill="none"/><path d="M3 16l5-5 3 3 4-4 6 6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <p style="font-size: 0.85rem; margin-bottom: 0.2rem;"><strong style="color: var(--w-acid);">Criativo</strong> <span style="color: var(--w-graphite); font-size: 0.75rem;">gera imagem</span></p>
+            <p style="font-size: 0.9rem; color: var(--w-graphite);">"Gerei <strong style="color: var(--w-black);">nova imagem com selo de voltagem</strong>. Kit com 5 fotos."</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1.1rem 1.5rem; border: 1px solid rgba(37,211,102,0.25); background: rgba(37,211,102,0.05);">
+          <div style="width: 36px; height: 36px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M17 2H7a2 2 0 00-2 2v16l4-3h8a2 2 0 002-2V4a2 2 0 00-2-2z" stroke="white" stroke-width="2" fill="none"/></svg>
+          </div>
+          <div>
+            <p style="font-size: 0.85rem; margin-bottom: 0.2rem;"><strong style="color: #25D366;">WhatsApp</strong> <span style="color: var(--w-graphite); font-size: 0.75rem;">notifica você</span></p>
+            <p style="font-size: 0.9rem; color: var(--w-graphite);">"Produto #4521: <strong style="color: var(--w-black);">descrição, imagem e atributo atualizados.</strong>"</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 1rem; padding: 0.75rem 1.5rem; border-left: 3px solid var(--w-acid); background: rgba(255,77,0,0.03);">
+          <p class="font-mono" style="font-size: 0.8rem; color: var(--w-acid); font-weight: 600;">
+            // 1 pergunta repetida &#x2192; 3 agentes &#x2192; problema resolvido em 60s
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SLIDE 08: DÚVIDA ===== -->
+<section class="slide slide-dark bg-tech-grid" id="dúvida">
+  <div class="slide-inner" style="text-align: center;">
+    <div class="reveal">
+      <p class="dúvida-text">Dúvida<span class="dúvida-caret">?</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SLIDE 09: ESCOPO ===== -->
+<section class="slide" id="escopo" style="background: var(--w-bone);">
+  <div class="slide-inner">
+    <p class="section-label reveal">sec.07 // escopo de entrega</p>
+    <h2 class="reveal" style="margin-bottom: clamp(2.5rem, 5vw, 4rem);">
+      Do briefing ao go-live<br>
+      <span style="color: var(--w-acid);">em 4 semanas.</span>
+    </h2>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="counter" style="margin-bottom: 0.75rem;">semana 01</p>
+        <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Infra + Analista + Anúncios</h3>
+        <p style="font-size: 0.95rem; text-align: left;">Setup ML Developers + OAuth<br>Agente Analista (concorrência)<br>Agente Anúncios (criação)<br>Fluxo Analista &#x2192; Anúncios</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="counter" style="margin-bottom: 0.75rem;">semana 02</p>
+        <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Criativo + Gestor ML</h3>
+        <p style="font-size: 0.95rem; text-align: left;">Agente Criativo (imagens IA)<br>Agente Gestor (semáforo)<br>Integração dos 4 agentes<br>Testes com produtos reais</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="counter" style="margin-bottom: 0.75rem;">semana 03</p>
+        <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">ADS ML + SAC + WhatsApp</h3>
+        <p style="font-size: 0.95rem; text-align: left;">Agente ADS (campanhas)<br>Agente SAC (perguntas + claims)<br>Integração WhatsApp<br>Alertas e notificações</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="counter" style="margin-bottom: 0.75rem;">semana 04</p>
+        <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Integração + Go-live</h3>
+        <p style="font-size: 0.95rem; text-align: left;">6 agentes conectados end-to-end<br>Deploy em produção 24/7<br>Escritório Virtual 3D<br>Treinamento do operador</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SLIDE 10: ANCORAGEM ===== -->
+<section class="slide slide-dark" id="ancoragem">
+  <div class="slide-inner">
+    <p class="section-label reveal" style="color: rgba(244,244,240,0.6);">sec.08 // o investimento real</p>
+    <h2 class="reveal" style="color: var(--w-bone); margin-bottom: 0.75rem; font-size: clamp(2.5rem, 5vw, 3.5rem);">
+      Se você fosse montar<br>
+      <span style="color: var(--w-acid);">essa equipe internamente.</span>
+    </h2>
+    <p class="reveal" style="margin-bottom: clamp(2rem, 4vw, 3rem); max-width: 600px; font-size: 1.15rem;">
+      Precisaria de desenvolvedores, analista de marketplace, designer, especialista em ML e meses de trabalho. Esse é o custo real:
+    </p>
+
+    <div class="reveal">
+      <table class="value-table">
+        <tr>
+          <td style="font-size: 1.1rem;">Setup + infraestrutura + integração API ML</td>
+          <td style="font-size: 1.1rem;">R$10.000</td>
+        </tr>
+        <tr>
+          <td style="font-size: 1.1rem;">Agente Analista (inteligência de mercado + concorrência)</td>
+          <td style="font-size: 1.1rem;">R$20.000</td>
+        </tr>
+        <tr>
+          <td style="font-size: 1.1rem;">Agente Anúncios (criação + otimização + SEO)</td>
+          <td style="font-size: 1.1rem;">R$20.000</td>
+        </tr>
+        <tr>
+          <td style="font-size: 1.1rem;">Agente Criativo (geração de imagens por IA)</td>
+          <td style="font-size: 1.1rem;">R$18.000</td>
+        </tr>
+        <tr>
+          <td style="font-size: 1.1rem;">Agente Gestor ML (aprovação + semáforo + controle)</td>
+          <td style="font-size: 1.1rem;">R$15.000</td>
+        </tr>
+        <tr>
+          <td style="font-size: 1.1rem;">Agente ADS ML (campanhas + ROAS + budget)</td>
+          <td style="font-size: 1.1rem;">R$18.000</td>
+        </tr>
+        <tr>
+          <td style="font-size: 1.1rem;">Agente SAC (perguntas + reclamações + avaliações)</td>
+          <td style="font-size: 1.1rem;">R$15.000</td>
+        </tr>
+        <tr>
+          <td style="font-size: 1.1rem;">Escritório Virtual 3D + WhatsApp + infra</td>
+          <td style="font-size: 1.1rem;">R$24.000</td>
+        </tr>
+        <tr style="border-bottom: 2px solid var(--w-acid);">
+          <td style="font-weight: 700; color: var(--w-bone); font-size: 1.4rem;">Valor total de mercado</td>
+          <td style="font-weight: 700; color: var(--w-acid); font-size: 1.6rem;">R$140.000</td>
+        </tr>
+      </table>
+    </div>
+
+    <p class="reveal" style="margin-top: 2.5rem; font-size: 1.15rem;">
+      E mesmo investindo tudo isso — sem garantia de que funciona com a API do ML, sem equipe que entende de IA e marketplace ao mesmo tempo.
+    </p>
+  </div>
+</section>
+
+<!-- ===== SLIDE 11: PREÇO ===== -->
+<section class="slide bg-tech-grid-light" id="preco" style="background: var(--w-bone);">
+  <div class="slide-inner" style="text-align: center;">
+    <div class="reveal">
+      <p class="section-label">sec.09 // seu investimento</p>
+
+      <div style="margin-bottom: 2.5rem;">
+        <p class="price-strikethrough" style="color: rgba(92,92,92,0.3);">R$140.000</p>
+      </div>
+
+      <p class="font-mono" style="font-size: 1.1rem; color: var(--w-graphite); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">
+        6 agentes especializados &middot; escritório virtual 3d &middot; 4 semanas &middot; opera 24/7
+      </p>
+
+      <div class="draw-line" style="margin: 2rem auto; max-width: 80px;"></div>
+
+      <p class="price-big" style="margin-bottom: 0.75rem;">R$30.000</p>
+      <p class="font-mono" style="font-size: 1.15rem; color: var(--w-graphite); letter-spacing: 0.05em;">
+        à vista &nbsp;|&nbsp; ou <strong style="color: var(--w-black); font-size: 1.25rem;">12x de R$2.997,99</strong>
+      </p>
+
+      <p class="font-mono" style="font-size: 0.9rem; color: var(--w-graphite); margin-top: 1rem; letter-spacing: 0.03em;">
+        Custo operacional após go-live: <strong style="color: var(--w-black);">~R$450 a R$850/mês</strong> (APIs + infraestrutura)
+      </p>
+    </div>
+
+    <div class="reveal" style="margin-top: clamp(2.5rem, 5vw, 4rem); display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+      <div class="bonus-card" style="max-width: 400px; text-align: left; background: var(--w-white);">
+        <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem;">Consultoria em Agentes IA</h3>
+        <p style="font-size: 1.05rem;">Ensinamos você a treinar os agentes e modificar os treinamentos. Você aprende a ajustar regras, comportamentos e estratégias sem depender de nós.</p>
+      </div>
+      <div class="bonus-card" style="max-width: 400px; text-align: left; background: var(--w-white);">
+        <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem;">+30 dias de acompanhamento</h3>
+        <p style="font-size: 1.05rem;">Após o go-live, seguimos junto. Calibragem de semáforos, ajustes de regras, monitoramento de estabilidade e suporte técnico.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: 3.5rem;">
+      <div style="display: inline-block; padding: 1.25rem 2.5rem; border: 2px solid var(--w-acid); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);">
+        <p class="font-mono" style="font-size: 1rem; color: var(--w-acid); font-weight: 600; letter-spacing: 0.05em;">
+          // ENGENHARIA, NÃO PROMESSA. VENDAS, NÃO SLIDES BONITOS.
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top: 4rem;">
+      <span class="font-mono" style="font-size: 1.25rem; font-weight: 700; color: var(--w-graphite);">
+        <span style="color: var(--w-bone);">&gt;_</span>
+        We<span style="color: var(--w-acid);">{</span>Stack<span style="color: var(--w-acid);">}</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.reveal, .draw-line').forEach(el => observer.observe(el));
+
+  const navLinks = document.querySelectorAll('.slide-nav a');
+  const slides = document.querySelectorAll('.slide');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { threshold: 0.4 });
+  slides.forEach(slide => navObserver.observe(slide));
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>

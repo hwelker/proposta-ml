@@ -1,0 +1,637 @@
+<html class="scroll-smooth" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WeStack | Design System — Site Edition</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.3.0/dist/iconify-icon.min.js"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+w_black: '#0A0A0A',
+w_graphite: '#5C5C5C',
+w_acid: '#FF4D00',
+w_acid_light: '#FF6A1A',
+w_acid_dark: '#E04400',
+w_bone: '#F4F4F0',
+w_white: '#FFFFFF',
+},
+fontFamily: {
+display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+body: ['"Inter"', 'sans-serif'],
+mono: ['"JetBrains Mono"', 'monospace'],
+},
+transitionTimingFunction: {
+'swiss': 'cubic-bezier(0.16, 1, 0.3, 1)',
+}
+}
+}
+}
+</script>
+<style>
+.track-tighter { letter-spacing: -0.04em; }
+.track-tight { letter-spacing: -0.02em; }
+.track-widest { letter-spacing: 0.1em; }
+
+.bg-noise {
+  position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: 0.04; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.dark-section .bg-noise { opacity: 0.08; mix-blend-mode: color-dodge; }
+
+.clip-button {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+}
+
+.bg-tech-grid {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(92,92,92,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(92,92,92,0.08) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+}
+
+.grid-node { animation: pulse-node 4s infinite alternate ease-in-out; }
+@keyframes pulse-node {
+  0% { opacity: 0.2; transform: scale(1); }
+  100% { opacity: 0.8; transform: scale(1.5); fill: #FF4D00; }
+}
+
+.marquee-container { display: flex; width: 200%; animation: marquee 30s linear infinite; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+.draw-line { width: 0; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
+.draw-line.active { width: 100%; }
+.draw-line-y { height: 0; transition: height 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.draw-line-y.active { height: 100%; }
+
+.dash-anim { stroke-dasharray: 1000; stroke-dashoffset: 1000; transition: stroke-dashoffset 2s cubic-bezier(0.16, 1, 0.3, 1); }
+.card:hover .dash-anim { stroke-dashoffset: 0; }
+
+/* Logo caret blink */
+.caret-blink { animation: blink-caret 1s step-end infinite; }
+@keyframes blink-caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.scramble:hover {
+  color: #FF4D00;
+  text-shadow: 2px 0 0 rgba(255,77,0,0.5), -2px 0 0 rgba(10,10,10,0.5);
+  animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
+}
+@keyframes glitch {
+  0% { transform: translate(0) } 20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) } 60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) } 100% { transform: translate(0) }
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #F4F4F0; }
+::-webkit-scrollbar-thumb { background: #FF4D00; }
+
+.ds-spec-row { display: grid; grid-template-columns: 200px 1fr 180px; align-items: baseline; gap: 2rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(92,92,92,0.15); }
+.ds-spec-label { font-family: "JetBrains Mono", monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #5C5C5C; }
+.ds-spec-value { font-family: "JetBrains Mono", monospace; font-size: 11px; color: #5C5C5C; text-align: right; white-space: nowrap; }
+@media (max-width: 768px) { .ds-spec-row { grid-template-columns: 1fr; gap: 0.5rem; } .ds-spec-value { text-align: left; } }
+
+.prism-hex { position: relative; width: 100%; max-width: 600px; margin: 0 auto; }
+.prism-facet { padding: 1.25rem; border: 1px solid rgba(92,92,92,0.2); background: #FFFFFF; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.prism-facet:hover { border-color: #FF4D00; transform: translateY(-4px); box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1); }
+</style>
+</head>
+<body class="bg-w_bone text-w_black font-body antialiased selection:bg-w_acid selection:text-w_white overflow-x-hidden">
+<div class="bg-noise"></div>
+
+<!-- ══ NAV ══ -->
+<nav class="fixed top-0 left-0 w-full z-40 bg-w_bone/90 backdrop-blur-md border-b border-w_graphite/20 transition-all duration-300">
+<div class="max-w-[clamp(70rem,95vw,100rem)] mx-auto px-[clamp(1.5rem,5vw,4rem)] h-20 flex items-center justify-between">
+<a class="font-mono font-bold text-[clamp(1rem,1.5vw,1.25rem)] track-tighter flex items-center gap-1 group" href="#">
+<span class="text-w_graphite group-hover:text-w_acid transition-colors duration-300">&gt;<span class="caret-blink">_</span></span>
+<span class="text-w_black">We</span><span class="text-w_acid">{Stack}</span>
+<span class="text-w_graphite font-normal text-xs ml-2">/ design-system</span>
+</a>
+<div class="hidden md:flex items-center gap-8 font-mono text-xs uppercase track-widest text-w_graphite">
+<a class="hover:text-w_black transition-colors" href="#ds-brand">Brand</a>
+<a class="hover:text-w_black transition-colors" href="#ds-tokens">Tokens</a>
+<a class="hover:text-w_black transition-colors" href="#ds-typography">Type</a>
+<a class="hover:text-w_black transition-colors" href="#ds-components">Components</a>
+<a class="hover:text-w_black transition-colors" href="#ds-motion">Motion</a>
+<a class="hover:text-w_black transition-colors" href="#ds-layout">Layout</a>
+<a class="hover:text-w_black transition-colors" href="#ds-icons">Icons</a>
+</div>
+<a class="hidden sm:inline-block relative px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,2vw,1rem)] font-mono font-medium text-xs uppercase track-widest text-w_bone bg-w_black clip-button overflow-hidden transition-all duration-300 hover:bg-w_acid" href="#">
+<span class="relative z-10">View Live Site</span>
+</a>
+</div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+<div class="absolute inset-0 bg-tech-grid opacity-50 z-0 pointer-events-none"></div>
+<svg class="absolute inset-0 w-full h-full z-0 opacity-20 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+<circle class="grid-node" cx="20%" cy="30%" fill="#5C5C5C" r="2" style="animation-delay:0s"></circle>
+<circle class="grid-node" cx="80%" cy="40%" fill="#5C5C5C" r="2" style="animation-delay:1s"></circle>
+<circle class="grid-node" cx="60%" cy="70%" fill="#5C5C5C" r="2" style="animation-delay:2s"></circle>
+<circle class="grid-node" cx="30%" cy="80%" fill="#5C5C5C" r="2" style="animation-delay:0.5s"></circle>
+<line stroke="#5C5C5C" stroke-dasharray="2 2" stroke-width="0.5" x1="20%" x2="80%" y1="30%" y2="40%"></line>
+<line stroke="#5C5C5C" stroke-dasharray="2 2" stroke-width="0.5" x1="80%" x2="60%" y1="40%" y2="70%"></line>
+<line stroke="#5C5C5C" stroke-dasharray="2 2" stroke-width="0.5" x1="60%" x2="30%" y1="70%" y2="80%"></line>
+<line stroke="#5C5C5C" stroke-dasharray="2 2" stroke-width="0.5" x1="30%" x2="20%" y1="80%" y2="30%"></line>
+</svg>
+<div class="max-w-[clamp(70rem,95vw,100rem)] mx-auto px-[clamp(1.5rem,5vw,4rem)] w-full relative z-10 grid grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)]">
+<div class="col-span-12 lg:col-span-8 reveal active">
+<h1 class="font-display font-semibold text-[clamp(3rem,7vw,6.5rem)] leading-[0.9] track-tighter text-w_black mb-[clamp(1.5rem,3vw,2.5rem)] uppercase">
+Design<br/>System.<br/><span class="text-w_graphite">Site Edition.</span>
+</h1>
+<p class="font-body text-[clamp(1rem,1.2vw,1.125rem)] leading-relaxed text-w_graphite max-w-[55ch] mb-[clamp(2.5rem,5vw,4rem)]">
+Identidade visual WeStack aplicada sobre o sistema de design Quantis. Cada token, componente e animacao documentados como referencia viva para construcao do site institucional.
+</p>
+<div class="flex flex-wrap items-center gap-6">
+<a class="relative px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,2vw,1rem)] font-mono font-medium text-sm md:text-base uppercase track-widest text-w_bone bg-w_acid clip-button overflow-hidden transition-all duration-300 hover:bg-w_black hover:-translate-y-1" href="#ds-brand">
+Explorar Sistema
+</a>
+<a class="font-mono text-xs uppercase track-widest text-w_black border-b border-w_black pb-1 hover:text-w_acid hover:border-w_acid transition-colors duration-300" href="#ds-tokens">
+Ver Tokens
+</a>
+</div>
+<div class="mt-[clamp(3rem,6vw,5rem)] flex items-center gap-4 border-t border-w_graphite/20 pt-6">
+<iconify-icon class="text-w_acid text-2xl" icon="solar:shield-check-linear" stroke-width="1.5"></iconify-icon>
+<p class="font-mono text-xs uppercase track-widest text-w_graphite">
+Kapferer Identity Prism. Wheeler Visual System. Neumeier Onlyness. Swiss Motion.
+</p>
+</div>
+</div>
+<div class="hidden lg:flex col-span-4 flex-col justify-end pb-12 reveal active" style="transition-delay:0.2s">
+<div class="border-l border-w_graphite/20 pl-8 space-y-8">
+<div>
+<div class="font-mono text-xs uppercase track-widest text-w_graphite mb-2">System Version</div>
+<div class="font-display font-semibold text-[clamp(2rem,3vw,3rem)] track-tighter text-w_acid flex items-baseline gap-1">
+v2.0 <span class="w-2 h-2 rounded-full bg-w_acid animate-pulse mb-4"></span>
+</div>
+</div>
+<div>
+<div class="font-mono text-xs uppercase track-widest text-w_graphite mb-2">Brand Status</div>
+<div class="font-mono text-sm text-w_black flex items-center gap-2">
+<iconify-icon class="text-w_acid" icon="solar:server-square-linear" stroke-width="1.5"></iconify-icon>
+Identity Prism Active
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ══ TICKER ══ -->
+<div class="w-full bg-w_black border-y border-w_graphite/30 overflow-hidden py-3">
+<div class="marquee-container font-mono text-xs uppercase track-widest text-w_bone">
+<div class="flex-shrink-0 flex items-center gap-12 px-6">
+<span>// BRAND: <span class="text-w_acid">WeStack</span></span>
+<span>// PRIMARY: #FF4D00</span>
+<span>// FONTS: Space Grotesk + Inter + JetBrains Mono</span>
+<span>// EASING: Swiss cubic-bezier(0.16, 1, 0.3, 1)</span>
+<span>// GRID: 12 Columns</span>
+<span>// BRAND: <span class="text-w_acid">WeStack</span></span>
+<span>// PRIMARY: #FF4D00</span>
+<span>// FONTS: Space Grotesk + Inter + JetBrains Mono</span>
+<span>// EASING: Swiss cubic-bezier(0.16, 1, 0.3, 1)</span>
+<span>// GRID: 12 Columns</span>
+</div>
+</div>
+</div>
+
+<!-- ══ [01] BRAND IDENTITY — Kapferer Prism ══ -->
+<section class="py-[clamp(5rem,10vw,10rem)]" id="ds-brand">
+<div class="max-w-[clamp(70rem,95vw,100rem)] mx-auto px-[clamp(1.5rem,5vw,4rem)]">
+<div class="mb-[clamp(3rem,6vw,5rem)] reveal">
+<div class="font-mono text-[10px] md:text-xs uppercase track-widest text-w_graphite mb-6 flex items-center gap-4 before:content-[''] before:w-8 before:h-[1px] before:bg-w_acid">[SEC.01_BRAND]</div>
+<h2 class="font-display font-semibold text-[clamp(2rem,5vw,4rem)] leading-[1.1] track-tight text-w_black mb-6">
+Brand Identity <span class="scramble inline-block cursor-crosshair transition-colors duration-200">Prism.</span>
+</h2>
+<p class="font-body text-[clamp(1rem,1.2vw,1.125rem)] text-w_graphite max-w-[55ch]">
+Kapferer: "Identidade precede imagem. Voce nao pode gerenciar o que nao definiu." As 6 facetas do Identity Prism aplicadas a WeStack.
+</p>
+</div>
+
+<!-- Neumeier Onlyness Statement -->
+<div class="border-2 border-w_acid bg-w_white p-[clamp(2rem,4vw,3.5rem)] text-center mb-[clamp(3rem,6vw,5rem)] relative overflow-hidden reveal">
+<div class="absolute inset-0 bg-tech-grid opacity-30 pointer-events-none"></div>
+<div class="font-mono text-[10px] md:text-xs uppercase track-widest text-w_acid mb-4 relative z-10">Neumeier Onlyness Statement</div>
+<h3 class="font-display font-semibold text-[clamp(1.5rem,3vw,2.5rem)] leading-[1.15] track-tight text-w_black relative z-10">
+A <span class="text-w_acid">WeStack</span> e a unica consultoria de crescimento para SaaS que combina <span class="text-w_acid">engenharia de software</span> com estrategia comercial para gerar receita <span class="text-w_acid">previsivel</span>.
+</h3>
+</div>
+
+<!-- 6 Facets Grid (Kapferer Prism) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[clamp(1.5rem,3vw,2.5rem)] mb-12">
+<div class="prism-facet reveal">
+<div class="font-mono text-[10px] uppercase track-widest text-w_acid mb-3">01 // Physique</div>
+<h4 class="font-display font-medium text-xl text-w_black mb-3 track-tight">Aparencia Tangivel</h4>
+<div class="space-y-2 font-body text-sm text-w_graphite leading-relaxed">
+<p>Logo: <span class="font-mono text-w_black">&gt;<span class="caret-blink">_</span> We{Stack}</span></p>
+<p>Cor: <span class="inline-block w-4 h-4 bg-w_acid rounded-sm align-middle"></span> <span class="font-mono text-w_black">#FF4D00</span> sobre fundo bone</p>
+<p>Geometria: clip-button (corte diagonal), tech-grid, linhas dashed</p>
+<p>Tipografia: Space Grotesk display bold + JetBrains Mono accents</p>
+</div>
+</div>
+
+<div class="prism-facet reveal" style="transition-delay:0.1s">
+<div class="font-mono text-[10px] uppercase track-widest text-w_acid mb-3">02 // Personality</div>
+<h4 class="font-display font-medium text-xl text-w_black mb-3 track-tight">Personalidade</h4>
+<div class="space-y-2 font-body text-sm text-w_graphite leading-relaxed">
+<p><span class="font-mono text-w_black">&lt;/&gt;</span> Tecnica — fala a lingua do codigo</p>
+<p><span class="font-mono text-w_black">&gt;<span class="caret-blink">_</span></span> Direta — sem buzzwords ou enrolacao</p>
+<p><span class="font-mono text-w_black">{}</span> Estruturada — metodo antes de acao</p>
+<p><span class="font-mono text-w_black">//</span> Confiavel — dados, nao opiniao</p>
+<p><span class="font-mono text-w_black">++</span> Ambiciosa — escala como mindset</p>
+</div>
+</div>
+
+<div class="prism-facet reveal" style="transition-delay:0.2s">
+<div class="font-mono text-[10px] uppercase track-widest text-w_acid mb-3">03 // Culture</div>
+<h4 class="font-display font-medium text-xl text-w_black mb-3 track-tight">Cultura & Valores</h4>
+<div class="space-y-2 font-body text-sm text-w_graphite leading-relaxed">
+<p>Engenharia > Marketing — construir sistemas, nao campanhas</p>
+<p>Previsibilidade > Crescimento caotico</p>
+<p>Dados > Opiniao — decisao baseada em evidencia</p>
+<p>Transparencia radical — sem hidden layers</p>
+<p>Heranca dev — nascida do codigo, pensa em negocios</p>
+</div>
+</div>
+
+<div class="prism-facet reveal" style="transition-delay:0.3s">
+<div class="font-mono text-[10px] uppercase track-widest text-w_acid mb-3">04 // Relationship</div>
+<h4 class="font-display font-medium text-xl text-w_black mb-3 track-tight">Relacionamento</h4>
+<div class="space-y-2 font-body text-sm text-w_graphite leading-relaxed">
+<p>CTO-to-CEO: traduz tech para negocios e vice-versa</p>
+<p>Consultor senior, nao fornecedor — desafia o cliente</p>
+<p>Accountability mutua — resultados medidos, nao prometidos</p>
+<p>Parceria de longo prazo — nao projeto pontual</p>
+</div>
+</div>
+
+<div class="prism-facet reveal" style="transition-delay:0.4s">
+<div class="font-mono text-[10px] uppercase track-widest text-w_acid mb-3">05 // Reflection</div>
+<h4 class="font-display font-medium text-xl text-w_black mb-3 track-tight">Reflexao (Espelho Externo)</h4>
+<div class="space-y-2 font-body text-sm text-w_graphite leading-relaxed">
+<p>Founder SaaS ambicioso, 25-40 anos</p>
+<p>Tech-savvy, produto validado, quer escalar com metodo</p>
+<p>Cansado de agencias genericas e promessas vazias</p>
+<p>Lê codigo E entende unit economics</p>
+</div>
+</div>
+
+<div class="prism-facet reveal" style="transition-delay:0.5s">
+<div class="font-mono text-[10px] uppercase track-widest text-w_acid mb-3">06 // Self-Image</div>
+<h4 class="font-display font-medium text-xl text-w_black mb-3 track-tight">Auto-Imagem (Espelho Interno)</h4>
+<div class="space-y-2 font-body text-sm text-w_graphite leading-relaxed">
+<p>"Eu construo com metodo, nao improviso"</p>
+<p>"Meu SaaS merece crescimento previsivel"</p>
+<p>"Sou tech-first mas entendo business"</p>
+<p>"Faco deploy de receita como faco deploy de codigo"</p>
+</div>
+</div>
+</div>
+
+<!-- Brand Voice (Wheeler Verbal Identity) -->
+<div class="grid grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] reveal">
+<div class="col-span-12 lg:col-span-4">
+<div class="font-mono text-[10px] md:text-xs uppercase track-widest text-w_graphite mb-6 flex items-center gap-4 before:content-[''] before:w-8 before:h-[1px] before:bg-w_acid">Brand Voice</div>
+</div>
+<div class="col-span-12 lg:col-span-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-[clamp(1.5rem,3vw,2.5rem)]">
+<div class="border border-green-500/20 bg-green-500/5 p-6">
+<div class="font-mono text-xs uppercase track-widest text-green-600 mb-4">// Tom WeStack</div>
+<div class="space-y-3 font-body text-sm text-w_graphite">
+<p>"Seu MRR travou em R$7K. O problema nao e o produto."</p>
+<p>"8.400 usuarios free. 0.95% de conversao. Hora de cortar."</p>
+<p>"De 2 vendas/mes para 20. O que mudou nao foi o produto."</p>
+</div>
+</div>
+<div class="border border-red-500/20 bg-red-500/5 p-6">
+<div class="font-mono text-xs uppercase track-widest text-red-600 mb-4">// Evitar</div>
+<div class="space-y-3 font-body text-sm text-w_graphite">
+<p>"Somos uma agencia de marketing digital focada em resultados."</p>
+<p>"Vamos alavancar seu negocio com estrategias inovadoras."</p>
+<p>"Entre em contato e descubra como podemos ajudar."</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ══ [02] TOKENS ══ -->
+<section class="py-[clamp(5rem,10vw,10rem)] bg-w_white border-y border-w_graphite/20" id="ds-tokens">
+<div class="max-w-[clamp(70rem,95vw,100rem)] mx-auto px-[clamp(1.5rem,5vw,4rem)]">
+<div class="mb-[clamp(3rem,6vw,5rem)] reveal">
+<div class="font-mono text-[10px] md:text-xs uppercase track-widest text-w_graphite mb-6 flex items-center gap-4 before:content-[''] before:w-8 before:h-[1px] before:bg-w_acid">[SEC.02_TOKENS]</div>
+<h2 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] track-tight text-w_black mb-4">Color & Surface Tokens.</h2>
+<p class="font-body text-[clamp(1rem,1.2vw,1.125rem)] text-w_graphite max-w-[55ch]">Paleta restrita de 6 cores. Fundo bone institucional, acento acid-orange unico, superficies em camadas.</p>
+</div>
+
+<!-- Core Palette -->
+<div class="grid grid-cols-2 md:grid-cols-6 gap-0 border border-w_graphite/20 mb-12 reveal">
+<div class="h-24 bg-w_black flex items-end p-3"><span class="font-mono text-[10px] text-w_bone uppercase">w_black<br/>#0A0A0A</span></div>
+<div class="h-24 bg-w_graphite flex items-end p-3"><span class="font-mono text-[10px] text-w_bone uppercase">w_graphite<br/>#5C5C5C</span></div>
+<div class="h-24 bg-w_acid flex items-end p-3"><span class="font-mono text-[10px] text-w_white uppercase">w_acid<br/>#FF4D00</span></div>
+<div class="h-24 bg-w_acid_light flex items-end p-3"><span class="font-mono text-[10px] text-w_white uppercase">w_acid_light<br/>#FF6A1A</span></div>
+<div class="h-24 bg-w_bone flex items-end p-3 border-x border-w_graphite/20"><span class="font-mono text-[10px] text-w_black uppercase">w_bone<br/>#F4F4F0</span></div>
+<div class="h-24 bg-w_white flex items-end p-3"><span class="font-mono text-[10px] text-w_black uppercase">w_white<br/>#FFFFFF</span></div>
+</div>
+
+<!-- Surfaces -->
+<h3 class="font-display font-medium text-2xl text-w_black mb-6 track-tight">Surfaces</h3>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-[clamp(1rem,2vw,1.5rem)] mb-12 reveal">
+<div class="border border-w_graphite/20 p-6 bg-w_bone">
+<div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-1">Page Base</div>
+<div class="font-mono text-xs text-w_black">bg-w_bone</div>
+</div>
+<div class="border border-w_graphite/20 p-6 bg-w_white">
+<div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-1">Card / Section</div>
+<div class="font-mono text-xs text-w_black">bg-w_white</div>
+</div>
+<div class="border border-w_graphite/20 p-6 bg-w_black">
+<div class="font-mono text-[10px] uppercase track-widest text-w_bone mb-1">Dark Section</div>
+<div class="font-mono text-xs text-w_bone">bg-w_black</div>
+</div>
+<div class="border-2 border-w_acid p-6 bg-w_white relative overflow-hidden">
+<div class="absolute inset-0 bg-tech-grid opacity-20 pointer-events-none"></div>
+<div class="font-mono text-[10px] uppercase track-widest text-w_acid mb-1 relative z-10">Emphasis</div>
+<div class="font-mono text-xs text-w_black relative z-10">border-w_acid + grid</div>
+</div>
+</div>
+
+<!-- Borders & Dividers -->
+<h3 class="font-display font-medium text-2xl text-w_black mb-6 track-tight">Borders & Dividers</h3>
+<div class="space-y-4 reveal">
+<div class="flex items-center gap-8"><div class="w-full h-[1px] bg-w_graphite/20"></div><div class="font-mono text-[10px] text-w_graphite whitespace-nowrap">w_graphite/20 (default)</div></div>
+<div class="flex items-center gap-8"><div class="w-full h-[1px] bg-w_graphite/10"></div><div class="font-mono text-[10px] text-w_graphite whitespace-nowrap">w_graphite/10 (subtle)</div></div>
+<div class="flex items-center gap-8"><div class="w-full h-[1px] bg-w_acid"></div><div class="font-mono text-[10px] text-w_graphite whitespace-nowrap">w_acid (active / emphasis)</div></div>
+</div>
+</div>
+</section>
+
+<!-- ══ [03] TYPOGRAPHY ══ -->
+<section class="py-[clamp(5rem,10vw,10rem)]" id="ds-typography">
+<div class="max-w-[clamp(70rem,95vw,100rem)] mx-auto px-[clamp(1.5rem,5vw,4rem)]">
+<div class="mb-[clamp(3rem,6vw,5rem)] reveal">
+<div class="font-mono text-[10px] md:text-xs uppercase track-widest text-w_graphite mb-6 flex items-center gap-4 before:content-[''] before:w-8 before:h-[1px] before:bg-w_acid">[SEC.03_TYPE]</div>
+<h2 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] track-tight text-w_black mb-4">Type Scale.</h2>
+<p class="font-body text-[clamp(1rem,1.2vw,1.125rem)] text-w_graphite max-w-[55ch]">Space Grotesk para display. Inter para corpo. JetBrains Mono para accents tech e marca.</p>
+</div>
+
+<div class="reveal">
+<div class="ds-spec-row"><div class="ds-spec-label">Hero Display</div><h1 class="font-display font-semibold text-[clamp(3rem,7vw,6.5rem)] leading-[0.9] track-tighter text-w_black uppercase">Build. Scale.</h1><div class="ds-spec-value">clamp(3rem,7vw,6.5rem)</div></div>
+<div class="ds-spec-row"><div class="ds-spec-label">Heading 2</div><h2 class="font-display font-semibold text-[clamp(2rem,5vw,4rem)] leading-[1.1] track-tight text-w_black">Sistema Operacional de <span class="text-w_acid">Receita</span>.</h2><div class="ds-spec-value">clamp(2rem,5vw,4rem)</div></div>
+<div class="ds-spec-row"><div class="ds-spec-label">Heading 2 Alt</div><h2 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] track-tight text-w_black">Growth Engineering.</h2><div class="ds-spec-value">clamp(2rem,4vw,3.5rem)</div></div>
+<div class="ds-spec-row"><div class="ds-spec-label">Heading 3</div><h3 class="font-display font-medium text-2xl text-w_black track-tight">Pipeline Previsivel</h3><div class="ds-spec-value">1.5rem / medium</div></div>
+<div class="ds-spec-row"><div class="ds-spec-label">Heading 4</div><h4 class="font-mono text-xs uppercase track-widest text-w_black">Frameworks</h4><div class="ds-spec-value">0.75rem / mono uppercase</div></div>
+<div class="ds-spec-row"><div class="ds-spec-label">Bold L (Counter)</div><div class="font-display font-medium text-[clamp(3rem,5vw,4.5rem)] track-tighter text-w_black">9x MRR</div><div class="ds-spec-value">clamp(3rem,5vw,4.5rem)</div></div>
+<div class="ds-spec-row"><div class="ds-spec-label">Bold M (Stat)</div><div class="font-display font-medium text-3xl text-w_black">R$45K</div><div class="ds-spec-value">1.875rem / display</div></div>
+<div class="ds-spec-row"><div class="ds-spec-label">Bold S (Live)</div><div class="font-display font-semibold text-[clamp(2rem,3vw,3rem)] track-tighter text-w_acid">+340%</div><div class="ds-spec-value">clamp(2rem,3vw,3rem) / acid</div></div>
+<div class="ds-spec-row"><div class="ds-spec-label">Paragraph</div><p class="font-body text-[clamp(1rem,1.2vw,1.125rem)] leading-relaxed text-w_graphite max-w-[55ch]">Crescimento previsivel nao vem de campanha. Vem de sistema: aquisicao, conversao, retencao.</p><div class="ds-spec-value">clamp(1rem,1.2vw,1.125rem)</div></div>
+<div class="ds-spec-row"><div class="ds-spec-label">Section Label</div><div class="font-mono text-[10px] md:text-xs uppercase track-widest text-w_graphite flex items-center gap-4 before:content-[''] before:w-8 before:h-[1px] before:bg-w_acid">[SEC.01_GROWTH]</div><div class="ds-spec-value">10-12px / mono uppercase</div></div>
+<div class="ds-spec-row"><div class="ds-spec-label">Mono Data</div><div class="font-mono text-xs text-w_graphite">// MRR: R$45K // CPL: <span class="text-w_acid">R$16</span> // CHURN: 2.1%</div><div class="ds-spec-value">0.75rem / mono</div></div>
+<div class="ds-spec-row"><div class="ds-spec-label">Brand Mark</div><div class="font-mono font-bold text-2xl"><span class="text-w_graphite">&gt;<span class="caret-blink">_</span></span> <span class="text-w_black">We</span><span class="text-w_acid">{Stack}</span></div><div class="ds-spec-value">JetBrains Mono Bold</div></div>
+<div class="ds-spec-row"><div class="ds-spec-label">Scramble FX</div><h2 class="font-display font-semibold text-[clamp(2rem,4vw,3rem)] leading-[1.1] track-tight text-w_black">Marketing is <span class="scramble inline-block cursor-crosshair transition-colors duration-200">Dead Weight.</span></h2><div class="ds-spec-value">Hover to trigger glitch</div></div>
+<div class="ds-spec-row" style="border-bottom:none"><div class="ds-spec-label">Code Block</div><div class="font-mono text-sm text-w_graphite"><span class="text-w_acid">const</span> growth = <span class="text-green-500">await</span> westack.<span class="text-w_acid_light">scale</span>({ method: <span class="text-amber-500">'structured'</span> });</div><div class="ds-spec-value">0.875rem / mono syntax</div></div>
+</div>
+</div>
+</section>
+
+<!-- ══ [04] COMPONENTS ══ -->
+<section class="py-[clamp(5rem,10vw,10rem)] bg-w_white border-y border-w_graphite/20" id="ds-components">
+<div class="max-w-[clamp(70rem,95vw,100rem)] mx-auto px-[clamp(1.5rem,5vw,4rem)]">
+<div class="mb-[clamp(3rem,6vw,5rem)] reveal">
+<div class="font-mono text-[10px] md:text-xs uppercase track-widest text-w_graphite mb-6 flex items-center gap-4 before:content-[''] before:w-8 before:h-[1px] before:bg-w_acid">[SEC.04_COMPONENTS]</div>
+<h2 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] track-tight text-w_black mb-4">UI Components.</h2>
+<p class="font-body text-[clamp(1rem,1.2vw,1.125rem)] text-w_graphite max-w-[55ch]">Cada componente interativo com estados de hover. Todos usam Swiss easing e clip-button geometry.</p>
+</div>
+
+<!-- Buttons -->
+<h3 class="font-display font-medium text-2xl text-w_black mb-6 track-tight reveal">Buttons</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 reveal">
+<div class="border border-w_graphite/20 bg-w_bone p-8">
+<div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-6">Primary (Acid)</div>
+<a class="relative inline-block px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,2vw,1rem)] font-mono font-medium text-sm uppercase track-widest text-w_bone bg-w_acid clip-button overflow-hidden transition-all duration-300 hover:bg-w_black hover:-translate-y-1" href="#">Estruturar Receita</a>
+<div class="font-mono text-[10px] text-w_graphite mt-4">clip-button / hover:bg-w_black -translate-y-1</div>
+</div>
+<div class="border border-w_graphite/20 bg-w_bone p-8">
+<div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-6">Secondary (Black)</div>
+<a class="relative inline-block px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,2vw,1rem)] font-mono font-medium text-xs uppercase track-widest text-w_bone bg-w_black clip-button overflow-hidden transition-all duration-300 hover:bg-w_acid" href="#">Iniciar Diagnostico</a>
+<div class="font-mono text-[10px] text-w_graphite mt-4">clip-button / hover:bg-w_acid</div>
+</div>
+<div class="border border-w_graphite/20 bg-w_black p-8">
+<div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-6">Dark BG (White)</div>
+<a class="relative inline-block px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,2vw,1rem)] font-mono font-medium text-sm uppercase track-widest text-w_black bg-w_white clip-button overflow-hidden transition-all duration-300 hover:bg-w_acid hover:text-w_white" href="#"><span class="flex items-center gap-3">Download PDF <iconify-icon icon="solar:download-minimalistic-linear" stroke-width="1.5"></iconify-icon></span></a>
+<div class="font-mono text-[10px] text-w_graphite mt-4">hover:bg-w_acid hover:text-w_white</div>
+</div>
+<div class="border border-w_graphite/20 bg-w_bone p-8">
+<div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-6">Mega CTA</div>
+<a class="relative inline-block px-[clamp(2rem,4vw,3rem)] py-[clamp(1rem,2vw,1.5rem)] font-mono font-semibold text-sm md:text-lg uppercase track-widest text-w_bone bg-w_black clip-button overflow-hidden transition-all duration-300 hover:bg-w_acid hover:scale-105 active:scale-95 shadow-2xl shadow-w_acid/20" href="#">Agendar Consultoria</a>
+<div class="font-mono text-[10px] text-w_graphite mt-4">hover:scale-105 active:scale-95 shadow-w_acid/20</div>
+</div>
+</div>
+
+<!-- Cards -->
+<h3 class="font-display font-medium text-2xl text-w_black mb-6 track-tight reveal">Cards</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-l border-w_graphite/20 mb-16 reveal">
+<div class="border-b border-r border-w_graphite/20 bg-w_white p-[clamp(2rem,4vw,3.5rem)] hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-w_acid hover:relative hover:z-10 transition-all duration-500 ease-swiss group card">
+<div class="font-display font-medium text-[clamp(3rem,5vw,4.5rem)] track-tighter text-w_black mb-2">9x</div>
+<div class="w-12 h-[1px] bg-w_graphite/50 mb-4 group-hover:bg-w_acid transition-colors duration-300"></div>
+<div class="font-mono text-xs uppercase track-widest text-w_graphite group-hover:text-w_black transition-colors duration-300">Crescimento MRR</div>
+</div>
+<div class="border-b border-r border-w_graphite/20 bg-w_white p-[clamp(2rem,4vw,3.5rem)] hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-w_acid hover:relative hover:z-10 transition-all duration-500 ease-swiss group card">
+<div class="font-display font-medium text-[clamp(3rem,5vw,4.5rem)] track-tighter text-w_black mb-2">R$16</div>
+<div class="w-12 h-[1px] bg-w_graphite/50 mb-4 group-hover:bg-w_acid transition-colors duration-300"></div>
+<div class="font-mono text-xs uppercase track-widest text-w_graphite group-hover:text-w_black transition-colors duration-300">CPL Medio</div>
+</div>
+<div class="border-b border-r border-w_graphite/20 bg-w_white p-[clamp(2rem,4vw,3.5rem)] hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-w_acid hover:relative hover:z-10 transition-all duration-500 ease-swiss group card">
+<div class="font-display font-medium text-[clamp(3rem,5vw,4.5rem)] track-tighter text-w_black mb-2">40%</div>
+<div class="w-12 h-[1px] bg-w_graphite/50 mb-4 group-hover:bg-w_acid transition-colors duration-300"></div>
+<div class="font-mono text-xs uppercase track-widest text-w_graphite group-hover:text-w_black transition-colors duration-300">Lead → Reuniao</div>
+</div>
+</div>
+
+<!-- Strategy Card -->
+<h3 class="font-display font-medium text-2xl text-w_black mb-6 track-tight reveal">Strategy Cards</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-[clamp(1.5rem,3vw,2.5rem)] mb-16 reveal">
+<div class="border border-w_graphite/20 bg-w_white p-[clamp(2rem,4vw,3.5rem)] hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-w_acid transition-all duration-400 ease-swiss group card">
+<div class="flex justify-between items-start mb-16">
+<div class="font-mono text-xs uppercase track-widest text-w_graphite group-hover:text-w_acid transition-colors">01.</div>
+<svg fill="none" height="40" viewbox="0 0 40 40" width="40"><path class="dash-anim" d="M5 20H15L20 5L25 35L30 20H35" stroke="#0A0A0A" stroke-width="1.5"></path></svg>
+</div>
+<h3 class="font-display font-medium text-2xl text-w_black mb-4 track-tight">Growth Engineering</h3>
+<p class="font-body text-w_graphite text-sm md:text-base leading-relaxed">Engenharia de aquisicao + processo comercial estruturado para SaaS B2B com metricas previsiveis.</p>
+</div>
+<div class="border border-w_graphite/20 bg-w_white p-[clamp(2rem,4vw,3.5rem)] hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-w_acid transition-all duration-400 ease-swiss group card">
+<div class="flex justify-between items-start mb-16">
+<div class="font-mono text-xs uppercase track-widest text-w_graphite group-hover:text-w_acid transition-colors">02.</div>
+<svg fill="none" height="40" viewbox="0 0 40 40" width="40"><circle class="dash-anim" cx="20" cy="20" r="15" stroke="#0A0A0A" stroke-dasharray="4 4" stroke-width="1.5"></circle><path d="M10 20H30" stroke="#0A0A0A" stroke-width="1.5"></path></svg>
+</div>
+<h3 class="font-display font-medium text-2xl text-w_black mb-4 track-tight">Revenue Operations</h3>
+<p class="font-body text-w_graphite text-sm md:text-base leading-relaxed">Pipeline previsivel, cadencia comercial automatizada e dashboard de metricas em tempo real.</p>
+</div>
+</div>
+
+<!-- Input -->
+<h3 class="font-display font-medium text-2xl text-w_black mb-6 track-tight reveal">Input</h3>
+<div class="border border-w_graphite/20 bg-w_bone p-8 max-w-md reveal">
+<form class="flex items-center border-b border-w_graphite/40 pb-2 group focus-within:border-w_acid transition-colors">
+<input class="bg-transparent border-none outline-none font-mono text-xs uppercase track-widest text-w_black placeholder:text-w_graphite w-full" placeholder="SEU EMAIL" type="email"/>
+<button class="text-w_black group-hover:text-w_acid transition-colors" type="button">
+<iconify-icon class="text-xl" icon="solar:arrow-right-linear" stroke-width="1.5"></iconify-icon>
+</button>
+</form>
+</div>
+</div>
+</section>
+
+<!-- ══ [05] MOTION ══ -->
+<section class="py-[clamp(5rem,10vw,10rem)]" id="ds-motion">
+<div class="max-w-[clamp(70rem,95vw,100rem)] mx-auto px-[clamp(1.5rem,5vw,4rem)]">
+<div class="mb-[clamp(3rem,6vw,5rem)] reveal">
+<div class="font-mono text-[10px] md:text-xs uppercase track-widest text-w_graphite mb-6 flex items-center gap-4 before:content-[''] before:w-8 before:h-[1px] before:bg-w_acid">[SEC.05_MOTION]</div>
+<h2 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] track-tight text-w_black mb-4">Motion Gallery.</h2>
+<p class="font-body text-[clamp(1rem,1.2vw,1.125rem)] text-w_graphite max-w-[55ch]">Swiss easing: cubic-bezier(0.16, 1, 0.3, 1). Todas as animacoes do sistema.</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[clamp(1.5rem,3vw,2.5rem)] reveal">
+<div class="border border-w_graphite/20 bg-w_white p-8"><div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-4">Scroll Reveal</div><div class="border border-w_graphite/20 p-6 flex items-center justify-center min-h-[80px]"><div class="reveal active font-display font-medium text-xl text-w_black">Fade Up 30px</div></div><div class="font-mono text-[10px] text-w_graphite mt-4">.reveal / 0.8s swiss</div></div>
+
+<div class="border border-w_graphite/20 bg-w_white p-8"><div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-4">Draw Line X</div><div class="border border-w_graphite/20 p-6 min-h-[80px] flex items-center"><div class="w-full h-[1px] bg-w_graphite/20 relative"><div class="h-full bg-w_acid draw-line active"></div></div></div><div class="font-mono text-[10px] text-w_graphite mt-4">.draw-line / 1s swiss</div></div>
+
+<div class="border border-w_graphite/20 bg-w_white p-8"><div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-4">Draw Line Y</div><div class="border border-w_graphite/20 p-6 min-h-[80px] flex items-center justify-center"><div class="w-[1px] h-16 bg-w_graphite/20 relative"><div class="w-full bg-w_acid draw-line-y active"></div></div></div><div class="font-mono text-[10px] text-w_graphite mt-4">.draw-line-y / 1.5s swiss</div></div>
+
+<div class="border border-w_graphite/20 bg-w_white p-8"><div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-4">Card Hover</div><div class="p-4 border border-w_graphite/20 bg-w_bone hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-w_acid transition-all duration-500 ease-swiss cursor-pointer text-center"><div class="font-mono text-xs text-w_black">Hover me</div></div><div class="font-mono text-[10px] text-w_graphite mt-4">-translate-y-2 / 500ms swiss</div></div>
+
+<div class="border border-w_graphite/20 bg-w_white p-8"><div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-4">SVG Dash Draw</div><div class="border border-w_graphite/20 p-6 min-h-[80px] flex items-center justify-center card cursor-pointer group"><svg fill="none" height="50" viewbox="0 0 100 50" width="100"><path class="dash-anim" d="M0,40 L20,30 L40,35 L60,15 L80,5 L100,10" stroke="#0A0A0A" stroke-width="2"></path></svg></div><div class="font-mono text-[10px] text-w_graphite mt-4">.dash-anim / 2s swiss (on .card:hover)</div></div>
+
+<div class="border border-w_graphite/20 bg-w_white p-8"><div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-4">Scramble Glitch</div><div class="border border-w_graphite/20 p-6 min-h-[80px] flex items-center justify-center"><span class="scramble inline-block cursor-crosshair transition-colors duration-200 font-display font-semibold text-2xl text-w_black">Hover This</span></div><div class="font-mono text-[10px] text-w_graphite mt-4">.scramble / glitch 0.3s</div></div>
+
+<div class="border border-w_graphite/20 bg-w_white p-8"><div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-4">Grid Node Pulse</div><div class="border border-w_graphite/20 p-6 min-h-[80px] flex items-center justify-center"><svg width="100" height="50" xmlns="http://www.w3.org/2000/svg"><circle class="grid-node" cx="25" cy="25" r="3" fill="#5C5C5C"></circle><circle class="grid-node" cx="75" cy="25" r="3" fill="#5C5C5C" style="animation-delay:1s"></circle><line stroke="#5C5C5C" stroke-dasharray="2 2" stroke-width="0.5" x1="25" x2="75" y1="25" y2="25"></line></svg></div><div class="font-mono text-[10px] text-w_graphite mt-4">pulse-node / 4s infinite</div></div>
+
+<div class="border border-w_graphite/20 bg-w_white p-8"><div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-4">Marquee</div><div class="border border-w_graphite/20 bg-w_black p-3 min-h-[50px] overflow-hidden flex items-center"><div class="marquee-container font-mono text-[10px] uppercase track-widest text-w_bone"><div class="flex-shrink-0 flex items-center gap-6 px-3"><span>BUILD</span><span class="text-w_acid">SCALE</span><span>REPEAT</span><span>BUILD</span><span class="text-w_acid">SCALE</span><span>REPEAT</span></div></div></div><div class="font-mono text-[10px] text-w_graphite mt-4">marquee / 30s linear infinite</div></div>
+
+<div class="border border-w_graphite/20 bg-w_white p-8"><div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-4">Logo Caret Blink</div><div class="border border-w_graphite/20 p-6 min-h-[80px] flex items-center justify-center"><div class="font-mono font-bold text-3xl"><span class="text-w_graphite">&gt;<span class="caret-blink">_</span></span> <span class="text-w_black">We</span><span class="text-w_acid">{Stack}</span></div></div><div class="font-mono text-[10px] text-w_graphite mt-4">.caret-blink / 1s step-end infinite</div></div>
+
+<div class="border border-w_graphite/20 bg-w_white p-8"><div class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-4">Pulse Dot</div><div class="border border-w_graphite/20 p-6 min-h-[80px] flex items-center justify-center gap-3"><span class="w-3 h-3 rounded-full bg-w_acid animate-pulse"></span><span class="font-mono text-xs text-w_graphite">Live indicator</span></div><div class="font-mono text-[10px] text-w_graphite mt-4">animate-pulse (Tailwind)</div></div>
+</div>
+</div>
+</section>
+
+<!-- ══ [06] LAYOUT ══ -->
+<section class="py-[clamp(5rem,10vw,10rem)] bg-w_white border-y border-w_graphite/20" id="ds-layout">
+<div class="max-w-[clamp(70rem,95vw,100rem)] mx-auto px-[clamp(1.5rem,5vw,4rem)]">
+<div class="mb-[clamp(3rem,6vw,5rem)] reveal">
+<div class="font-mono text-[10px] md:text-xs uppercase track-widest text-w_graphite mb-6 flex items-center gap-4 before:content-[''] before:w-8 before:h-[1px] before:bg-w_acid">[SEC.06_LAYOUT]</div>
+<h2 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] track-tight text-w_black mb-4">Layout Patterns.</h2>
+</div>
+
+<div class="space-y-6 mb-12 reveal">
+<div class="flex justify-between items-center border-b border-w_graphite/20 pb-4"><div class="font-mono text-xs text-w_black uppercase track-widest">Container</div><div class="font-mono text-[10px] text-w_graphite">max-w-[clamp(70rem,95vw,100rem)]</div></div>
+<div class="flex justify-between items-center border-b border-w_graphite/20 pb-4"><div class="font-mono text-xs text-w_black uppercase track-widest">Padding</div><div class="font-mono text-[10px] text-w_graphite">px-[clamp(1.5rem,5vw,4rem)]</div></div>
+<div class="flex justify-between items-center border-b border-w_graphite/20 pb-4"><div class="font-mono text-xs text-w_black uppercase track-widest">Grid</div><div class="font-mono text-[10px] text-w_graphite">grid-cols-12 / gap-[clamp(1.5rem,3vw,2.5rem)]</div></div>
+<div class="flex justify-between items-center border-b border-w_graphite/20 pb-4"><div class="font-mono text-xs text-w_black uppercase track-widest">Section Spacing</div><div class="font-mono text-[10px] text-w_graphite">py-[clamp(5rem,10vw,10rem)]</div></div>
+<div class="flex justify-between items-center border-b border-w_graphite/20 pb-4"><div class="font-mono text-xs text-w_black uppercase track-widest">Nav Height</div><div class="font-mono text-[10px] text-w_graphite">h-20 (80px)</div></div>
+</div>
+
+<h3 class="font-display font-medium text-2xl text-w_black mb-6 track-tight reveal">Hero Split (8/4)</h3>
+<div class="grid grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] border border-w_graphite/20 p-4 mb-8 reveal">
+<div class="col-span-12 lg:col-span-8 bg-w_acid/10 border border-w_acid/30 p-6 flex items-center justify-center min-h-[100px]"><div class="font-mono text-xs text-w_acid uppercase">col-span-8 // Content</div></div>
+<div class="hidden lg:flex col-span-4 bg-w_graphite/10 border border-w_graphite/20 p-6 items-center justify-center min-h-[100px]"><div class="font-mono text-xs text-w_graphite uppercase">col-span-4 // Sidebar</div></div>
+</div>
+
+<h3 class="font-display font-medium text-2xl text-w_black mb-6 track-tight reveal">Content Split (4/8)</h3>
+<div class="grid grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] border border-w_graphite/20 p-4 mb-8 reveal">
+<div class="col-span-12 lg:col-span-4 bg-w_graphite/10 border border-w_graphite/20 p-6 flex items-center justify-center min-h-[100px]"><div class="font-mono text-xs text-w_graphite uppercase">col-span-4 // Label</div></div>
+<div class="col-span-12 lg:col-span-8 bg-w_acid/10 border border-w_acid/30 p-6 flex items-center justify-center min-h-[100px]"><div class="font-mono text-xs text-w_acid uppercase">col-span-8 // Content</div></div>
+</div>
+
+<h3 class="font-display font-medium text-2xl text-w_black mb-6 track-tight reveal">Metric Grid (3-col border)</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-l border-w_graphite/20 reveal">
+<div class="border-b border-r border-w_graphite/20 p-6 flex items-center justify-center min-h-[80px] bg-w_bone"><div class="font-mono text-xs text-w_graphite uppercase">Metric 1</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex items-center justify-center min-h-[80px] bg-w_bone"><div class="font-mono text-xs text-w_graphite uppercase">Metric 2</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex items-center justify-center min-h-[80px] bg-w_bone"><div class="font-mono text-xs text-w_graphite uppercase">Metric 3</div></div>
+</div>
+</div>
+</section>
+
+<!-- ══ [07] ICONS ══ -->
+<section class="py-[clamp(5rem,10vw,10rem)]" id="ds-icons">
+<div class="max-w-[clamp(70rem,95vw,100rem)] mx-auto px-[clamp(1.5rem,5vw,4rem)]">
+<div class="mb-[clamp(3rem,6vw,5rem)] reveal">
+<div class="font-mono text-[10px] md:text-xs uppercase track-widest text-w_graphite mb-6 flex items-center gap-4 before:content-[''] before:w-8 before:h-[1px] before:bg-w_acid">[SEC.07_ICONS]</div>
+<h2 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] track-tight text-w_black mb-4">Icon System.</h2>
+<p class="font-body text-[clamp(1rem,1.2vw,1.125rem)] text-w_graphite max-w-[55ch]">Solar Linear via Iconify. Stroke-width 1.5. Cor herda do parent.</p>
+</div>
+
+<div class="grid grid-cols-3 md:grid-cols-6 gap-0 border-t border-l border-w_graphite/20 reveal">
+<div class="border-b border-r border-w_graphite/20 p-6 flex flex-col items-center gap-3 hover:bg-w_bone transition-colors"><iconify-icon class="text-w_black text-2xl" icon="solar:shield-check-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">shield-check</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex flex-col items-center gap-3 hover:bg-w_bone transition-colors"><iconify-icon class="text-w_black text-2xl" icon="solar:server-square-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">server-square</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex flex-col items-center gap-3 hover:bg-w_bone transition-colors"><iconify-icon class="text-w_black text-2xl" icon="solar:programming-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">programming</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex flex-col items-center gap-3 hover:bg-w_bone transition-colors"><iconify-icon class="text-w_black text-2xl" icon="solar:chart-square-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">chart-square</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex flex-col items-center gap-3 hover:bg-w_bone transition-colors"><iconify-icon class="text-w_black text-2xl" icon="solar:download-minimalistic-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">download</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex flex-col items-center gap-3 hover:bg-w_bone transition-colors"><iconify-icon class="text-w_black text-2xl" icon="solar:arrow-right-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">arrow-right</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex flex-col items-center gap-3 hover:bg-w_bone transition-colors"><iconify-icon class="text-w_black text-2xl" icon="solar:info-circle-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">info-circle</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex flex-col items-center gap-3 hover:bg-w_bone transition-colors"><iconify-icon class="text-w_black text-2xl" icon="solar:hamburger-menu-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">hamburger</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex flex-col items-center gap-3 hover:bg-w_bone transition-colors"><iconify-icon class="text-w_black text-2xl" icon="solar:code-square-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">code-square</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex flex-col items-center gap-3 hover:bg-w_bone transition-colors"><iconify-icon class="text-w_black text-2xl" icon="solar:graph-up-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">graph-up</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex flex-col items-center gap-3 hover:bg-w_bone transition-colors"><iconify-icon class="text-w_black text-2xl" icon="solar:users-group-rounded-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">users-group</div></div>
+<div class="border-b border-r border-w_graphite/20 p-6 flex flex-col items-center gap-3 hover:bg-w_bone transition-colors"><iconify-icon class="text-w_black text-2xl" icon="solar:bolt-circle-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">bolt-circle</div></div>
+</div>
+
+<!-- Color Inheritance -->
+<div class="mt-12 border border-w_graphite/20 bg-w_bone p-8 flex items-center gap-12 flex-wrap reveal">
+<div class="flex flex-col items-center gap-2"><iconify-icon class="text-w_black text-3xl" icon="solar:code-square-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">w_black</div></div>
+<div class="flex flex-col items-center gap-2"><iconify-icon class="text-w_acid text-3xl" icon="solar:code-square-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">w_acid</div></div>
+<div class="flex flex-col items-center gap-2"><iconify-icon class="text-w_graphite text-3xl" icon="solar:code-square-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">w_graphite</div></div>
+<div class="flex flex-col items-center gap-2 bg-w_black rounded p-3"><iconify-icon class="text-w_bone text-3xl" icon="solar:code-square-linear" stroke-width="1.5"></iconify-icon><div class="font-mono text-[10px] text-w_graphite">w_bone</div></div>
+</div>
+</div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="border-t border-w_graphite/20 bg-w_bone py-16 relative overflow-hidden">
+<div class="max-w-[clamp(70rem,95vw,100rem)] mx-auto px-[clamp(1.5rem,5vw,4rem)] text-center relative z-10">
+<div class="font-mono font-bold text-3xl mb-4">
+<span class="text-w_graphite">&gt;<span class="caret-blink">_</span></span> <span class="text-w_black">We</span><span class="text-w_acid">{Stack}</span>
+</div>
+<p class="font-mono text-[10px] uppercase track-widest text-w_graphite mb-2">Design System — Site Edition v2.0</p>
+<p class="font-mono text-[10px] uppercase track-widest text-w_graphite">Kapferer Identity Prism + Wheeler Visual System + Neumeier Onlyness + Swiss Motion</p>
+</div>
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/4 w-full text-center overflow-hidden pointer-events-none z-0">
+<h1 class="font-display font-semibold text-[clamp(10rem,25vw,30rem)] leading-none track-tighter text-w_graphite opacity-[0.03] select-none m-0 p-0">WESTACK</h1>
+</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const revealElements = document.querySelectorAll('.reveal:not(.active)');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                entry.target.querySelectorAll('.draw-line, .draw-line-y').forEach(l => l.classList.add('active'));
+            }
+        });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) { nav.classList.add('bg-w_bone'); nav.classList.remove('bg-w_bone/90'); }
+        else { nav.classList.add('bg-w_bone/90'); nav.classList.remove('bg-w_bone'); }
+    });
+});
+</script>
+</body>
+</html>
