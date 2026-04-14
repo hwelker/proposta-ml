@@ -60,23 +60,19 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
 <nav class="slide-nav">
   <a href="#capa"><span class="nav-tooltip">01</span></a>
   <a href="#autoridade"><span class="nav-tooltip">02</span></a>
-  <a href="#promocoes"><span class="nav-tooltip">03</span></a>
-  <a href="#anuncios"><span class="nav-tooltip">04</span></a>
-  <a href="#sac"><span class="nav-tooltip">05</span></a>
-  <a href="#ads"><span class="nav-tooltip">06</span></a>
-  <a href="#pedidos"><span class="nav-tooltip">07</span></a>
-  <a href="#metricas"><span class="nav-tooltip">08</span></a>
-
-  <a href="#ambiente"><span class="nav-tooltip">10</span></a>
-  <a href="#ex-buybox"><span class="nav-tooltip">11</span></a>
-  <a href="#ex-perguntas"><span class="nav-tooltip">12</span></a>
-  <a href="#ex-claim"><span class="nav-tooltip">13</span></a>
-  <a href="#duvida"><span class="nav-tooltip">14</span></a>
-  <a href="#timeline"><span class="nav-tooltip">15</span></a>
-  <a href="#inteligencia"><span class="nav-tooltip">16</span></a>
-  <a href="#ancoragem"><span class="nav-tooltip">17</span></a>
-
-  <a href="#valor"><span class="nav-tooltip">19</span></a>
+  <a href="#ambiente"><span class="nav-tooltip">03</span></a>
+  <a href="#semaforo"><span class="nav-tooltip">04</span></a>
+  <a href="#ex-buybox"><span class="nav-tooltip">05</span></a>
+  <a href="#ex-olist"><span class="nav-tooltip">06</span></a>
+  <a href="#ex-perguntas"><span class="nav-tooltip">07</span></a>
+  <a href="#ex-claim"><span class="nav-tooltip">08</span></a>
+  <a href="#ex-ranking"><span class="nav-tooltip">09</span></a>
+  <a href="#func-vendas"><span class="nav-tooltip">10</span></a>
+  <a href="#func-operacao"><span class="nav-tooltip">11</span></a>
+  <a href="#duvida"><span class="nav-tooltip">12</span></a>
+  <a href="#timeline"><span class="nav-tooltip">13</span></a>
+  <a href="#ancoragem"><span class="nav-tooltip">14</span></a>
+  <a href="#valor"><span class="nav-tooltip">15</span></a>
 </nav>
 
 <!-- ══ 01. CAPA ══ -->
@@ -89,7 +85,7 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
         <span class="text-w_bone">&gt;_</span> We<span class="text-w_acid">{Stack}</span>
       </p>
       <h1 class="font-display font-semibold text-[clamp(3rem,7vw,6.5rem)] leading-[0.9] track-tighter text-w_bone mb-8">
-        Escritório Virtual de IA<br><span class="text-w_acid">para Mercado Livre</span>
+        Squad de Agentes IA<br><span class="text-w_acid">para Mercado Livre</span>
       </h1>
       <div class="grid grid-cols-6 gap-3 max-w-4xl mx-auto mt-12 mb-12">
         <div class="text-center py-5 px-2 border border-w_acid/20 bg-w_acid/[0.04] clip-button"><p class="font-mono text-2xl font-bold text-w_acid leading-none mb-2">{?}</p><p class="font-mono text-[10px] font-semibold text-w_bone/70 tracking-wide">ANALISTA</p></div>
@@ -116,12 +112,10 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
         <p class="font-mono text-xs text-w_acid tracking-widest uppercase mt-2 mb-6">Founder & CEO · WeStack</p>
 
         <h3 class="font-display text-lg font-medium text-w_black/80 mb-2">Cases entregues</h3>
-        <p class="text-w_graphite leading-relaxed mb-6">Ronaldinho Gaúcho (R10) · Sebrae · Beto Carreiro</p>
+        <p class="text-w_graphite leading-relaxed mb-6">Sebrae · Beto Carreiro · Google for Startups</p>
 
         <div class="logo-row mb-6">
           <img src="google-for-startups.png" alt="Google for Startups">
-          <img src="Ronaldinho.png" alt="R10">
-          <img src="Sebrae.svg.png" alt="Sebrae">
         </div>
 
         <div class="border border-w_graphite/15 bg-white p-5 mb-3 transition-all duration-300 hover:border-w_acid">
@@ -155,7 +149,7 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
       </div>
       <div>
         <h2 class="font-display text-[clamp(2rem,4vw,3rem)] font-semibold track-tighter text-w_black">Raicon Look</h2>
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mt-2 mb-6">Seller · +383 Mil em Vendas no Mercado Livre</p>
+        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mt-2 mb-6">Seller & Co-founder · +R$ 383 Mil em Vendas no Mercado Livre</p>
 
         <h3 class="font-display text-lg font-medium text-w_black/80 mb-2">Case: +R$ 383 mil em vendas no ML</h3>
         <p class="text-w_graphite leading-relaxed mb-6">Vendeu mais de R$ 383 mil no Mercado Livre. Viveu as dores na pele: perguntas, reclamações, ADS sem otimização, concorrentes derrubando preço. Sabe exatamente o que automatizar.</p>
@@ -178,767 +172,139 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
   </div>
 </section>
 
-<!-- ══ 03. CENTRAL DE PROMOÇÕES ══ -->
-<section class="slide relative bg-w_black" id="promocoes">
-  <div class="absolute inset-0 bg-tech-grid opacity-40 pointer-events-none"></div>
-  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest mb-10 reveal" style="color:rgba(255,255,255,0.35)">[SEC.03 // CENTRAL DE PROMOÇÕES]</p>
+<!-- ══ 10. AMBIENTE VIRTUAL ══ -->
+<section class="slide relative bg-w_black overflow-hidden" id="ambiente">
+  <div class="absolute inset-0 pointer-events-none" style="background-size:48px 48px;background-image:linear-gradient(to right,rgba(255,77,0,0.025) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,77,0,0.025) 1px,transparent 1px)"></div>
+  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse at 50% 40%, rgba(255,77,0,0.04) 0%, transparent 60%)"></div>
 
-    <h2 class="font-display font-semibold text-[clamp(2.5rem,5vw,4rem)] track-tighter leading-tight mb-3 reveal" style="color:rgba(244,244,240,0.9)">
-      Central de <span class="text-w_acid">Promoções</span>
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-12 w-full relative z-10 h-full flex flex-col justify-center">
+
+    <p class="font-mono text-[11px] uppercase tracking-widest mb-4 reveal" style="color:rgba(255,255,255,0.3)">[SEC.03 // ESCRITÓRIO VIRTUAL]</p>
+    <h2 class="font-display font-semibold text-[clamp(2.5rem,5vw,4rem)] track-tighter leading-[0.95] text-w_bone mb-10 reveal">
+      Ambiente <span class="text-w_acid">Virtual</span>
     </h2>
 
-
-
-    <!-- 10 tipos de promoção com sub-itens -->
-    <div class="grid md:grid-cols-2 gap-4 mb-12 reveal">
-
-      <!-- DEAL -->
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-2">DEAL — Campanhas Tradicionais</p>
-        <p class="font-mono text-xs mb-2" style="color:rgba(244,244,240,0.35)">Organizadas pelo ML. Vendedores convidados. Agente detecta e aceita automaticamente.</p>
-        <div class="space-y-1">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Detectar convites de campanha por item</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Aceitar convite e definir deal_price</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Atualizar preço dentro da campanha ativa</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Remover item de campanha</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Consultar status e datas da campanha</p>
+    <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <div style="filter:drop-shadow(0 15px 30px rgba(0,0,0,0.4))">
+        <div style="background:#1a1a1a;border-radius:12px 12px 0 0;padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-bottom:none;display:flex;align-items:center;gap:8px">
+          <div style="display:flex;gap:5px">
+            <div style="width:9px;height:9px;border-radius:50%;background:#ef4444"></div>
+            <div style="width:9px;height:9px;border-radius:50%;background:#d97706"></div>
+            <div style="width:9px;height:9px;border-radius:50%;background:#22c55e"></div>
+          </div>
+          <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;padding:4px 12px">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35)">westack.app/escritorio</p>
+          </div>
+        </div>
+        <div style="border:1px solid rgba(255,255,255,0.1);border-top:none;border-radius:0 0 12px 12px;overflow:hidden;background:#000">
+          <img src="ambientevirtual1.png" alt="Ambiente Virtual — Escritório dos Agentes" style="width:100%;display:block">
         </div>
       </div>
-
-      <!-- CO-PARTICIPAÇÃO -->
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-2">Co-participação — ML Paga Parte</p>
-        <p class="font-mono text-xs mb-2" style="color:rgba(244,244,240,0.35)">ML subsidia parte do desconto. Agente aceita quando margem permite.</p>
-        <div class="space-y-1">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Detectar ofertas de co-participação</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Aceitar co-participação com deal_price</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Co-participação PIX (desconto extra via PIX)</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Ver quanto o ML subsidia vs quanto o seller paga</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Sair da co-participação se margem ficar ruim</p>
+      <div style="filter:drop-shadow(0 15px 30px rgba(0,0,0,0.4))">
+        <div style="background:#1a1a1a;border-radius:12px 12px 0 0;padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-bottom:none;display:flex;align-items:center;gap:8px">
+          <div style="display:flex;gap:5px">
+            <div style="width:9px;height:9px;border-radius:50%;background:#ef4444"></div>
+            <div style="width:9px;height:9px;border-radius:50%;background:#d97706"></div>
+            <div style="width:9px;height:9px;border-radius:50%;background:#22c55e"></div>
+          </div>
+          <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;padding:4px 12px">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35)">westack.app/reuniao</p>
+          </div>
+        </div>
+        <div style="border:1px solid rgba(255,255,255,0.1);border-top:none;border-radius:0 0 12px 12px;overflow:hidden;background:#000">
+          <img src="ambientevirtual 2.png" alt="Ambiente Virtual — Reunião dos Agentes" style="width:100%;display:block">
         </div>
       </div>
-
-      <!-- DOD -->
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-2">Ofertas do Dia (DOD)</p>
-        <p class="font-mono text-xs mb-2" style="color:rgba(244,244,240,0.35)">Destaque na homepage do ML por 24h. Convite do ML.</p>
-        <div class="space-y-1">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Detectar convite de Oferta do Dia</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Aceitar com deal_price otimizado pela margem</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Monitorar performance durante a oferta</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Remover antes do prazo se necessário</p>
-        </div>
-      </div>
-
-      <!-- LIGHTNING -->
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-2">Ofertas Relâmpago (LIGHTNING)</p>
-        <p class="font-mono text-xs mb-2" style="color:rgba(244,244,240,0.35)">Tempo limitado com contador regressivo. Alto volume de vendas.</p>
-        <div class="space-y-1">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Detectar convite de oferta relâmpago</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Aceitar com semáforo de margens</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Definir estoque máximo para a oferta</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Acompanhar vendas em tempo real</p>
-        </div>
-      </div>
-
-      <!-- PRICE_DISCOUNT -->
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-2">Desconto Individual (PRICE_DISCOUNT)</p>
-        <p class="font-mono text-xs mb-2" style="color:rgba(244,244,240,0.35)">Aplicar desconto direto no item. Aparece preço riscado.</p>
-        <div class="space-y-1">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Verificar se item é candidato a desconto</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Aplicar desconto com preço riscado (original_price)</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Definir período do desconto (start/finish date)</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Remover desconto a qualquer momento</p>
-        </div>
-      </div>
-
-      <!-- PRE_NEGOTIATED -->
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-2">Desconto Pré-acordado (PRE_NEGOTIATED)</p>
-        <p class="font-mono text-xs mb-2" style="color:rgba(244,244,240,0.35)">Desconto negociado diretamente pelo ML com o seller.</p>
-        <div class="space-y-1">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Detectar proposta de desconto pré-acordado</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Aceitar ou rejeitar conforme margem</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Atualizar deal_price do acordo</p>
-        </div>
-      </div>
-
-      <!-- QUANTIDADE -->
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-2">Desconto por Quantidade</p>
-        <p class="font-mono text-xs mb-2" style="color:rgba(244,244,240,0.35)">Configurar "leve 3 pague 2", descontos progressivos por volume.</p>
-        <div class="space-y-1">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Criar regras de desconto por quantidade</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Definir faixas (2 un = 5%, 3 un = 10%, etc)</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Aplicar em SKUs específicos ou categorias</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Ativar/desativar regras</p>
-        </div>
-      </div>
-
-      <!-- SELLER_CAMPAIGN -->
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-2">Campanha do Vendedor (SELLER_CAMPAIGN)</p>
-        <p class="font-mono text-xs mb-2" style="color:rgba(244,244,240,0.35)">Criar sua própria campanha com % de desconto. Duração máxima: 14 dias.</p>
-        <div class="space-y-1">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Criar campanha própria com nome e datas</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Definir % de desconto flexível por item</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Adicionar/remover itens da campanha</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Atualizar ou excluir campanha</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Listar itens de uma campanha</p>
-        </div>
-      </div>
-
-      <!-- CUPONS -->
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-2">Cupons do Vendedor</p>
-        <p class="font-mono text-xs mb-2" style="color:rgba(244,244,240,0.35)">Criar cupons de desconto % ou valor fixo para sua loja.</p>
-        <div class="space-y-1">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Criar cupom percentual (ex: 10% OFF)</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Criar cupom valor fixo (ex: R$20 OFF)</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Definir validade e limite de uso</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Consultar cupons ativos</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Desativar cupom</p>
-        </div>
-      </div>
-
-      <!-- SMART PRICE -->
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-2">Smart Price Matching</p>
-        <p class="font-mono text-xs mb-2" style="color:rgba(244,244,240,0.35)">Automático pelo ML. Quando seu preço está competitivo, ML subsidia desconto extra.</p>
-        <div class="space-y-1">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Automático — não precisa de API para ativar</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; ML detecta que preço está bom e subsidia desconto</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Agente pode consultar se item está com Smart Price</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Estratégia: manter preço base competitivo para ativar</p>
-        </div>
-      </div>
-
     </div>
-
-    <!-- Fluxo do Agente -->
-    <div class="flex items-center gap-3 mb-6 reveal">
-      <div class="h-px flex-1" style="background:rgba(255,255,255,0.08)"></div>
-      <p class="font-mono text-[10px] tracking-widest uppercase text-w_acid flex-shrink-0">Fluxo do Agente com Promoções</p>
-      <div class="h-px flex-1" style="background:rgba(255,255,255,0.08)"></div>
-    </div>
-
-    <!-- Workflow 1: Oferta do Dia -->
-    <div class="grid md:grid-cols-2 gap-6 items-stretch">
-
-      <div class="reveal flex">
-        <div class="rounded-lg overflow-hidden flex flex-col w-full" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)">
-          <div class="flex items-center gap-3 px-5 py-3" style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
-            <div class="flex gap-1.5"><div class="w-2.5 h-2.5 rounded-full" style="background:#ef4444"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#d97706"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#22c55e"></div></div>
-            <p class="font-mono text-[10px] tracking-wide" style="color:rgba(255,255,255,0.3)">westack_log // oferta_do_dia</p>
-          </div>
-          <div class="p-4 space-y-3 flex-1">
-            <div class="flex gap-3 items-start">
-              <div class="flex-shrink-0 text-right w-12"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">08:00</p></div>
-              <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[10px] font-bold" style="background:#00A650">A</div>
-              <div class="flex-1 p-2.5 rounded-lg" style="background:rgba(0,166,80,0.06);border:1px solid rgba(0,166,80,0.15)">
-                <p class="font-mono text-[10px] font-semibold mb-0.5" style="color:#00A650">Analista · convite detectado</p>
-                <p class="text-xs text-w_bone">ML convidou "Kit Meias 12 Pares" para Oferta do Dia. Prazo de aceite: 12h.</p>
-              </div>
-            </div>
-            <div class="flex gap-3 items-start">
-              <div class="flex-shrink-0 text-right w-12"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">08:01</p></div>
-              <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-[10px] font-bold" style="background:#FFE600;color:#0A0A0A">G</div>
-              <div class="flex-1 p-2.5 rounded-lg" style="background:rgba(255,77,0,0.05);border:1px solid rgba(255,77,0,0.15)">
-                <p class="font-mono text-[10px] font-semibold mb-0.5 text-w_acid">Gestor · verificação de margem</p>
-                <p class="text-xs text-w_bone">Preço sugerido R$39,90. Margem: 28%. <span style="color:#22c55e">Margem segura.</span> Aprovando.</p>
-              </div>
-            </div>
-            <div class="flex gap-3 items-start">
-              <div class="flex-shrink-0 text-right w-12"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">08:01</p></div>
-              <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[10px] font-bold" style="background:#3483FA">An</div>
-              <div class="flex-1 p-2.5 rounded-lg" style="background:rgba(52,131,250,0.06);border:1px solid rgba(52,131,250,0.15)">
-                <p class="font-mono text-[10px] font-semibold mb-0.5" style="color:#3483FA">Anúncios · aceite automático</p>
-                <p class="text-xs text-w_bone">Oferta aceita por <strong>R$39,90</strong>. Anúncio já aparece na vitrine do ML.</p>
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center justify-between px-5 py-2.5" style="border-top:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
-            <p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">1 minuto · 0 intervenção humana</p>
-            <span class="font-mono text-[10px] font-bold px-3 py-1 rounded-full" style="background:rgba(34,197,94,0.15);color:#22c55e">OFERTA ACEITA</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Workflow 2: Cupom + Campanha automática -->
-      <div class="reveal flex" style="transition-delay:0.15s">
-        <div class="rounded-lg overflow-hidden flex flex-col w-full" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)">
-          <div class="flex items-center gap-3 px-5 py-3" style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
-            <div class="flex gap-1.5"><div class="w-2.5 h-2.5 rounded-full" style="background:#ef4444"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#d97706"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#22c55e"></div></div>
-            <p class="font-mono text-[10px] tracking-wide" style="color:rgba(255,255,255,0.3)">westack_log // campanha_vendedor + cupom</p>
-          </div>
-          <div class="p-4 space-y-3 flex-1">
-            <div class="flex gap-3 items-start">
-              <div class="flex-shrink-0 text-right w-12"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">09:00</p></div>
-              <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[10px] font-bold" style="background:#00A650">A</div>
-              <div class="flex-1 p-2.5 rounded-lg" style="background:rgba(0,166,80,0.06);border:1px solid rgba(0,166,80,0.15)">
-                <p class="font-mono text-[10px] font-semibold mb-0.5" style="color:#00A650">Analista · oportunidade identificada</p>
-                <p class="text-xs text-w_bone">5 SKUs com estoque alto e vendas estagnadas há 7 dias. Recomendação: campanha promocional.</p>
-              </div>
-            </div>
-            <div class="flex gap-3 items-start">
-              <div class="flex-shrink-0 text-right w-12"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">09:01</p></div>
-              <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-[10px] font-bold" style="background:#FFE600;color:#0A0A0A">G</div>
-              <div class="flex-1 p-2.5 rounded-lg" style="background:rgba(255,77,0,0.05);border:1px solid rgba(255,77,0,0.15)">
-                <p class="font-mono text-[10px] font-semibold mb-0.5 text-w_acid">Gestor · plano de ação</p>
-                <p class="text-xs text-w_bone">Criar campanha de 14 dias com 10% OFF nos 5 SKUs + cupom de R$15 para recompra. Margens verificadas: todas acima de 20%.</p>
-              </div>
-            </div>
-            <div class="flex gap-3 items-start">
-              <div class="flex-shrink-0 text-right w-12"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">09:02</p></div>
-              <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[10px] font-bold" style="background:#3483FA">An</div>
-              <div class="flex-1 p-2.5 rounded-lg" style="background:rgba(52,131,250,0.06);border:1px solid rgba(52,131,250,0.15)">
-                <p class="font-mono text-[10px] font-semibold mb-0.5" style="color:#3483FA">Anúncios · campanha + cupom criados</p>
-                <p class="text-xs text-w_bone">Campanha "Queima de Estoque" ativa. 5 itens com 10% OFF + preço riscado. Cupom "VOLTA15" de R$15 criado com validade de 30 dias.</p>
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center justify-between px-5 py-2.5" style="border-top:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
-            <p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">2 min · campanha + cupom ativos</p>
-            <span class="font-mono text-[10px] font-bold px-3 py-1 rounded-full" style="background:rgba(34,197,94,0.15);color:#22c55e">PROMOÇÃO ATIVA</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
   </div>
 </section>
 
-<!-- ══ 04. ANÚNCIOS & CATÁLOGO ══ -->
-<section class="slide relative bg-w_bone overflow-hidden" id="anuncios">
+<!-- ══ 04. SEMÁFORO DE AUTONOMIA ══ -->
+<section class="slide relative bg-w_bone overflow-hidden" id="semaforo">
   <div class="absolute inset-0 pointer-events-none overflow-hidden">
     <div class="absolute top-[18%] left-0 w-full h-px" style="background:linear-gradient(90deg, transparent 0%, rgba(255,77,0,0.06) 20%, rgba(255,77,0,0.1) 50%, rgba(255,77,0,0.06) 80%, transparent 100%)"></div>
     <div class="absolute top-0 left-[6%] w-px h-full" style="background:linear-gradient(180deg, transparent 0%, rgba(92,92,92,0.04) 15%, rgba(92,92,92,0.04) 85%, transparent 100%)"></div>
-  </div>
-
-  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-10 reveal">[SEC.04 // ANÚNCIOS & CATÁLOGO]</p>
-
-    <h2 class="font-display font-semibold text-[clamp(2.5rem,5vw,4rem)] track-tighter leading-tight text-w_black mb-3 reveal">
-      Anúncios & <span class="text-w_acid">Catálogo</span>
-    </h2>
-
-
-
-    <!-- 4 blocos de funcionalidades -->
-    <div class="grid md:grid-cols-2 gap-6 mb-12 reveal">
-      <div class="border border-w_graphite/10 bg-white p-8">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-3">Criação de Anúncios</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm text-w_graphite">&#9654; Criar anúncio completo com título SEO, ficha técnica e preço</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Publicar em catálogo oficial do ML (quando elegível)</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Configurar variações (cor, tamanho, voltagem)</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Definir tipo de anúncio (Clássico, Premium, Full)</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Validar anúncio antes de publicar (evita erros)</p>
-        </div>
-      </div>
-      <div class="border border-w_graphite/10 bg-white p-8">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-3">Otimização de Anúncios</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm text-w_graphite">&#9654; Reescrever títulos com keywords de maior busca</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Completar atributos obrigatórios da categoria</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Atualizar descrição com copywriting otimizado</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Ajustar preço baseado em análise de concorrência</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Pausar/ativar/encerrar anúncios automaticamente</p>
-        </div>
-      </div>
-      <div class="border border-w_graphite/10 bg-white p-8">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-3">Imagens Profissionais</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm text-w_graphite">&#9654; Gerar fotos com fundo branco via IA (Nano Banana)</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Criar infográficos de ficha técnica</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Banners promocionais e mockups de uso</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Remoção de fundo automática</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Upload e organização de fotos no anúncio</p>
-        </div>
-      </div>
-      <div class="border border-w_graphite/10 bg-white p-8">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-3">Análise de Concorrência</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm text-w_graphite">&#9654; Buscar concorrentes do mesmo produto</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Comparar preço, título, vendas e fotos</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Monitorar posição no Buy Box</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Identificar tendências de busca por categoria</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Detectar novos concorrentes em tempo real</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Health check de qualidade do anúncio</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Fluxo na Prática -->
-    <div class="reveal" style="transition-delay:0.1s">
-      <div class="border border-w_graphite/10 bg-white rounded-lg overflow-hidden" style="box-shadow:0 4px 20px rgba(0,0,0,0.04)">
-        <div class="flex items-center gap-3 px-5 py-3 border-b border-w_graphite/10" style="background:rgba(244,244,240,0.5)">
-          <div class="flex gap-1.5"><div class="w-2.5 h-2.5 rounded-full" style="background:#ef4444"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#d97706"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#22c55e"></div></div>
-          <p class="font-mono text-[10px] text-w_graphite tracking-wide">westack_log // otimizacao_anuncio — fluxo automático</p>
-        </div>
-        <div class="p-5 space-y-3">
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px] text-w_graphite">10:00</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#00A650">A</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(0,166,80,0.04);border:1px solid rgba(0,166,80,0.12)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#00A650">Analista · health check</p>
-              <p class="text-sm text-w_black">Anúncio <strong>MLB-618492053</strong> com SEO score <strong class="text-w_acid">28</strong>, 6/18 atributos preenchidos, 1 imagem. Status: CRÍTICO.</p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px] text-w_graphite">10:02</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#3483FA">An</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(52,131,250,0.04);border:1px solid rgba(52,131,250,0.12)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#3483FA">Anúncios · reescrita SEO</p>
-              <p class="text-sm text-w_black">Título reescrito com keywords de alta busca. 12 atributos faltantes preenchidos. Descrição otimizada.</p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px] text-w_graphite">10:05</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#E040FB">C</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(224,64,251,0.04);border:1px solid rgba(224,64,251,0.12)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#E040FB">Criativo · imagens profissionais</p>
-              <p class="text-sm text-w_black">5 fotos profissionais geradas: fundo branco, infográfico com specs, banner lifestyle. Kit completo.</p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px] text-w_graphite">10:06</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold" style="background:#FFE600;color:#0A0A0A">G</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(255,77,0,0.04);border:1px solid rgba(255,77,0,0.15)">
-              <p class="font-mono text-[10px] font-semibold mb-1 text-w_acid">Gestor · aprovação e publicação</p>
-              <p class="text-sm text-w_black"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold mr-1" style="background:rgba(34,197,94,0.1);color:#22c55e">&#9679; PUBLICADO</span> Qualidade do anúncio: 28 → 87. Atributos: 6 → 18. Imagens: 1 → 5. Anúncio no ar.</p>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center justify-between px-5 py-3 border-t border-w_graphite/10" style="background:rgba(34,197,94,0.03)">
-          <p class="font-mono text-[10px] text-w_graphite">6 minutos · 4 agentes · SEO score +211%</p>
-          <span class="font-mono text-[10px] font-bold px-3 py-1 rounded-full" style="background:rgba(34,197,94,0.1);color:#22c55e">ANÚNCIO OTIMIZADO</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 05. SAC & ATENDIMENTO ══ -->
-<section class="slide relative bg-w_black overflow-hidden" id="sac">
-  <div class="absolute inset-0 pointer-events-none" style="background-size:48px 48px;background-image:linear-gradient(to right,rgba(14,165,233,0.03) 1px,transparent 1px),linear-gradient(to bottom,rgba(14,165,233,0.03) 1px,transparent 1px)"></div>
-
-  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest mb-10 reveal" style="color:rgba(255,255,255,0.35)">[SEC.05 // SAC & ATENDIMENTO]</p>
-
-    <h2 class="font-display font-semibold text-[clamp(2.5rem,5vw,4rem)] track-tighter leading-tight mb-3 reveal" style="color:rgba(244,244,240,0.9)">
-      SAC & <span class="text-w_acid">Atendimento</span>
-    </h2>
-
-
-
-    <div class="grid md:grid-cols-2 gap-6 mb-12 reveal">
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs tracking-widest uppercase mb-3" style="color:#0EA5E9">Perguntas & Respostas</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Monitorar perguntas novas a cada 1-2 minutos</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Responder automaticamente com dados da ficha técnica</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Classificar: dúvida técnica, preço, frete, estoque</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Tempo de resposta &lt;1h (melhora reputação)</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Escalar perguntas complexas pro humano</p>
-        </div>
-      </div>
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs tracking-widest uppercase mb-3" style="color:#0EA5E9">Mensagens Pós-Venda</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Mensagem automática de acompanhamento do pedido</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Notificar comprador sobre envio e tracking</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Mensagem pós-entrega solicitando avaliação</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Follow-up em caso de problema</p>
-        </div>
-      </div>
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs tracking-widest uppercase mb-3" style="color:#0EA5E9">Reclamações & Mediações</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Detectar reclamações abertas automaticamente</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Analisar tipo: produto errado, defeito, atraso</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Propor resolução padrão (reenvio, reembolso, troca)</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Responder na mediação do ML</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Alerta urgente para mediações críticas</p>
-        </div>
-      </div>
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs tracking-widest uppercase mb-3" style="color:#0EA5E9">Avaliações & Reputação</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Monitorar avaliações recebidas</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Responder avaliações negativas com resolução</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Solicitar avaliação positiva pós-entrega</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Identificar SKUs com padrão de reclamação</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Monitorar health score da conta</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Fluxo na Prática -->
-    <div class="reveal" style="transition-delay:0.1s">
-      <div class="rounded-lg overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)">
-        <div class="flex items-center gap-3 px-5 py-3" style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
-          <div class="flex gap-1.5"><div class="w-2.5 h-2.5 rounded-full" style="background:#ef4444"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#d97706"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#22c55e"></div></div>
-          <p class="font-mono text-[10px] tracking-wide" style="color:rgba(255,255,255,0.3)">westack_log // pergunta_respondida — fluxo automático</p>
-        </div>
-        <div class="p-5 space-y-3">
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">15:30</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#0EA5E9">S</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.15)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#0EA5E9">SAC · nova pergunta detectada</p>
-              <p class="text-sm text-w_bone">Pergunta: <strong>"Qual o prazo de entrega?"</strong> no SKU Kit Meias 12 Pares.</p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">15:30</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#0EA5E9">S</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.15)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#0EA5E9">SAC · classificação e resposta</p>
-              <p class="text-sm text-w_bone">Classificada como <strong>"frete"</strong>. Resposta gerada com dados do anúncio: "Entrega em 2-4 dias úteis para sua região via Mercado Envios Full."</p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">15:32</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#0EA5E9">S</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.15)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#22c55e">SAC · resposta publicada</p>
-              <p class="text-sm text-w_bone">Resposta enviada em <strong>&lt;3 minutos</strong>. Comprador satisfeito, reputação mantida.</p>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center justify-between px-5 py-3" style="border-top:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
-          <p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">2 minutos · resposta automática · reputação protegida</p>
-          <span class="font-mono text-[10px] font-bold px-3 py-1 rounded-full" style="background:rgba(14,165,233,0.15);color:#0EA5E9">PERGUNTA RESPONDIDA</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 06. CAMPANHAS & ADS ══ -->
-<section class="slide relative bg-w_bone overflow-hidden" id="ads">
-  <div class="absolute inset-0 pointer-events-none overflow-hidden">
-    <div class="absolute top-[18%] left-0 w-full h-px" style="background:linear-gradient(90deg, transparent 0%, rgba(255,77,0,0.06) 20%, rgba(255,77,0,0.1) 50%, rgba(255,77,0,0.06) 80%, transparent 100%)"></div>
     <div class="absolute top-0 right-[6%] w-px h-full" style="background:linear-gradient(180deg, transparent 0%, rgba(92,92,92,0.04) 15%, rgba(92,92,92,0.04) 85%, transparent 100%)"></div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-10 reveal">[SEC.06 // CAMPANHAS & ADS]</p>
-
-    <h2 class="font-display font-semibold text-[clamp(2.5rem,5vw,4rem)] track-tighter leading-tight text-w_black mb-3 reveal">
-      Campanhas & <span class="text-w_acid">ADS</span>
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-12 w-full relative z-10">
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-4 reveal">[SEC.04 // SEMÁFORO DE AUTONOMIA]</p>
+    <h2 class="font-display font-semibold text-[clamp(2.5rem,5vw,4rem)] track-tighter leading-[0.95] text-w_black mb-3 reveal">
+      A IA sabe <span class="text-w_acid">até onde ir</span> sozinha.
     </h2>
+    <p class="text-sm text-w_graphite mb-12 max-w-[70ch] reveal">Cada decisão é validada contra os seus limites de margem, ROAS e ACOS. O semáforo define o que a IA pode fazer sozinha, o que precisa alertar você e o que deve parar automaticamente.</p>
 
+    <!-- Traffic light layout -->
+    <div class="grid md:grid-cols-[280px_1fr] gap-10 items-center reveal" style="transition-delay:0.1s">
 
-
-    <div class="grid md:grid-cols-2 gap-6 mb-12 reveal">
-      <div class="border border-w_graphite/10 bg-white p-8">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-3">Gestão de Campanhas</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm text-w_graphite">&#9654; Criar Product Ads automaticamente</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Budget por margem de cada SKU</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Ativar / pausar campanhas</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Lance por produto otimizado</p>
+      <!-- Semáforo desenhado -->
+      <div class="flex justify-center">
+        <div class="relative" style="filter:drop-shadow(0 20px 40px rgba(0,0,0,0.12))">
+          <!-- Poste -->
+          <div class="absolute left-1/2 -translate-x-1/2 -bottom-16 w-2 h-16" style="background:linear-gradient(180deg, #1a1a1a 0%, #0A0A0A 100%)"></div>
+          <!-- Box -->
+          <div class="rounded-2xl p-5 flex flex-col gap-5" style="background:linear-gradient(135deg, #1a1a1a 0%, #0A0A0A 100%);border:2px solid rgba(255,255,255,0.08);width:160px">
+            <!-- Verde -->
+            <div class="w-28 h-28 rounded-full mx-auto relative" style="background:radial-gradient(circle at 35% 35%, #4ade80 0%, #22c55e 45%, #16a34a 100%);box-shadow:0 0 40px rgba(34,197,94,0.6), inset 0 -6px 12px rgba(0,0,0,0.2)">
+              <div class="absolute top-3 left-4 w-7 h-5 rounded-full" style="background:rgba(255,255,255,0.35);filter:blur(2px)"></div>
+            </div>
+            <!-- Amarelo -->
+            <div class="w-28 h-28 rounded-full mx-auto relative" style="background:radial-gradient(circle at 35% 35%, #fde047 0%, #facc15 45%, #ca8a04 100%);box-shadow:0 0 40px rgba(250,204,21,0.55), inset 0 -6px 12px rgba(0,0,0,0.2)">
+              <div class="absolute top-3 left-4 w-7 h-5 rounded-full" style="background:rgba(255,255,255,0.35);filter:blur(2px)"></div>
+            </div>
+            <!-- Vermelho -->
+            <div class="w-28 h-28 rounded-full mx-auto relative" style="background:radial-gradient(circle at 35% 35%, #fca5a5 0%, #ef4444 45%, #991b1b 100%);box-shadow:0 0 40px rgba(239,68,68,0.55), inset 0 -6px 12px rgba(0,0,0,0.2)">
+              <div class="absolute top-3 left-4 w-7 h-5 rounded-full" style="background:rgba(255,255,255,0.35);filter:blur(2px)"></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="border border-w_graphite/10 bg-white p-8">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-3">Otimização Automática</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm text-w_graphite">&#9654; Monitorar ACoS, CPC, CTR, ROAS em tempo real</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Ajustar lances automaticamente (sobe/baixa)</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Realocar budget dos ruins para os bons</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Pausar campanhas com ACoS acima do limite</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Escalar budget de campanhas que performam</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Relatório diário de ROAS e custo por venda</p>
+
+      <!-- Descrições -->
+      <div class="space-y-4">
+
+        <div class="border border-w_graphite/10 bg-white p-5 relative transition-all duration-300 hover:-translate-x-1" style="border-left:6px solid #22c55e">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded tracking-widest" style="background:rgba(34,197,94,0.12);color:#16a34a">VERDE · AUTONOMIA TOTAL</span>
+          </div>
+          <p class="font-display font-semibold text-w_black mb-1">A IA trabalha sozinha</p>
+          <p class="text-sm text-w_graphite leading-relaxed">Decisões dentro dos limites combinados de <strong>margem</strong>, <strong>ROAS</strong> e <strong>ACOS</strong>. Ajuste de preço, resposta de perguntas, reposicionamento de Buy Box, aceite de campanhas — tudo automático, 24/7.</p>
         </div>
-      </div>
-      <div class="border border-w_graphite/10 bg-white p-8">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-3">Brand Ads</p>
-        <p class="font-mono text-[10px] text-w_graphite/50 mb-2">Requer: Loja Oficial ou Minha Loja + reputação verde + min 3 anúncios</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm text-w_graphite">&#9654; Listar campanhas Brand Ads ativas</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Monitorar métricas (impressões, cliques, CTR, custo)</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Campanhas automáticas gerenciadas pelo Mercado Ads</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Dados disponíveis desde 02/2023</p>
+
+        <div class="border border-w_graphite/10 bg-white p-5 relative transition-all duration-300 hover:-translate-x-1" style="border-left:6px solid #facc15">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded tracking-widest" style="background:rgba(250,204,21,0.12);color:#a16207">AMARELO · VOCÊ APROVA</span>
+          </div>
+          <p class="font-display font-semibold text-w_black mb-1">Alerta no WhatsApp</p>
+          <p class="text-sm text-w_graphite leading-relaxed">Decisões no limite da faixa segura — reenvio com custo, desconto agressivo, mudança estrutural em campanha. A IA monta a proposta e te chama <strong>no WhatsApp</strong>. Você responde APROVA ou REJEITA.</p>
         </div>
+
+        <div class="border border-w_graphite/10 bg-white p-5 relative transition-all duration-300 hover:-translate-x-1" style="border-left:6px solid #ef4444">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded tracking-widest" style="background:rgba(239,68,68,0.12);color:#b91c1c">VERMELHO · IA SAI FORA</span>
+          </div>
+          <p class="font-display font-semibold text-w_black mb-1">Parada automática</p>
+          <p class="text-sm text-w_graphite leading-relaxed">Se a margem sair da zona combinada, se o ROAS despencar, se o ACOS explodir — a IA <strong>sai fora automaticamente</strong>. Pausa a campanha, remove o item da oferta, cancela o desconto. Zero prejuízo silencioso.</p>
+        </div>
+
       </div>
-      <div class="border border-w_graphite/10 bg-white p-8">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-3">Display Ads</p>
-        <p class="font-mono text-[10px] text-w_graphite/50 mb-2">Banners e mídia programática dentro do ML</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm text-w_graphite">&#9654; Consultar métricas de campanhas Display</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Métricas por dimensão (line_items, campaign)</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Impressões, cliques, CTR, CPM, CPC, frequência</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Período máximo: 90 dias por consulta</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Orçamento consumido em tempo real</p>
+    </div>
+
+    <!-- Aviso API -->
+    <div class="mt-10 reveal" style="transition-delay:0.25s">
+      <div class="flex items-center gap-4 px-6 py-4 rounded-lg" style="background:rgba(255,77,0,0.04);border:1px solid rgba(255,77,0,0.2)">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(255,77,0,0.12);border:1px solid rgba(255,77,0,0.3)">
+          <span class="font-mono text-lg font-bold text-w_acid">&#10003;</span>
+        </div>
+        <div class="flex-1">
+          <p class="font-display font-semibold text-w_black text-sm">100% via API oficial do Mercado Livre</p>
+          <p class="text-xs text-w_graphite">Todas as automações são feitas pelos endpoints oficiais da API do ML — totalmente em conformidade com os termos de uso da plataforma.</p>
         </div>
       </div>
     </div>
 
-    <!-- Fluxo na Prática -->
-    <div class="reveal" style="transition-delay:0.1s">
-      <div class="border border-w_graphite/10 bg-white rounded-lg overflow-hidden" style="box-shadow:0 4px 20px rgba(0,0,0,0.04)">
-        <div class="flex items-center gap-3 px-5 py-3 border-b border-w_graphite/10" style="background:rgba(244,244,240,0.5)">
-          <div class="flex gap-1.5"><div class="w-2.5 h-2.5 rounded-full" style="background:#ef4444"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#d97706"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#22c55e"></div></div>
-          <p class="font-mono text-[10px] text-w_graphite tracking-wide">westack_log // ads_optimization — fluxo automático</p>
-        </div>
-        <div class="p-5 space-y-3">
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px] text-w_graphite">14:00</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#F97316">$</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(249,115,22,0.04);border:1px solid rgba(249,115,22,0.15)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#F97316">ADS · monitoramento de campanha</p>
-              <p class="text-sm text-w_black">Campanha "Kit Meias" com ACoS subindo para <strong class="text-w_acid">5%</strong>. Margem comprometida. Ação necessária.</p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px] text-w_graphite">14:01</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#F97316">$</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(249,115,22,0.04);border:1px solid rgba(249,115,22,0.15)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#F97316">ADS · pausa e realocação</p>
-              <p class="text-sm text-w_black">Campanha negativa pausada. <strong>R$150/dia</strong> realocado para SKU "Meia Térmica" com ROAS <strong style="color:#22c55e">8.2</strong>.</p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px] text-w_graphite">20:00</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold" style="background:#FFE600;color:#0A0A0A">G</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(255,77,0,0.04);border:1px solid rgba(255,77,0,0.15)">
-              <p class="font-mono text-[10px] font-semibold mb-1 text-w_acid">Gestor · relatório diário</p>
-              <p class="text-sm text-w_black">ROAS geral subiu de <strong>13.1</strong> para <strong class="text-w_acid">15.4</strong>. Budget otimizado. 2 campanhas pausadas, 1 escalada.</p>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center justify-between px-5 py-3 border-t border-w_graphite/10" style="background:rgba(34,197,94,0.03)">
-          <p class="font-mono text-[10px] text-w_graphite">Otimização contínua · ROAS +74%</p>
-          <span class="font-mono text-[10px] font-bold px-3 py-1 rounded-full" style="background:rgba(34,197,94,0.1);color:#22c55e">ADS OTIMIZADO</span>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
-
-<!-- ══ 07. PEDIDOS & ENVIOS ══ -->
-<section class="slide relative bg-w_black overflow-hidden" id="pedidos">
-  <div class="absolute inset-0 pointer-events-none" style="background-size:48px 48px;background-image:linear-gradient(to right,rgba(255,77,0,0.025) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,77,0,0.025) 1px,transparent 1px)"></div>
-
-  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest mb-10 reveal" style="color:rgba(255,255,255,0.35)">[SEC.07 // PEDIDOS & ENVIOS]</p>
-
-    <h2 class="font-display font-semibold text-[clamp(2.5rem,5vw,4rem)] track-tighter leading-tight mb-3 reveal" style="color:rgba(244,244,240,0.9)">
-      Pedidos & <span class="text-w_acid">Envios</span>
-    </h2>
-
-
-
-    <div class="grid md:grid-cols-2 gap-x-8 gap-y-2 mb-12 reveal">
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs tracking-widest uppercase mb-3" style="color:#0EA5E9">Gestão de Pedidos</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Listar pedidos recentes e pendentes</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Monitorar status de cada pedido</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Identificar pedidos com problema</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Alertar atrasos de envio</p>
-        </div>
-      </div>
-      <div class="p-6" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs tracking-widest uppercase mb-3" style="color:#0EA5E9">Tracking de Envios</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Acompanhar status do envio em tempo real</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Notificar comprador sobre entrega</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Detectar envios atrasados</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Gerar etiqueta de envio</p>
-        </div>
-      </div>
-      <div class="p-5 md:col-span-2" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
-        <p class="font-mono text-xs tracking-widest uppercase mb-3" style="color:#0EA5E9">Devoluções</p>
-        <div class="grid md:grid-cols-2 gap-x-6 gap-y-1.5">
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Monitorar solicitações de devolução</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Aprovar/recusar devoluções automaticamente</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Gerar etiqueta de devolução</p>
-          <p class="font-mono text-sm" style="color:rgba(244,244,240,0.55)">&#9654; Processar reembolso</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Fluxo na Prática -->
-    <div class="reveal" style="transition-delay:0.1s">
-      <div class="rounded-lg overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)">
-        <div class="flex items-center gap-3 px-5 py-3" style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
-          <div class="flex gap-1.5"><div class="w-2.5 h-2.5 rounded-full" style="background:#ef4444"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#d97706"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#22c55e"></div></div>
-          <p class="font-mono text-[10px] tracking-wide" style="color:rgba(255,255,255,0.3)">westack_log // venda_a_avaliacao — fluxo completo</p>
-        </div>
-        <div class="p-5 space-y-3">
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">10:00</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold" style="background:#FFE600;color:#0A0A0A">G</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(255,77,0,0.05);border:1px solid rgba(255,77,0,0.15)">
-              <p class="font-mono text-[10px] font-semibold mb-1 text-w_acid">Gestor · venda confirmada</p>
-              <p class="text-sm text-w_bone">Pedido #5023 confirmado — Kit Meias 12 Pares. Pagamento aprovado.</p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">10:01</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#0EA5E9">S</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.15)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#0EA5E9">SAC · mensagem de agradecimento</p>
-              <p class="text-sm text-w_bone">Mensagem enviada ao comprador: "Obrigado pela compra! Seu pedido já está sendo preparado."</p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">+2d</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#0EA5E9">S</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.15)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#0EA5E9">SAC · entrega confirmada</p>
-              <p class="text-sm text-w_bone">Rastreio atualizado: entrega confirmada. Enviando solicitação de avaliação positiva.</p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">+2d</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#0EA5E9">S</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.15)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#22c55e">SAC · avaliação solicitada</p>
-              <p class="text-sm text-w_bone">"Ficamos felizes que recebeu! Se puder avaliar a compra, ajuda muito nossa loja." Reputação protegida.</p>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center justify-between px-5 py-3" style="border-top:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
-          <p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">Venda → agradecimento → tracking → avaliação · 100% automático</p>
-          <span class="font-mono text-[10px] font-bold px-3 py-1 rounded-full" style="background:rgba(34,197,94,0.15);color:#22c55e">REPUTAÇÃO PROTEGIDA</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 08. MÉTRICAS & RELATÓRIOS ══ -->
-<section class="slide relative bg-w_bone overflow-hidden" id="metricas">
-  <div class="absolute inset-0 pointer-events-none overflow-hidden">
-    <div class="absolute top-[18%] left-0 w-full h-px" style="background:linear-gradient(90deg, transparent 0%, rgba(255,77,0,0.06) 20%, rgba(255,77,0,0.1) 50%, rgba(255,77,0,0.06) 80%, transparent 100%)"></div>
-    <div class="absolute top-0 left-[6%] w-px h-full" style="background:linear-gradient(180deg, transparent 0%, rgba(92,92,92,0.04) 15%, rgba(92,92,92,0.04) 85%, transparent 100%)"></div>
-  </div>
-
-  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-10 reveal">[SEC.08 // MÉTRICAS & RELATÓRIOS]</p>
-
-    <h2 class="font-display font-semibold text-[clamp(2.5rem,5vw,4rem)] track-tighter leading-tight text-w_black mb-3 reveal">
-      Métricas & <span class="text-w_acid">Relatórios</span>
-    </h2>
-
-
-
-    <div class="grid md:grid-cols-2 gap-6 mb-12 reveal">
-      <div class="border border-w_graphite/10 bg-white p-8">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-3">Visitas & Conversão</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm text-w_graphite">&#9654; Visitas por anúncio (diário, semanal, mensal)</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Taxa de conversão por SKU</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Vendas por período</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Ranking de produtos mais vendidos</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Comparação de performance período a período</p>
-        </div>
-      </div>
-      <div class="border border-w_graphite/10 bg-white p-8">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-3">Saúde da Conta</p>
-        <div class="space-y-1.5">
-          <p class="font-mono text-sm text-w_graphite">&#9654; Reputação do vendedor (verde/amarelo/vermelho)</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Taxa de reclamaç��o</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Tempo médio de envio</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Taxa de cancelamento</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Score de atendimento (perguntas)</p>
-          <p class="font-mono text-sm text-w_graphite">&#9654; Qualidade dos anúncios (health score)</p>
-        </div>
-      </div>
-      <div class="border border-w_graphite/10 bg-white p-8 md:col-span-2">
-        <p class="font-mono text-xs text-w_acid tracking-widest uppercase mb-3">Relatórios Automáticos</p>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div>
-            <p class="font-mono text-[10px] font-semibold text-w_black mb-2">Diário (20h Brasília)</p>
-            <div class="space-y-1">
-              <p class="font-mono text-sm text-w_graphite">&#9654; Vendas e faturamento do dia</p>
-              <p class="font-mono text-sm text-w_graphite">&#9654; Anúncios criados/otimizados</p>
-              <p class="font-mono text-sm text-w_graphite">&#9654; Perguntas respondidas + tempo médio</p>
-              <p class="font-mono text-sm text-w_graphite">&#9654; Performance de campanhas ADS</p>
-              <p class="font-mono text-sm text-w_graphite">&#9654; Alertas de concorrência</p>
-            </div>
-          </div>
-          <div>
-            <p class="font-mono text-[10px] font-semibold text-w_black mb-2">Semanal</p>
-            <div class="space-y-1">
-              <p class="font-mono text-sm text-w_graphite">&#9654; Top 10 SKUs por vendas</p>
-              <p class="font-mono text-sm text-w_graphite">&#9654; SKUs com queda de performance</p>
-              <p class="font-mono text-sm text-w_graphite">&#9654; Novos concorrentes identificados</p>
-              <p class="font-mono text-sm text-w_graphite">&#9654; ROI das campanhas ADS</p>
-              <p class="font-mono text-sm text-w_graphite">&#9654; Evolução da reputação</p>
-            </div>
-          </div>
-          <div>
-            <p class="font-mono text-[10px] font-semibold text-w_black mb-2">Sob demanda</p>
-            <div class="space-y-1">
-              <p class="font-mono text-sm text-w_graphite">&#9654; Reunião de alinhamento (qualquer tema)</p>
-              <p class="font-mono text-sm text-w_graphite">&#9654; Análise de produto específico</p>
-              <p class="font-mono text-sm text-w_graphite">&#9654; Comparativo com concorrente</p>
-              <p class="font-mono text-sm text-w_graphite">&#9654; Simulação de preço</p>
-              <p class="font-mono text-sm text-w_graphite">&#9654; Auditoria completa do catálogo</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Fluxo na Prática -->
-    <div class="reveal" style="transition-delay:0.1s">
-      <div class="border border-w_graphite/10 bg-white rounded-lg overflow-hidden" style="box-shadow:0 4px 20px rgba(0,0,0,0.04)">
-        <div class="flex items-center gap-3 px-5 py-3 border-b border-w_graphite/10" style="background:rgba(244,244,240,0.5)">
-          <div class="flex gap-1.5"><div class="w-2.5 h-2.5 rounded-full" style="background:#ef4444"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#d97706"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#22c55e"></div></div>
-          <p class="font-mono text-[10px] text-w_graphite tracking-wide">westack_log // relatorio_diario — 20:00</p>
-        </div>
-        <div class="p-5 space-y-3">
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px] text-w_graphite">20:00</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold" style="background:#FFE600;color:#0A0A0A">G</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(255,77,0,0.04);border:1px solid rgba(255,77,0,0.15)">
-              <p class="font-mono text-[10px] font-semibold mb-1 text-w_acid">Gestor · compilação de relatório diário</p>
-              <p class="text-sm text-w_black">Vendas: <strong>R$4.280</strong> · 23 perguntas respondidas (média <strong>8min</strong>) · ADS ROAS <strong>5.4</strong></p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px] text-w_graphite">20:01</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#00A650">A</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(0,166,80,0.04);border:1px solid rgba(0,166,80,0.12)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#00A650">Analista · alerta de concorrência</p>
-              <p class="text-sm text-w_black"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold mr-1" style="background:rgba(217,119,6,0.1);color:#d97706">&#9679; ALERTA</span> Concorrente novo detectado no SKU principal. Monitoramento ativado.</p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px] text-w_graphite">20:02</p></div>
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#25D366">W</div>
-            <div class="flex-1 p-3 rounded-lg" style="background:rgba(37,211,102,0.04);border:1px solid rgba(37,211,102,0.12)">
-              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#25D366">WhatsApp · email · relatório enviado</p>
-              <p class="text-sm text-w_black">Relatório completo enviado ao seller via WhatsApp e email. Resumo: dia positivo, 1 alerta de concorrência.</p>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center justify-between px-5 py-3 border-t border-w_graphite/10" style="background:rgba(34,197,94,0.03)">
-          <p class="font-mono text-[10px] text-w_graphite">Todos os dias às 20h · automático</p>
-          <span class="font-mono text-[10px] font-bold px-3 py-1 rounded-full" style="background:rgba(34,197,94,0.1);color:#22c55e">RELATÓRIO ENVIADO</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Separador animado -->
-<div class="bg-w_bone py-4">
-  <div class="max-w-5xl mx-auto px-6 lg:px-12">
-    <div class="divider-glow"></div>
-    <p class="font-mono text-[10px] tracking-widest uppercase text-center mt-4" style="color:rgba(92,92,92,0.4)">exemplos de aplicação</p>
-  </div>
-</div>
 
 <!-- ══ 11. EXEMPLO: BUY BOX ══ -->
 <section class="slide relative bg-w_bone overflow-hidden" id="ex-buybox">
@@ -948,7 +314,7 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
   </div>
 
   <div class="max-w-[1400px] mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-4 reveal">[SEC.11 // EXEMPLO DE APLICAÇÃO — 1 DE 3]</p>
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-4 reveal">[SEC.05 // EXEMPLO — BUY BOX RECUPERADO]</p>
     <h2 class="font-display font-semibold text-[clamp(2rem,4vw,3rem)] track-tighter leading-[0.95] text-w_black mb-2 reveal">
       Buy Box perdido às 23h.<br><span class="text-w_acid">Recuperado às 23h02.</span>
     </h2>
@@ -1029,14 +395,138 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
   </div>
 </section>
 
+<!-- ══ 06. EXEMPLO: OLIST + REALOCAÇÃO DE ADS ══ -->
+<section class="slide relative bg-w_black overflow-hidden" id="ex-olist">
+  <div class="absolute inset-0 pointer-events-none" style="background-size:48px 48px;background-image:linear-gradient(to right,rgba(255,77,0,0.025) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,77,0,0.025) 1px,transparent 1px)"></div>
+
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-12 w-full relative z-10">
+    <p class="font-mono text-[11px] uppercase tracking-widest mb-4 reveal" style="color:rgba(255,255,255,0.3)">[SEC.06 // EXEMPLO — OLIST + REALOCAÇÃO DE VERBA]</p>
+    <h2 class="font-display font-semibold text-[clamp(2rem,4vw,3rem)] track-tighter leading-[0.95] text-w_bone mb-2 reveal">
+      ROAS 14 com estoque quase zero.<br><span class="text-w_acid">A IA realoca a verba sozinha.</span>
+    </h2>
+    <p class="text-sm mb-8 reveal" style="color:rgba(244,244,240,0.45)">Integração com o <strong>Olist</strong> permite à IA enxergar margem real, estoque e fornecedor — e decidir com contexto completo, sem ruptura de venda.</p>
+
+    <div class="grid md:grid-cols-[1fr_340px] gap-8 reveal" style="transition-delay:0.1s">
+
+      <!-- Log dos agentes -->
+      <div class="rounded-lg overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)">
+        <div class="flex items-center gap-3 px-5 py-3" style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
+          <div class="flex gap-1.5"><div class="w-2.5 h-2.5 rounded-full" style="background:#ef4444"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#d97706"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#22c55e"></div></div>
+          <p class="font-mono text-[10px] tracking-wide" style="color:rgba(255,255,255,0.3)">westack_log // ads_reallocation + olist_sync</p>
+        </div>
+        <div class="p-5 space-y-4">
+
+          <div class="flex gap-4 items-start">
+            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">07:30</p></div>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#00A650">A</div>
+            <div class="flex-1 p-3 rounded-lg" style="background:rgba(0,166,80,0.06);border:1px solid rgba(0,166,80,0.15)">
+              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#00A650">Analista · cálculo de margem via Olist</p>
+              <p class="text-sm text-w_bone">SKU "Kit Meias Premium" — custo Olist R$12,40 · preço ML R$49,90 · margem bruta <strong class="text-w_acid">31%</strong>. Estoque Olist: <strong>18 un</strong>.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start">
+            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">07:31</p></div>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#00A650">A</div>
+            <div class="flex-1 p-3 rounded-lg" style="background:rgba(0,166,80,0.06);border:1px solid rgba(0,166,80,0.15)">
+              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#00A650">Analista · alerta de ruptura</p>
+              <p class="text-sm text-w_bone">Campanha "Meias Premium" está com <strong class="text-w_acid">ROAS 14</strong> (excelente), mas estoque só aguenta <strong>3 dias</strong> no ritmo atual. Pausar para evitar venda sem produto.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start">
+            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">07:32</p></div>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold" style="background:#FFE600;color:#0A0A0A">G</div>
+            <div class="flex-1 p-3 rounded-lg" style="background:rgba(255,77,0,0.05);border:1px solid rgba(255,77,0,0.15)">
+              <p class="font-mono text-[10px] font-semibold mb-1 text-w_acid">Gestor · decisão de realocação</p>
+              <p class="text-sm text-w_bone"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold mr-1" style="background:rgba(34,197,94,0.15);color:#22c55e">● APROVADO</span> Pausar campanha ROAS 14 · realocar R$380/dia para "Kit Meias Verão" (ROAS <strong>8</strong>, estoque 240 un). Margem-alvo atingida.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start">
+            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">07:32</p></div>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#FF4D00">Ads</div>
+            <div class="flex-1 p-3 rounded-lg" style="background:rgba(255,77,0,0.04);border:1px solid rgba(255,77,0,0.15)">
+              <p class="font-mono text-[10px] font-semibold mb-1 text-w_acid">ADS · pausa + escalonamento</p>
+              <p class="text-sm text-w_bone">Campanha "Premium" pausada. Budget de R$380/dia migrado para "Verão". Lance CPC ajustado para manter ROAS ≥ 6.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start">
+            <div class="flex-shrink-0 text-right w-14"><p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">07:33</p></div>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#0EA5E9">S</div>
+            <div class="flex-1 p-3 rounded-lg" style="background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.15)">
+              <p class="font-mono text-[10px] font-semibold mb-1" style="color:#0EA5E9">SAC · e-mail ao fornecedor</p>
+              <p class="text-sm text-w_bone">E-mail disparado para <strong>fornecedor@textilonline.com.br</strong>: pedido de reposição de <strong>500 un</strong> do Kit Meias Premium. Lead time 7 dias.</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="flex items-center justify-between px-5 py-3" style="border-top:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
+          <p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">3 min · 4 agentes · Olist + ML + e-mail fornecedor · 0 intervenção humana</p>
+          <span class="font-mono text-[10px] font-bold px-3 py-1 rounded-full" style="background:rgba(34,197,94,0.15);color:#22c55e">VERBA REALOCADA</span>
+        </div>
+      </div>
+
+      <!-- Painel Olist -->
+      <div class="flex flex-col gap-4">
+        <div class="rounded-lg overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)">
+          <div class="flex items-center justify-between px-4 py-2.5" style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(6,182,212,0.08)">
+            <p class="font-mono text-[10px] tracking-widest" style="color:#06b6d4">OLIST · ESTOQUE</p>
+            <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:#06b6d4"></span>
+          </div>
+          <div class="p-4 space-y-3">
+            <div>
+              <div class="flex justify-between items-baseline">
+                <p class="text-[11px]" style="color:rgba(244,244,240,0.55)">Kit Meias Premium</p>
+                <p class="font-mono text-sm font-bold text-w_acid">18 un</p>
+              </div>
+              <div class="h-1 rounded-full mt-1 overflow-hidden" style="background:rgba(255,255,255,0.08)"><div class="h-full" style="width:7%;background:#ef4444"></div></div>
+              <p class="font-mono text-[9px] mt-1" style="color:#ef4444">CRÍTICO · 3 dias de cobertura</p>
+            </div>
+            <div>
+              <div class="flex justify-between items-baseline">
+                <p class="text-[11px]" style="color:rgba(244,244,240,0.55)">Kit Meias Verão</p>
+                <p class="font-mono text-sm font-bold" style="color:#22c55e">240 un</p>
+              </div>
+              <div class="h-1 rounded-full mt-1 overflow-hidden" style="background:rgba(255,255,255,0.08)"><div class="h-full" style="width:85%;background:#22c55e"></div></div>
+              <p class="font-mono text-[9px] mt-1" style="color:#22c55e">SAUDÁVEL · 40 dias de cobertura</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-lg overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)">
+          <div class="flex items-center justify-between px-4 py-2.5" style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,77,0,0.08)">
+            <p class="font-mono text-[10px] tracking-widest text-w_acid">ADS · REALOCAÇÃO</p>
+            <span class="w-1.5 h-1.5 rounded-full animate-pulse bg-w_acid"></span>
+          </div>
+          <div class="p-4 space-y-3">
+            <div class="flex items-center gap-2">
+              <p class="font-mono text-[9px] px-1.5 py-0.5 rounded" style="background:rgba(239,68,68,0.15);color:#ef4444">PAUSADO</p>
+              <p class="text-[11px] flex-1" style="color:rgba(244,244,240,0.55)">Premium · ROAS 14</p>
+              <p class="font-mono text-[11px] font-bold text-w_bone">-R$380</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <p class="font-mono text-[9px] px-1.5 py-0.5 rounded" style="background:rgba(34,197,94,0.15);color:#22c55e">ESCALADO</p>
+              <p class="text-[11px] flex-1" style="color:rgba(244,244,240,0.55)">Verão · ROAS 8</p>
+              <p class="font-mono text-[11px] font-bold" style="color:#22c55e">+R$380</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ══ 12. EXEMPLO: PERGUNTAS → DESCRIÇÃO ══ -->
 <section class="slide relative bg-w_black overflow-hidden" id="ex-perguntas">
   <div class="absolute inset-0 pointer-events-none" style="background-size:48px 48px;background-image:linear-gradient(to right,rgba(255,77,0,0.025) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,77,0,0.025) 1px,transparent 1px)"></div>
 
   <div class="max-w-[1400px] mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest mb-4 reveal" style="color:rgba(255,255,255,0.3)">[SEC.12 // EXEMPLO DE APLICAÇÃO — 2 DE 3]</p>
+    <p class="font-mono text-[11px] uppercase tracking-widest mb-4 reveal" style="color:rgba(255,255,255,0.3)">[SEC.07 // EXEMPLO — PERGUNTAS → DESCRIÇÃO]</p>
     <h2 class="font-display font-semibold text-[clamp(2rem,4vw,3rem)] track-tighter leading-[0.95] text-w_bone mb-2 reveal">
-      42 clientes fizeram a mesma pergunta.<br><span class="text-w_acid">O anúncio foi atualizado sozinho.</span>
+      15 clientes fizeram a mesma pergunta.<br><span class="text-w_acid">O anúncio foi atualizado sozinho.</span>
     </h2>
     <p class="text-sm mb-8 reveal" style="color:rgba(244,244,240,0.45)">SAC detecta padrão de dúvida repetida. Os agentes transformam a pergunta em informação permanente no anúncio.</p>
 
@@ -1057,7 +547,7 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
             <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold" style="background:#0EA5E9">S</div>
             <div class="flex-1 p-3 rounded-lg" style="background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.15)">
               <p class="font-mono text-[10px] font-semibold mb-1" style="color:#0EA5E9">SAC · detecção de padrão</p>
-              <p class="text-sm text-w_bone">Pergunta <strong>"qual a voltagem?"</strong> feita <strong class="text-w_acid">42 vezes</strong> nos últimos 7 dias no SKU "Secador Profissional 2100W". Informação ausente na descrição e nos atributos.</p>
+              <p class="text-sm text-w_bone">Pergunta <strong>"qual a voltagem?"</strong> feita <strong class="text-w_acid">15 vezes</strong> nos últimos 7 dias no SKU "Secador Profissional 2100W". Informação ausente na descrição e nos atributos.</p>
             </div>
           </div>
 
@@ -1106,7 +596,7 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
         <!-- Footer -->
         <div class="flex items-center justify-between px-5 py-3" style="border-top:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
           <p class="font-mono text-[10px]" style="color:rgba(255,255,255,0.3)">3 minutos · 4 agentes envolvidos · 0 intervenção humana</p>
-          <span class="font-mono text-[10px] font-bold px-3 py-1 rounded-full" style="background:rgba(14,165,233,0.15);color:#0EA5E9">-42 PERGUNTAS/SEMANA</span>
+          <span class="font-mono text-[10px] font-bold px-3 py-1 rounded-full" style="background:rgba(14,165,233,0.15);color:#0EA5E9">-15 PERGUNTAS/SEMANA</span>
         </div>
       </div>
     </div>
@@ -1121,7 +611,7 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
   </div>
 
   <div class="max-w-[1400px] mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-4 reveal">[SEC.13 // EXEMPLO DE APLICAÇÃO — 3 DE 3]</p>
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-4 reveal">[SEC.08 // EXEMPLO — RECLAMAÇÃO + WHATSAPP]</p>
     <h2 class="font-display font-semibold text-[clamp(2rem,4vw,3rem)] track-tighter leading-[0.95] text-w_black mb-2 reveal">
       Reclamação aberta. IA analisa.<br><span class="text-w_acid">Você aprova no WhatsApp.</span>
     </h2>
@@ -1252,49 +742,380 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
   </div>
 </section>
 
-<!-- ══ 10. AMBIENTE VIRTUAL ══ -->
-<section class="slide relative bg-w_black overflow-hidden" id="ambiente">
-  <div class="absolute inset-0 pointer-events-none" style="background-size:48px 48px;background-image:linear-gradient(to right,rgba(255,77,0,0.025) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,77,0,0.025) 1px,transparent 1px)"></div>
-  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse at 50% 40%, rgba(255,77,0,0.04) 0%, transparent 60%)"></div>
+<!-- ══ 09. EXEMPLO: RANKING DE CATÁLOGO ══ -->
+<section class="slide relative bg-w_bone overflow-hidden" id="ex-ranking">
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="absolute top-[18%] left-0 w-full h-px" style="background:linear-gradient(90deg, transparent 0%, rgba(255,77,0,0.06) 20%, rgba(255,77,0,0.1) 50%, rgba(255,77,0,0.06) 80%, transparent 100%)"></div>
+    <div class="absolute top-0 left-[6%] w-px h-full" style="background:linear-gradient(180deg, transparent 0%, rgba(92,92,92,0.04) 15%, rgba(92,92,92,0.04) 85%, transparent 100%)"></div>
+  </div>
 
-  <div class="max-w-[1400px] mx-auto px-6 lg:px-12 w-full relative z-10 h-full flex flex-col justify-center">
-
-    <p class="font-mono text-[11px] uppercase tracking-widest mb-4 reveal" style="color:rgba(255,255,255,0.3)">[SEC.10 // AMBIENTE VIRTUAL]</p>
-    <h2 class="font-display font-semibold text-[clamp(2.5rem,5vw,4rem)] track-tighter leading-[0.95] text-w_bone mb-10 reveal">
-      Ambiente <span class="text-w_acid">Virtual</span>
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-12 w-full relative z-10">
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-4 reveal">[SEC.09 // EXEMPLO — RANKING REAL DE CATÁLOGO]</p>
+    <h2 class="font-display font-semibold text-[clamp(2rem,4vw,3rem)] track-tighter leading-[0.95] text-w_black mb-2 reveal">
+      O painel do ML diz "Ganhando".<br><span class="text-w_acid">O ranking real te coloca em 4º.</span>
     </h2>
+    <p class="text-sm text-w_graphite mb-8 reveal">A maioria dos sellers acredita no status do gerenciador do Mercado Livre. Os agentes WeStack consultam o <strong>ranking real</strong> do catálogo — e só agem sobre a posição que de fato aparece para o comprador.</p>
 
-    <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-      <div style="filter:drop-shadow(0 15px 30px rgba(0,0,0,0.4))">
-        <div style="background:#1a1a1a;border-radius:12px 12px 0 0;padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-bottom:none;display:flex;align-items:center;gap:8px">
-          <div style="display:flex;gap:5px">
-            <div style="width:9px;height:9px;border-radius:50%;background:#ef4444"></div>
-            <div style="width:9px;height:9px;border-radius:50%;background:#d97706"></div>
-            <div style="width:9px;height:9px;border-radius:50%;background:#22c55e"></div>
-          </div>
-          <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;padding:4px 12px">
-            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35)">westack.app/escritorio</p>
-          </div>
+    <div class="grid md:grid-cols-2 gap-8 reveal" style="transition-delay:0.1s">
+
+      <!-- Painel enganoso do gerenciador -->
+      <div class="border border-w_graphite/10 bg-white rounded-lg overflow-hidden" style="box-shadow:0 4px 20px rgba(0,0,0,0.04)">
+        <div class="flex items-center gap-3 px-5 py-3 border-b border-w_graphite/10" style="background:rgba(244,244,240,0.6)">
+          <div class="flex gap-1.5"><div class="w-2.5 h-2.5 rounded-full" style="background:#ef4444"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#d97706"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#22c55e"></div></div>
+          <p class="font-mono text-[10px] text-w_graphite">mercadolivre.com.br/gerenciador/anuncios</p>
         </div>
-        <div style="border:1px solid rgba(255,255,255,0.1);border-top:none;border-radius:0 0 12px 12px;overflow:hidden;background:#000">
-          <img src="ambientevirtual1.png" alt="Ambiente Virtual — Escritório dos Agentes" style="width:100%;display:block">
-        </div>
-      </div>
-      <div style="filter:drop-shadow(0 15px 30px rgba(0,0,0,0.4))">
-        <div style="background:#1a1a1a;border-radius:12px 12px 0 0;padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-bottom:none;display:flex;align-items:center;gap:8px">
-          <div style="display:flex;gap:5px">
-            <div style="width:9px;height:9px;border-radius:50%;background:#ef4444"></div>
-            <div style="width:9px;height:9px;border-radius:50%;background:#d97706"></div>
-            <div style="width:9px;height:9px;border-radius:50%;background:#22c55e"></div>
+        <div class="p-5">
+          <p class="font-mono text-[10px] uppercase tracking-widest text-w_graphite mb-3">Gerenciador de anúncios · visão do seller</p>
+          <div class="border border-w_graphite/15 rounded p-4 mb-4">
+            <p class="font-mono text-[10px] text-w_graphite">MLB-618492053</p>
+            <p class="font-display font-semibold text-sm text-w_black mt-1">Secador Profissional 2100W</p>
+            <div class="flex items-center gap-3 mt-3">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold" style="background:rgba(34,197,94,0.12);color:#16a34a">
+                <span class="w-1.5 h-1.5 rounded-full" style="background:#22c55e"></span>
+                STATUS: GANHANDO
+              </span>
+            </div>
+            <p class="text-xs text-w_graphite mt-3">Preço R$189,90 · Full · 142 vendas últimos 30 dias</p>
           </div>
-          <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;padding:4px 12px">
-            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35)">westack.app/reuniao</p>
+          <div class="flex items-center gap-2 px-3 py-2 rounded" style="background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.15)">
+            <span class="font-mono text-[9px] px-1.5 py-0.5 rounded" style="background:rgba(239,68,68,0.15);color:#ef4444">ARMADILHA</span>
+            <p class="text-[11px] text-w_graphite">O status "Ganhando" é apenas do <strong>cluster interno</strong> do seller — não reflete o ranking real do catálogo.</p>
           </div>
-        </div>
-        <div style="border:1px solid rgba(255,255,255,0.1);border-top:none;border-radius:0 0 12px 12px;overflow:hidden;background:#000">
-          <img src="ambientevirtual 2.png" alt="Ambiente Virtual — Reunião dos Agentes" style="width:100%;display:block">
         </div>
       </div>
+
+      <!-- Ranking real do buybox -->
+      <div class="bg-w_black rounded-lg overflow-hidden" style="border:1px solid rgba(255,77,0,0.25)">
+        <div class="flex items-center gap-3 px-5 py-3" style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,77,0,0.04)">
+          <div class="flex gap-1.5"><div class="w-2.5 h-2.5 rounded-full" style="background:#ef4444"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#d97706"></div><div class="w-2.5 h-2.5 rounded-full" style="background:#22c55e"></div></div>
+          <p class="font-mono text-[10px] text-w_acid">westack_analytics // ranking_catalogo_real</p>
+        </div>
+        <div class="p-5">
+          <p class="font-mono text-[10px] uppercase tracking-widest mb-3" style="color:rgba(244,244,240,0.4)">Ranking real do buy box</p>
+
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 px-3 py-2.5 rounded" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)">
+              <p class="font-mono font-bold w-6" style="color:#22c55e">1º</p>
+              <div class="flex-1">
+                <p class="text-xs text-w_bone">Vendedor A · R$ 179,90</p>
+                <p class="font-mono text-[9px]" style="color:rgba(244,244,240,0.45)">Full · frete grátis</p>
+              </div>
+              <span class="font-mono text-[9px] px-1.5 py-0.5 rounded" style="background:rgba(34,197,94,0.15);color:#22c55e">BUY BOX</span>
+            </div>
+
+            <div class="flex items-center gap-3 px-3 py-2.5 rounded" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)">
+              <p class="font-mono font-bold w-6" style="color:rgba(244,244,240,0.55)">2º</p>
+              <div class="flex-1">
+                <p class="text-xs text-w_bone">Vendedor B · R$ 182,90</p>
+                <p class="font-mono text-[9px]" style="color:rgba(244,244,240,0.45)">Full · frete grátis</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 px-3 py-2.5 rounded" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)">
+              <p class="font-mono font-bold w-6" style="color:rgba(244,244,240,0.55)">3º</p>
+              <div class="flex-1">
+                <p class="text-xs text-w_bone">Vendedor C · R$ 185,00</p>
+                <p class="font-mono text-[9px]" style="color:rgba(244,244,240,0.45)">Full · frete grátis</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 px-3 py-2.5 rounded" style="background:rgba(255,77,0,0.08);border:1px solid rgba(255,77,0,0.35)">
+              <p class="font-mono font-bold w-6 text-w_acid">4º</p>
+              <div class="flex-1">
+                <p class="text-xs text-w_bone font-semibold">Você · R$ 189,90</p>
+                <p class="font-mono text-[9px]" style="color:rgba(244,244,240,0.55)">Full · frete grátis</p>
+              </div>
+              <span class="font-mono text-[9px] px-1.5 py-0.5 rounded text-w_acid" style="background:rgba(255,77,0,0.18)">VOCÊ</span>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-4" style="border-top:1px solid rgba(255,255,255,0.06)">
+            <p class="font-mono text-[10px] uppercase tracking-widest mb-3 text-w_acid">Por que você está em 4º</p>
+            <div class="space-y-1.5">
+              <div class="flex items-center gap-2"><span class="font-mono text-[10px] w-4" style="color:rgba(244,244,240,0.35)">1.</span><p class="text-xs text-w_bone"><strong>Preço</strong> — R$10 acima do líder</p></div>
+              <div class="flex items-center gap-2"><span class="font-mono text-[10px] w-4" style="color:rgba(244,244,240,0.35)">2.</span><p class="text-xs text-w_bone"><strong>Frete Grátis</strong> — concorrentes aplicam em mais CEPs</p></div>
+              <div class="flex items-center gap-2"><span class="font-mono text-[10px] w-4" style="color:rgba(244,244,240,0.35)">3.</span><p class="text-xs text-w_bone"><strong>Entrega Full</strong> — 2 concorrentes com Full em mais centros</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-8 reveal" style="transition-delay:0.2s">
+      <div class="flex items-center gap-4 px-5 py-4 rounded-lg" style="background:rgba(0,166,80,0.05);border:1px solid rgba(0,166,80,0.25)">
+        <div class="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center" style="background:rgba(0,166,80,0.15)">
+          <span class="font-mono text-sm font-bold" style="color:#00A650">A</span>
+        </div>
+        <p class="text-sm text-w_black"><strong>Agente Analista</strong> — trabalha sobre o <strong>ranking REAL</strong> do catálogo, não o status enganoso do gerenciador. Ajusta preço, revisa frete e escala Full com base no que o comprador vê.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 10. FUNCIONALIDADES · VENDAS & MARKETING ══ -->
+<section class="slide relative bg-w_bone overflow-hidden" id="func-vendas">
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="absolute top-[12%] left-0 w-full h-px" style="background:linear-gradient(90deg, transparent 0%, rgba(255,77,0,0.06) 20%, rgba(255,77,0,0.1) 50%, rgba(255,77,0,0.06) 80%, transparent 100%)"></div>
+  </div>
+
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-12 w-full relative z-10">
+    <p class="font-mono text-[10px] uppercase tracking-widest text-w_graphite mb-3 reveal">[SEC.10 // FUNCIONALIDADES · VENDAS & MARKETING]</p>
+    <h2 class="font-display font-semibold text-[clamp(2rem,3.5vw,2.8rem)] track-tighter leading-[0.95] text-w_black mb-2 reveal">
+      Tudo que o squad <span class="text-w_acid">vende</span> por você.
+    </h2>
+    <p class="text-[11px] text-w_graphite mb-6 reveal">Anúncios, promoções, ADS e análise de concorrência — agrupados por tipo, todas as funcionalidades do squad WeStack.</p>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 reveal" style="transition-delay:0.1s">
+
+      <div class="border border-w_graphite/10 bg-white p-4">
+        <p class="font-mono text-[9px] text-w_acid tracking-widest uppercase mb-2">Criação de Anúncios</p>
+        <div class="space-y-0.5 font-mono text-[10px] text-w_graphite">
+          <p>&#9654; Título SEO, ficha técnica, preço</p>
+          <p>&#9654; Publicação em catálogo oficial</p>
+          <p>&#9654; Variações (cor, tamanho, voltagem)</p>
+          <p>&#9654; Tipo (Clássico/Premium/Full)</p>
+          <p>&#9654; Validação pré-publicação</p>
+        </div>
+      </div>
+
+      <div class="border border-w_graphite/10 bg-white p-4">
+        <p class="font-mono text-[9px] text-w_acid tracking-widest uppercase mb-2">Otimização de Anúncios</p>
+        <div class="space-y-0.5 font-mono text-[10px] text-w_graphite">
+          <p>&#9654; Reescrever títulos com keywords</p>
+          <p>&#9654; Completar atributos obrigatórios</p>
+          <p>&#9654; Descrição com copy otimizado</p>
+          <p>&#9654; Ajuste de preço por concorrência</p>
+          <p>&#9654; Pausar/ativar/encerrar automático</p>
+          <p>&#9654; Health check de qualidade</p>
+        </div>
+      </div>
+
+      <div class="border border-w_graphite/10 bg-white p-4">
+        <p class="font-mono text-[9px] text-w_acid tracking-widest uppercase mb-2">Imagens Profissionais</p>
+        <div class="space-y-0.5 font-mono text-[10px] text-w_graphite">
+          <p>&#9654; Fotos fundo branco via IA</p>
+          <p>&#9654; Infográficos de ficha técnica</p>
+          <p>&#9654; Banners e mockups de uso</p>
+          <p>&#9654; Remoção de fundo automática</p>
+          <p>&#9654; Upload e organização no ML</p>
+        </div>
+      </div>
+
+      <div class="border border-w_graphite/10 bg-white p-4">
+        <p class="font-mono text-[9px] text-w_acid tracking-widest uppercase mb-2">Análise de Concorrência</p>
+        <div class="space-y-0.5 font-mono text-[10px] text-w_graphite">
+          <p>&#9654; Buscar concorrentes do mesmo produto</p>
+          <p>&#9654; Comparar preço, título, vendas e fotos</p>
+          <p>&#9654; Monitorar posição no Buy Box real</p>
+          <p>&#9654; Ranking de catálogo verdadeiro</p>
+          <p>&#9654; Tendências de busca por categoria</p>
+          <p>&#9654; Novos concorrentes em tempo real</p>
+        </div>
+      </div>
+
+      <div class="border border-w_graphite/10 bg-white p-4">
+        <p class="font-mono text-[9px] text-w_acid tracking-widest uppercase mb-2">Central de Promoções · 10 tipos</p>
+        <div class="space-y-0.5 font-mono text-[10px] text-w_graphite">
+          <p>&#9654; Deal / Campanhas tradicionais</p>
+          <p>&#9654; Co-participação (ML paga parte)</p>
+          <p>&#9654; Oferta do Dia (DOD)</p>
+          <p>&#9654; Ofertas Relâmpago</p>
+          <p>&#9654; Desconto individual (PRICE_DISCOUNT)</p>
+          <p>&#9654; Desconto pré-acordado</p>
+        </div>
+      </div>
+
+      <div class="border border-w_graphite/10 bg-white p-4">
+        <p class="font-mono text-[9px] text-w_acid tracking-widest uppercase mb-2">Promoções · continuação</p>
+        <div class="space-y-0.5 font-mono text-[10px] text-w_graphite">
+          <p>&#9654; Desconto por quantidade (leve 3 pague 2)</p>
+          <p>&#9654; Campanha do vendedor (14 dias)</p>
+          <p>&#9654; Cupons % ou valor fixo</p>
+          <p>&#9654; Smart Price Matching</p>
+          <p>&#9654; Semáforo de margem por promoção</p>
+          <p>&#9654; Saída automática se margem cair</p>
+        </div>
+      </div>
+
+      <div class="border border-w_graphite/10 bg-white p-4">
+        <p class="font-mono text-[9px] text-w_acid tracking-widest uppercase mb-2">Gestão de Campanhas ADS</p>
+        <div class="space-y-0.5 font-mono text-[10px] text-w_graphite">
+          <p>&#9654; Criar Product Ads automático</p>
+          <p>&#9654; Budget por margem de cada SKU</p>
+          <p>&#9654; Ativar / pausar campanhas</p>
+          <p>&#9654; Lance por produto otimizado</p>
+        </div>
+      </div>
+
+      <div class="border border-w_graphite/10 bg-white p-4">
+        <p class="font-mono text-[9px] text-w_acid tracking-widest uppercase mb-2">Otimização Automática ADS</p>
+        <div class="space-y-0.5 font-mono text-[10px] text-w_graphite">
+          <p>&#9654; ACoS, CPC, CTR, ROAS em tempo real</p>
+          <p>&#9654; Ajustar lances automaticamente</p>
+          <p>&#9654; Realocar budget dos ruins p/ bons</p>
+          <p>&#9654; Pausar ACoS acima do limite</p>
+          <p>&#9654; Escalar campanhas performando</p>
+          <p>&#9654; Relatório diário de ROAS</p>
+        </div>
+      </div>
+
+      <div class="border border-w_graphite/10 bg-white p-4">
+        <p class="font-mono text-[9px] text-w_acid tracking-widest uppercase mb-2">Brand Ads · Display Ads</p>
+        <div class="space-y-0.5 font-mono text-[10px] text-w_graphite">
+          <p>&#9654; Listar campanhas Brand Ads ativas</p>
+          <p>&#9654; Impressões, cliques, CTR, custo</p>
+          <p>&#9654; Display mídia programática</p>
+          <p>&#9654; Métricas por line_item</p>
+          <p>&#9654; CPM, CPC, frequência</p>
+          <p>&#9654; Orçamento consumido em tempo real</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ 11. FUNCIONALIDADES · OPERAÇÃO & INTELIGÊNCIA ══ -->
+<section class="slide relative bg-w_black overflow-hidden" id="func-operacao">
+  <div class="absolute inset-0 pointer-events-none" style="background-size:48px 48px;background-image:linear-gradient(to right,rgba(255,77,0,0.025) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,77,0,0.025) 1px,transparent 1px)"></div>
+
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-12 w-full relative z-10">
+    <p class="font-mono text-[10px] uppercase tracking-widest mb-3 reveal" style="color:rgba(255,255,255,0.35)">[SEC.11 // FUNCIONALIDADES · OPERAÇÃO & INTELIGÊNCIA]</p>
+    <h2 class="font-display font-semibold text-[clamp(2rem,3.5vw,2.8rem)] track-tighter leading-[0.95] mb-2 reveal" style="color:rgba(244,244,240,0.9)">
+      Tudo que o squad <span class="text-w_acid">opera</span> por você.
+    </h2>
+    <p class="text-[11px] mb-6 reveal" style="color:rgba(244,244,240,0.45)">SAC, pedidos, envios, métricas e inteligência de mercado — todas as funcionalidades do squad WeStack.</p>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 reveal" style="transition-delay:0.1s">
+
+      <div class="p-4" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+        <p class="font-mono text-[9px] tracking-widest uppercase mb-2" style="color:#0EA5E9">SAC · Perguntas</p>
+        <div class="space-y-0.5 font-mono text-[10px]" style="color:rgba(244,244,240,0.55)">
+          <p>&#9654; Monitorar a cada 1-2 minutos</p>
+          <p>&#9654; Responder com dados da ficha</p>
+          <p>&#9654; Classificar (dúvida, preço, frete)</p>
+          <p>&#9654; Tempo de resposta &lt;1h</p>
+          <p>&#9654; Escalar perguntas complexas</p>
+        </div>
+      </div>
+
+      <div class="p-4" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+        <p class="font-mono text-[9px] tracking-widest uppercase mb-2" style="color:#0EA5E9">SAC · Pós-venda</p>
+        <div class="space-y-0.5 font-mono text-[10px]" style="color:rgba(244,244,240,0.55)">
+          <p>&#9654; Acompanhamento automático</p>
+          <p>&#9654; Notificação de envio + tracking</p>
+          <p>&#9654; Solicitação de avaliação</p>
+          <p>&#9654; Follow-up em caso de problema</p>
+        </div>
+      </div>
+
+      <div class="p-4" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+        <p class="font-mono text-[9px] tracking-widest uppercase mb-2" style="color:#0EA5E9">Reclamações & Mediações</p>
+        <div class="space-y-0.5 font-mono text-[10px]" style="color:rgba(244,244,240,0.55)">
+          <p>&#9654; Detectar reclamações abertas</p>
+          <p>&#9654; Análise: defeito, atraso, errado</p>
+          <p>&#9654; Propor reenvio/reembolso/troca</p>
+          <p>&#9654; Responder mediação do ML</p>
+          <p>&#9654; Alerta urgente para críticas</p>
+        </div>
+      </div>
+
+      <div class="p-4" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+        <p class="font-mono text-[9px] tracking-widest uppercase mb-2" style="color:#0EA5E9">Avaliações & Reputação</p>
+        <div class="space-y-0.5 font-mono text-[10px]" style="color:rgba(244,244,240,0.55)">
+          <p>&#9654; Monitorar avaliações recebidas</p>
+          <p>&#9654; Responder negativas com resolução</p>
+          <p>&#9654; Solicitar avaliação pós-entrega</p>
+          <p>&#9654; Identificar SKUs com padrão</p>
+          <p>&#9654; Health score da conta</p>
+        </div>
+      </div>
+
+      <div class="p-4" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+        <p class="font-mono text-[9px] tracking-widest uppercase mb-2" style="color:#0EA5E9">Pedidos & Envios</p>
+        <div class="space-y-0.5 font-mono text-[10px]" style="color:rgba(244,244,240,0.55)">
+          <p>&#9654; Listar pedidos pendentes</p>
+          <p>&#9654; Monitorar status em tempo real</p>
+          <p>&#9654; Identificar pedidos com problema</p>
+          <p>&#9654; Alertar atrasos de envio</p>
+          <p>&#9654; Gerar etiqueta de envio</p>
+        </div>
+      </div>
+
+      <div class="p-4" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+        <p class="font-mono text-[9px] tracking-widest uppercase mb-2" style="color:#0EA5E9">Devoluções</p>
+        <div class="space-y-0.5 font-mono text-[10px]" style="color:rgba(244,244,240,0.55)">
+          <p>&#9654; Monitorar solicitações</p>
+          <p>&#9654; Aprovar/recusar automático</p>
+          <p>&#9654; Gerar etiqueta de devolução</p>
+          <p>&#9654; Processar reembolso</p>
+        </div>
+      </div>
+
+      <div class="p-4" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+        <p class="font-mono text-[9px] tracking-widest uppercase mb-2 text-w_acid">Métricas · Visitas & Conversão</p>
+        <div class="space-y-0.5 font-mono text-[10px]" style="color:rgba(244,244,240,0.55)">
+          <p>&#9654; Visitas por anúncio (dia/semana/mês)</p>
+          <p>&#9654; Taxa de conversão por SKU</p>
+          <p>&#9654; Vendas por período</p>
+          <p>&#9654; Ranking de mais vendidos</p>
+          <p>&#9654; Comparação período a período</p>
+        </div>
+      </div>
+
+      <div class="p-4" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+        <p class="font-mono text-[9px] tracking-widest uppercase mb-2 text-w_acid">Métricas · Saúde da conta</p>
+        <div class="space-y-0.5 font-mono text-[10px]" style="color:rgba(244,244,240,0.55)">
+          <p>&#9654; Reputação (verde/amarelo/vermelho)</p>
+          <p>&#9654; Taxa de reclamação</p>
+          <p>&#9654; Tempo médio de envio</p>
+          <p>&#9654; Taxa de cancelamento</p>
+          <p>&#9654; Score de atendimento</p>
+          <p>&#9654; Qualidade dos anúncios</p>
+        </div>
+      </div>
+
+      <div class="p-4" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+        <p class="font-mono text-[9px] tracking-widest uppercase mb-2 text-w_acid">Relatórios Automáticos</p>
+        <div class="space-y-0.5 font-mono text-[10px]" style="color:rgba(244,244,240,0.55)">
+          <p>&#9654; Diário 20h · vendas, ADS, perguntas</p>
+          <p>&#9654; Semanal · top 10, quedas, ROI</p>
+          <p>&#9654; Alertas de concorrência</p>
+          <p>&#9654; Análise sob demanda</p>
+          <p>&#9654; Simulação de preço</p>
+          <p>&#9654; Auditoria completa do catálogo</p>
+        </div>
+      </div>
+
+      <div class="p-4" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+        <p class="font-mono text-[9px] tracking-widest uppercase mb-2 text-w_acid">Inteligência · Briefing</p>
+        <div class="space-y-0.5 font-mono text-[10px]" style="color:rgba(244,244,240,0.55)">
+          <p>&#9654; Mapeamento de SKUs e gargalos</p>
+          <p>&#9654; Histórico de tentativas</p>
+          <p>&#9654; Metas e regras de negócio</p>
+        </div>
+      </div>
+
+      <div class="p-4" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+        <p class="font-mono text-[9px] tracking-widest uppercase mb-2 text-w_acid">Inteligência · Benchmarking</p>
+        <div class="space-y-0.5 font-mono text-[10px]" style="color:rgba(244,244,240,0.55)">
+          <p>&#9654; Top concorrentes da categoria</p>
+          <p>&#9654; Comparação de preço + Buy Box</p>
+          <p>&#9654; Mapa de reputação + ADS</p>
+        </div>
+      </div>
+
+      <div class="p-4" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+        <p class="font-mono text-[9px] tracking-widest uppercase mb-2 text-w_acid">Inteligência · Auditoria + Mapa</p>
+        <div class="space-y-0.5 font-mono text-[10px]" style="color:rgba(244,244,240,0.55)">
+          <p>&#9654; Auditoria de cada anúncio</p>
+          <p>&#9654; SEO score, imagens, atributos</p>
+          <p>&#9654; Classificação por prioridade</p>
+          <p>&#9654; Mapa de oportunidades</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1315,7 +1136,7 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
   </div>
 
   <div class="max-w-[1400px] mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-4 reveal">[SEC.15 // TIMELINE DE IMPLEMENTAÇÃO]</p>
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-4 reveal">[SEC.13 // TIMELINE DE IMPLEMENTAÇÃO · 21 DIAS]</p>
 
     <div class="flex items-end justify-between mb-12 reveal">
       <div>
@@ -1507,94 +1328,12 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
   </div>
 </section>
 
-<!-- ══ 16. INTELIGÊNCIA DE MERCADO (COMBINED) ══ -->
-<section class="slide relative bg-w_bone overflow-hidden" id="inteligencia">
-  <div class="absolute inset-0 pointer-events-none overflow-hidden">
-    <div class="absolute top-[20%] left-0 w-full h-px" style="background:linear-gradient(90deg, transparent 0%, rgba(255,77,0,0.06) 20%, rgba(255,77,0,0.1) 50%, rgba(255,77,0,0.06) 80%, transparent 100%)"></div>
-    <div class="absolute top-0 left-[6%] w-px h-full" style="background:linear-gradient(180deg, transparent 0%, rgba(92,92,92,0.04) 15%, rgba(92,92,92,0.04) 85%, transparent 100%)"></div>
-    <div class="absolute top-0 right-[6%] w-px h-full" style="background:linear-gradient(180deg, transparent 0%, rgba(92,92,92,0.04) 15%, rgba(92,92,92,0.04) 85%, transparent 100%)"></div>
-  </div>
-
-  <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-8 reveal">[SEC.16 // INTELIGÊNCIA DE MERCADO]</p>
-
-    <h2 class="font-display font-semibold text-[clamp(2.5rem,5vw,3.8rem)] track-tighter leading-[0.95] text-w_black mb-4 reveal">
-      Inteligência de <span class="text-w_acid">Mercado</span>
-    </h2>
-    <p class="text-sm text-w_graphite mb-12 max-w-[60ch] reveal">Antes de automatizar, entendemos seu negócio por completo. 4 etapas: Briefing, Benchmarking, Auditoria e Mapa de Oportunidades.</p>
-
-    <div class="grid md:grid-cols-[0.45fr_0.55fr] gap-10 lg:gap-16 items-center reveal">
-
-      <!-- Esquerda: MacBook mockup com briefing -->
-      <div class="relative" style="perspective:1200px">
-        <div class="relative md:[transform:rotateY(-8deg)_rotateX(3deg)] md:[transform-style:preserve-3d]" style="filter:drop-shadow(8px 12px 24px rgba(0,0,0,0.15))">
-          <!-- Tela / Lid -->
-          <div style="background:linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);border-radius:12px 12px 0 0;padding:10px 10px 0 10px;border:1px solid rgba(92,92,92,0.2);border-bottom:none">
-            <div class="flex justify-center" style="margin-bottom:5px">
-              <div style="width:40px;height:3px;background:rgba(92,92,92,0.15);border-radius:0 0 3px 3px"></div>
-            </div>
-            <div style="border-radius:3px;overflow:hidden;border:1px solid rgba(92,92,92,0.1);background:#000">
-              <img src="briefinf de projeto.png" alt="Briefing de Projeto" class="w-full block" style="object-fit:contain">
-            </div>
-          </div>
-          <!-- Base -->
-          <div style="background:linear-gradient(180deg, #333 0%, #222 40%, #1a1a1a 100%);height:14px;border-radius:0 0 8px 8px;border:1px solid rgba(92,92,92,0.15);border-top:1px solid rgba(92,92,92,0.2);position:relative">
-            <div class="absolute left-1/2 -translate-x-1/2 top-[3px]" style="width:40px;height:4px;background:rgba(92,92,92,0.1);border-radius:2px"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Direita: 4 etapas empilhadas -->
-      <div class="space-y-4">
-
-        <div class="border border-w_graphite/10 bg-white p-5 relative transition-all duration-300 hover:border-w_acid">
-          <div class="absolute top-0 left-0 w-1 h-full" style="background:#3483FA"></div>
-          <div class="flex items-center gap-3 mb-2">
-            <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded" style="background:rgba(52,131,250,0.1);color:#3483FA">01</span>
-            <p class="font-display font-semibold text-w_black">Briefing de Projeto</p>
-          </div>
-          <p class="text-sm text-w_graphite leading-relaxed">Entrevista estruturada com o seller. Mapeamos produtos, SKUs, gargalos operacionais, histórico de tentativas, metas de faturamento e regras de negócio.</p>
-        </div>
-
-        <div class="border border-w_graphite/10 bg-white p-5 relative transition-all duration-300 hover:border-w_acid">
-          <div class="absolute top-0 left-0 w-1 h-full" style="background:#00A650"></div>
-          <div class="flex items-center gap-3 mb-2">
-            <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded" style="background:rgba(0,166,80,0.1);color:#00A650">02</span>
-            <p class="font-display font-semibold text-w_black">Benchmarking</p>
-          </div>
-          <p class="text-sm text-w_graphite leading-relaxed">Analisamos top concorrentes — preço, título, Buy Box, reputação, ADS. Você vê onde está em relação ao mercado pela primeira vez.</p>
-        </div>
-
-        <div class="border border-w_graphite/10 bg-white p-5 relative transition-all duration-300 hover:border-w_acid">
-          <div class="absolute top-0 left-0 w-1 h-full" style="background:#d97706"></div>
-          <div class="flex items-center gap-3 mb-2">
-            <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded" style="background:rgba(217,119,6,0.1);color:#d97706">03</span>
-            <p class="font-display font-semibold text-w_black">Auditoria</p>
-          </div>
-          <p class="text-sm text-w_graphite leading-relaxed">Cada anúncio auditado — SEO score, imagens, atributos, ficha técnica. Classificamos em Saudável / Otimizável / Crítico.</p>
-        </div>
-
-        <div class="border border-w_graphite/10 bg-white p-5 relative transition-all duration-300 hover:border-w_acid">
-          <div class="absolute top-0 left-0 w-1 h-full bg-w_acid"></div>
-          <div class="flex items-center gap-3 mb-2">
-            <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded" style="background:rgba(255,77,0,0.1);color:#FF4D00">04</span>
-            <p class="font-display font-semibold text-w_black">Mapa de Oportunidades</p>
-          </div>
-          <p class="text-sm text-w_graphite leading-relaxed">Cruzamos benchmark + auditoria — onde está perdendo dinheiro, onde pode crescer, o que atacar primeiro. Prioridade clara para os agentes.</p>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- ══ 17. ANCORAGEM ══ -->
 <section class="slide relative bg-w_black overflow-hidden" id="ancoragem">
   <div class="absolute inset-0 pointer-events-none" style="background-size:48px 48px;background-image:linear-gradient(to right,rgba(255,77,0,0.02) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,77,0,0.02) 1px,transparent 1px)"></div>
 
   <div class="max-w-[1100px] mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest mb-6 reveal" style="color:rgba(255,255,255,0.3)">[SEC.17 // O INVESTIMENTO REAL]</p>
+    <p class="font-mono text-[11px] uppercase tracking-widest mb-6 reveal" style="color:rgba(255,255,255,0.3)">[SEC.14 // O INVESTIMENTO REAL]</p>
 
     <h2 class="font-display font-semibold text-[clamp(2.5rem,5vw,3.8rem)] track-tighter leading-[0.95] text-w_bone mb-3 reveal">
       Se você fosse montar<br><span class="text-w_acid">essa operação do zero.</span>
@@ -1669,7 +1408,7 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
   </div>
 
   <div class="max-w-[1100px] mx-auto px-6 lg:px-12 w-full relative z-10">
-    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-6 reveal">[SEC.19 // VALOR REAL]</p>
+    <p class="font-mono text-[11px] uppercase tracking-widest text-w_graphite mb-6 reveal">[SEC.15 // VALOR REAL]</p>
 
     <!-- Implementação -->
     <div class="text-center mb-14 reveal">
@@ -1721,13 +1460,13 @@ tailwind.config={theme:{extend:{colors:{w_black:'#0A0A0A',w_graphite:'#5C5C5C',w
         </div>
         <div class="border border-w_graphite/10 md:border-l-0 bg-white p-8 text-center transition-all duration-300 hover:border-w_acid hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)]">
           <p class="font-mono text-[10px] text-w_graphite tracking-widest uppercase mb-3">Acima de 500</p>
-          <p class="font-display font-bold text-4xl track-tighter text-w_black mb-1">+R$ 5</p>
-          <p class="font-mono text-xs text-w_graphite">/anúncio adicional</p>
+          <p class="font-display font-bold text-4xl track-tighter text-w_black mb-1">R$ 5.500</p>
+          <p class="font-mono text-xs text-w_graphite">/mês</p>
           <div class="mt-4 pt-3" style="border-top:1px solid rgba(92,92,92,0.1)">
             <p class="font-mono text-xs text-w_graphite mb-2">ou</p>
             <p class="font-mono text-[10px] text-w_acid tracking-widest uppercase mb-1">Contrato anual · no cartão</p>
-            <p class="font-display font-semibold text-lg track-tighter text-w_black">10x de R$ 5</p>
-            <p class="font-mono text-[10px] text-w_graphite">2 meses grátis por anúncio</p>
+            <p class="font-display font-semibold text-lg track-tighter text-w_black">10x de R$ 5.500</p>
+            <p class="font-mono text-[10px] text-w_graphite">2 meses grátis · economia de R$ 11.000</p>
           </div>
         </div>
       </div>
